@@ -10,7 +10,7 @@
 
 @implementation OpeningLogic
 
-- (BOOL) validateEmail: (NSString *) candidate {
+- (BOOL)validateEmail:(NSString *)email {
     NSString *emailRegex =
     @"(?:[a-z0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[a-z0-9!#$%\\&'*+/=?\\^_`{|}"
     @"~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\"
@@ -21,7 +21,48 @@
     @"-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])";
     NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES[c] %@", emailRegex];
     
-    return [emailTest evaluateWithObject:candidate];
+    return [emailTest evaluateWithObject:email];
+}
+
+- (BOOL)validatePassword:(NSString *)password {
+    
+    return password.length >= 6;
+}
+
+- (void)signUp:(NSString *)email
+      password:(NSString *)password
+  successBlock:(void (^)(PFUser *))successBlock
+  failureBlock:(FailureBlock)failureBlock {
+    
+    [[NetworkManager sharedInstance] signUpWithEmail:email
+                                            password:password
+                                        successBlock:^(PFUser *user)
+    {
+        successBlock(user);
+    }
+                                        failureBlock:^(NSString *error)
+    {
+        failureBlock(error);
+    }];
+    
+}
+
+- (void)login:(NSString *)email
+     password:(NSString *)password
+ successBlock:(void (^)(PFUser *))successBlock
+ failureBlock:(FailureBlock)failureBlock {
+    
+    [[NetworkManager sharedInstance] loginWithEmail:email
+                                           password:password
+                                       successBlock:^(PFUser *user)
+     {
+         successBlock(user);
+     }
+                                       failureBlock:^(NSString *error)
+     {
+         failureBlock(error);
+     }];
+    
 }
 
 

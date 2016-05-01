@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "NetworkManager.h"
 
 @interface AppDelegate ()
 
@@ -16,7 +17,30 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+
+    [NetworkManager sharedInstance];
+    
+    self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    
+    if ([NetworkManager currentUser])
+    {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"RegularUser" bundle:nil];
+        UIViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"ExpenseViewController"];
+        
+        self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:viewController];
+        [self.window makeKeyAndVisible];
+    }
+    else
+    {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"RegularUser" bundle:nil];
+        UIViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"RegularUserInitialNavigationController"];
+        
+        self.window.rootViewController = viewController;
+        [self.window makeKeyAndVisible];
+    }
+    
+//    [PFUser logOut];
+    
     return YES;
 }
 

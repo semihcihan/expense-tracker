@@ -7,7 +7,10 @@
 //
 
 #import "ViewController.h"
+#import "OpeningLogic.h"
 
 @interface OpeningViewController : ViewController
+
+@property (strong, nonatomic) OpeningLogic *logic;
 
 @end

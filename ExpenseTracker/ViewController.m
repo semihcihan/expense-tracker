@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import <UIView+Toast.h>
 
 @interface ViewController ()
 
@@ -15,8 +16,13 @@
 @implementation ViewController
 
 - (void)viewDidLoad {
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [CSToastManager setQueueEnabled:NO];
+    });
+    
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
 }
 
 - (void)didReceiveMemoryWarning {
