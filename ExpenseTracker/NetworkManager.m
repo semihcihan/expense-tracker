@@ -97,7 +97,7 @@
     
     PFQuery *query = [PFQuery queryWithClassName:@"Expense"];
     [query whereKey:@"user" equalTo:user];
-    [query orderByDescending:@"updatedAt"];
+    [query orderByDescending:@"date"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error)
         {

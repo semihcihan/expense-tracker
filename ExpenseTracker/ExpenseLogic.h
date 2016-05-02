@@ -11,7 +11,7 @@
 
 @interface ExpenseLogic : NSObject
 
-@property (strong, nonatomic) NSArray *expenses;
+@property (strong, nonatomic) NSMutableArray *shownExpenses;
 
 - (void)getExpensesWithSuccessBlock:(void (^)(NSArray *expenses))successBlock
                        failureBlock:(FailureBlock)failureBlock;

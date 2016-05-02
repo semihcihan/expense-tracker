@@ -9,6 +9,11 @@
 #import "ExpenseViewController.h"
 #import "UIView+Loading.h"
 #import <UIView+Toast.h>
+#import "UITableView+Register.h"
+#import "ExpenseTableViewCell.h"
+#import "Expense.h"
+#import "NSString+ExpenseTracker.h"
+#import "NSDate+ExpenseTracker.h"
 
 @interface ExpenseViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -25,15 +30,24 @@
 
 @end
 
+@interface ExpenseTableViewCell (Data)
+
+- (void)fillWithExpenseData:(Expense *)expense;
+
+@end
+
+
 @implementation ExpenseViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.view showLoadingView];
     self.navigationItem.title = @"Expenses";
     
+    [self.tableView registerCellClassForDefaultReuseIdentifier:[ExpenseTableViewCell class]];
+    
     self.logic = [[ExpenseLogic alloc] init];
+    [self.view showLoadingView];
     [self getData];
 }
 
@@ -42,6 +56,7 @@
     [self.logic getExpensesWithSuccessBlock:^(NSArray *expenses)
      {
          [self.view dismissLoadingView];
+         [self.tableView reloadData];
      }
                                failureBlock:^(NSString *error)
      {
@@ -57,12 +72,34 @@
 #pragma mark - TableView Data Source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return self.logic.shownExpenses.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    return 90;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return nil;
+    
+    ExpenseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[ExpenseTableViewCell reuseIdentifier]];
+    
+    [cell fillWithExpenseData:self.logic.shownExpenses[indexPath.row]];
+    
+    return cell;
 }
 
+
+@end
+
+@implementation ExpenseTableViewCell (Data)
+
+- (void)fillWithExpenseData:(Expense *)expense {
+    
+    self.expenseLabel.text = [NSString stringWithFormat:@"%@ %@",[expense.amount stringValue], [NSString currencySymbol]];
+    self.descriptionLabel.text = expense.expenseDescription;
+    self.commentLabel.text = expense.comment;
+    self.dateLabel.text = [expense.date localeDateString];
+}
 
 @end

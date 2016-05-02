@@ -8,7 +8,21 @@
 
 #import "ExpenseLogic.h"
 
+@interface ExpenseLogic ()
+
+@property (strong, nonatomic) NSArray *allExpenses;
+
+@end
+
 @implementation ExpenseLogic
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.shownExpenses = @[].mutableCopy;
+    }
+    return self;
+}
 
 - (void)getExpensesWithSuccessBlock:(void (^)(NSArray *))successBlock
                        failureBlock:(FailureBlock)failureBlock {
@@ -16,7 +30,8 @@
     [[NetworkManager sharedInstance] getExpensesOfUser:[NetworkManager currentUser]
                                           successBlock:^(NSArray *expenses)
     {
-        self.expenses = expenses;
+        self.allExpenses = expenses;
+        [self.shownExpenses addObjectsFromArray:self.allExpenses];
         successBlock(expenses);
     }
                                           failureBlock:^(NSString *error)
