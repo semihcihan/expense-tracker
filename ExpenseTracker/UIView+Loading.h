@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol CBLoadingActionProtocol <NSObject>
+@protocol ErrorActionProtocol <NSObject>
 
 - (void)errorViewTapped:(UIGestureRecognizer *)recognizer;
 
@@ -39,9 +39,12 @@
 
 /**
  Shows the given error message.
- @param errorMessage Message to be displayed.
+ @param errorMessage Message to be displayed on top.
+ @param actionMessage Message to be displayed at the bottom.
  @param target Target of the errorViewTapped action.
  */
-- (void)showErrorMessage:(NSString *)errorMessage actionTarget:(id<CBLoadingActionProtocol>)target;
+- (void)showErrorMessage:(NSString *)errorMessage
+           actionMessage:(NSString *)actionMessage
+            actionTarget:(id<ErrorActionProtocol>)target;
 
 @end

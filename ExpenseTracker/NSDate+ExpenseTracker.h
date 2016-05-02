@@ -11,5 +11,7 @@
 @interface NSDate (ExpenseTracker)
 
 - (NSString *)localeDateString;
+- (NSInteger)weekDifferenceWithDate:(NSDate *)date;
+- (NSInteger)monthDifferenceWithDate:(NSDate *)date;
 
 @end

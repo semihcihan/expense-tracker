@@ -17,12 +17,12 @@
                          target:(id)target
                          action:(SEL)action;
 
-- (void)styleRightNavigationItem:(UINavigationItem *)navigationItem
++ (void)styleRightNavigationItem:(UINavigationItem *)navigationItem
                            image:(UIImage *)image
                           target:(id)target
                           action:(SEL)action;
 
-- (void)styleRightNavigationItem:(UINavigationItem *)navigationItem
++ (void)styleRightNavigationItem:(UINavigationItem *)navigationItem
                firstButtonAction:(SEL)settingsAction
                 firstButtonImage:(UIImage *)firstButtonImage
               secondButtonAction:(SEL)infoAction

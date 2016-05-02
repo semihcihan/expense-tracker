@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "NetworkManager.h"
+#import "NavigationBarStyler.h"
+#import <UIView+Toast.h>
 
 @interface AppDelegate ()
 
@@ -19,7 +21,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
     [NetworkManager sharedInstance];
-    
+    [NavigationBarStyler styleNavigationBar];
+    [CSToastManager setQueueEnabled:NO];
+
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
     
     if ([NetworkManager currentUser])

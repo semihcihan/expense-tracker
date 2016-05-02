@@ -7,7 +7,6 @@
 //
 
 #import "ViewController.h"
-#import <UIView+Toast.h>
 
 @interface ViewController ()
 
@@ -17,9 +16,9 @@
 
 - (void)viewDidLoad {
     
+    self.navigationController.navigationBar.translucent = NO;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        [CSToastManager setQueueEnabled:NO];
     });
     
     [super viewDidLoad];

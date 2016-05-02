@@ -22,6 +22,8 @@
 		49015D921CD77D0700164FED /* UIColor+ExpenseTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 49015D911CD77D0700164FED /* UIColor+ExpenseTracker.m */; };
 		49015D951CD77FDA00164FED /* NSString+ExpenseTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 49015D941CD77FDA00164FED /* NSString+ExpenseTracker.m */; };
 		49015D981CD780AA00164FED /* NSDate+ExpenseTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 49015D971CD780AA00164FED /* NSDate+ExpenseTracker.m */; };
+		49015D9B1CD7C4EB00164FED /* NSNumber+ExpenseTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 49015D9A1CD7C4EB00164FED /* NSNumber+ExpenseTracker.m */; };
+		49015D9D1CD7D06500164FED /* NSDateExpenseTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 49015D9C1CD7D06500164FED /* NSDateExpenseTracker.m */; };
 		497F07F01CD53C1F003DC694 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 497F07EF1CD53C1F003DC694 /* main.m */; };
 		497F07F31CD53C1F003DC694 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 497F07F21CD53C1F003DC694 /* AppDelegate.m */; };
 		497F07F61CD53C1F003DC694 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497F07F51CD53C1F003DC694 /* ViewController.m */; };
@@ -75,6 +77,9 @@
 		49015D941CD77FDA00164FED /* NSString+ExpenseTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+ExpenseTracker.m"; sourceTree = "<group>"; };
 		49015D961CD780AA00164FED /* NSDate+ExpenseTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+ExpenseTracker.h"; sourceTree = "<group>"; };
 		49015D971CD780AA00164FED /* NSDate+ExpenseTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+ExpenseTracker.m"; sourceTree = "<group>"; };
+		49015D991CD7C4EB00164FED /* NSNumber+ExpenseTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+ExpenseTracker.h"; sourceTree = "<group>"; };
+		49015D9A1CD7C4EB00164FED /* NSNumber+ExpenseTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+ExpenseTracker.m"; sourceTree = "<group>"; };
+		49015D9C1CD7D06500164FED /* NSDateExpenseTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDateExpenseTracker.m; sourceTree = "<group>"; };
 		497F07EB1CD53C1F003DC694 /* ExpenseTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExpenseTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		497F07EF1CD53C1F003DC694 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		497F07F11CD53C1F003DC694 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -138,6 +143,14 @@
 		49015D741CD657A000164FED /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				49015D901CD77D0700164FED /* UIColor+ExpenseTracker.h */,
+				49015D911CD77D0700164FED /* UIColor+ExpenseTracker.m */,
+				49015D931CD77FDA00164FED /* NSString+ExpenseTracker.h */,
+				49015D941CD77FDA00164FED /* NSString+ExpenseTracker.m */,
+				49015D991CD7C4EB00164FED /* NSNumber+ExpenseTracker.h */,
+				49015D9A1CD7C4EB00164FED /* NSNumber+ExpenseTracker.m */,
+				49015D961CD780AA00164FED /* NSDate+ExpenseTracker.h */,
+				49015D971CD780AA00164FED /* NSDate+ExpenseTracker.m */,
 				49015D751CD657A800164FED /* UIView+Loading.h */,
 				49015D761CD657A800164FED /* UIView+Loading.m */,
 				49015D8D1CD7753300164FED /* UITableView+Register.h */,
@@ -194,12 +207,6 @@
 				49015D7C1CD66E2E00164FED /* NavigationBarStyler.m */,
 				49015D821CD7719D00164FED /* TableViewCell.h */,
 				49015D831CD7719D00164FED /* TableViewCell.m */,
-				49015D901CD77D0700164FED /* UIColor+ExpenseTracker.h */,
-				49015D911CD77D0700164FED /* UIColor+ExpenseTracker.m */,
-				49015D931CD77FDA00164FED /* NSString+ExpenseTracker.h */,
-				49015D941CD77FDA00164FED /* NSString+ExpenseTracker.m */,
-				49015D961CD780AA00164FED /* NSDate+ExpenseTracker.h */,
-				49015D971CD780AA00164FED /* NSDate+ExpenseTracker.m */,
 				497F07FA1CD53C1F003DC694 /* Assets.xcassets */,
 				49015D6A1CD608A900164FED /* RegularUser.storyboard */,
 				497F07FC1CD53C1F003DC694 /* LaunchScreen.storyboard */,
@@ -221,6 +228,7 @@
 			isa = PBXGroup;
 			children = (
 				497F08081CD53C1F003DC694 /* ExpenseTrackerTests.m */,
+				49015D9C1CD7D06500164FED /* NSDateExpenseTracker.m */,
 				497F080A1CD53C1F003DC694 /* Info.plist */,
 			);
 			path = ExpenseTrackerTests;
@@ -411,6 +419,7 @@
 				49015D881CD771D700164FED /* ExpenseTableViewCell.m in Sources */,
 				49015D691CD5EC0D00164FED /* NetworkManager.m in Sources */,
 				49015D811CD76F8800164FED /* Expense.m in Sources */,
+				49015D9B1CD7C4EB00164FED /* NSNumber+ExpenseTracker.m in Sources */,
 				497F07F01CD53C1F003DC694 /* main.m in Sources */,
 				49015D731CD6563200164FED /* ExpenseLogic.m in Sources */,
 				49015D771CD657A800164FED /* UIView+Loading.m in Sources */,
@@ -422,6 +431,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49015D9D1CD7D06500164FED /* NSDateExpenseTracker.m in Sources */,
 				497F08091CD53C1F003DC694 /* ExpenseTrackerTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -17,8 +17,6 @@ static const NSInteger kHudTag = 1899124;
     if (![self viewWithTag:kHudTag]) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self animated:YES];
         [hud setTag:kHudTag];
-//        hud.color = [CBAppConfig sharedConfig].loadingBackgroundColor;
-//        hud.activityIndicatorColor = [CBAppConfig sharedConfig].loadingIndicatorColor;
     }
 }
 
@@ -26,7 +24,6 @@ static const NSInteger kHudTag = 1899124;
     if (![self viewWithTag:kHudTag]) {
         MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self animated:YES];
         [hud setTag:kHudTag];
-//        hud.color = [CBAppConfig sharedConfig].loadingBackgroundColor;
         hud.activityIndicatorColor = indicatorColor;
     }
 }
@@ -39,17 +36,19 @@ static const NSInteger kHudTag = 1899124;
     [self dismissLoadingView];
 }
 
-- (void)showErrorMessage:(NSString *)errorMessage actionTarget:(id<CBLoadingActionProtocol>)target {
+- (void)showErrorMessage:(NSString *)errorMessage
+           actionMessage:(NSString *)actionMessage
+            actionTarget:(id<ErrorActionProtocol>)target {
     MBProgressHUD *hud = [MBProgressHUD HUDForView:self];
     if (!hud) {
         [self showLoadingView];
         hud = [MBProgressHUD HUDForView:self];
     }
-//    hud.detailsLabelFont = [CBAppConfig sharedConfig].errorTextFont;
-//    hud.detailsLabelColor = [CBAppConfig sharedConfig].errorTextColor;
     hud.mode = MBProgressHUDModeText;
-    hud.opacity = 0.f;
-    [hud setDetailsLabelText:errorMessage];
+    [hud setLabelText:errorMessage];
+    if (actionMessage) {
+        [hud setDetailsLabelText:actionMessage];
+    }
     
     if (target) {
         for (UIGestureRecognizer *recognizer in hud.gestureRecognizers) {

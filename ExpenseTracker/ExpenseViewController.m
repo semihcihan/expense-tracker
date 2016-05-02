@@ -8,14 +8,18 @@
 
 #import "ExpenseViewController.h"
 #import "UIView+Loading.h"
-#import <UIView+Toast.h>
 #import "UITableView+Register.h"
 #import "ExpenseTableViewCell.h"
 #import "Expense.h"
 #import "NSString+ExpenseTracker.h"
 #import "NSDate+ExpenseTracker.h"
+#import "NSNumber+ExpenseTracker.h"
+#import "NavigationBarStyler.h"
+#include <math.h>
 
-@interface ExpenseViewController () <UITableViewDataSource, UITableViewDelegate>
+static const CGFloat kHiddenFilterViewVerticalSpace = -180.f;
+
+@interface ExpenseViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, ErrorActionProtocol>
 
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) IBOutlet UILabel *amountFilterLabel;
@@ -23,10 +27,9 @@
 @property (strong, nonatomic) IBOutlet UISlider *amountSlider;
 @property (strong, nonatomic) IBOutlet UISlider *dateSlider;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *sortSegmentedControl;
-@property (strong, nonatomic) IBOutlet UIButton *filterClearButton;
-- (IBAction)filterClearButtonTapped:(id)sender;
 @property (strong, nonatomic) IBOutlet UIView *filterView;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *filterViewVerticalSpaceToTopLayoutGuideConstraint;
 
 @end
 
@@ -43,6 +46,12 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"Expenses";
+    [NavigationBarStyler styleLeftNavigationItem:self.navigationItem image:[UIImage imageNamed:@"filtering"] target:self action:@selector(filterButtonTapped)];
+    [NavigationBarStyler styleRightNavigationItem:self.navigationItem firstButtonAction:@selector(newExpenseButtonTapped) firstButtonImage:[UIImage imageNamed:@"new_expense"] secondButtonAction:@selector(moreButtonTapped) secondButtonImage:[UIImage imageNamed:@"more"] target:self];
+    
+    [self.amountSlider addTarget:self action:@selector(filterValueChanged) forControlEvents:UIControlEventValueChanged];
+    [self.dateSlider addTarget:self action:@selector(filterValueChanged) forControlEvents:UIControlEventValueChanged];
+    [self.sortSegmentedControl addTarget:self action:@selector(sortMethodChanged) forControlEvents:UIControlEventValueChanged];
     
     [self.tableView registerCellClassForDefaultReuseIdentifier:[ExpenseTableViewCell class]];
     
@@ -60,13 +69,12 @@
      }
                                failureBlock:^(NSString *error)
      {
-         [self.view dismissLoadingView];
-         [self.view makeToast:error duration:2 position:CSToastPositionBottom];
+         [self.view showErrorMessage:error actionMessage:@"Tap to retry" actionTarget:self];
      }];
 }
 
-- (IBAction)filterClearButtonTapped:(id)sender {
-    
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES]; //dismiss keyboard
 }
 
 #pragma mark - TableView Data Source
@@ -89,14 +97,206 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark - Actions
+
+- (void)filterButtonTapped {
+    
+    if (self.filterViewVerticalSpaceToTopLayoutGuideConstraint.constant == 0) //close it
+    {
+        self.filterViewVerticalSpaceToTopLayoutGuideConstraint.constant = kHiddenFilterViewVerticalSpace;
+    }
+    else //open it
+    {
+        self.filterViewVerticalSpaceToTopLayoutGuideConstraint.constant = 0;
+    }
+    [UIView animateWithDuration:0.4 animations:^{[self.view layoutIfNeeded];}];
+    
+    [self.view endEditing:YES];
+}
+
+- (void)newExpenseButtonTapped {
+    
+}
+
+- (void)moreButtonTapped {
+    
+}
+
+- (void)filterClearButtonTapped {
+    
+}
+
+- (void)filterValueChanged {
+    
+    self.dateSlider.value = roundf(self.dateSlider.value);
+    self.amountSlider.value = roundf(self.amountSlider.value);
+    
+    [self updateSliderLabelTexts];
+    
+    [self.logic filterExpenseWithKeyword:self.searchBar.text
+                      amountsGreaterThan:[ExpenseViewController amountSliderValue:self.amountSlider.value]
+                           inRecentWeeks:[ExpenseViewController dateSliderValue:self.dateSlider.value]
+                           sortingMethod:[ExpenseViewController dateSegmentedControlValue:self.sortSegmentedControl.selectedSegmentIndex]];
+    
+    [self.tableView reloadData];
+}
+
+- (void)sortMethodChanged {
+    [self.logic sortExpenses:[ExpenseViewController dateSegmentedControlValue:self.sortSegmentedControl.selectedSegmentIndex]];
+    
+    [self.tableView reloadData];
+}
+
+- (void)updateSliderLabelTexts {
+    
+    self.amountFilterLabel.text = [ExpenseViewController amountSliderStringValue:self.amountSlider.value];
+    self.dateFilterLabel.text = [ExpenseViewController dateSliderStringValue:self.dateSlider.value];
+
+}
+
+- (void)errorViewTapped:(UIGestureRecognizer *)recognizer {
+    
+    [self.view dismissErrorView];
+    [self.view showLoadingView];
+    [self getData];
+}
+
+#pragma mark - UISearchBarDelegate
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    
+    [self filterValueChanged];
+    [self.tableView reloadData];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    
+    [self.view endEditing:YES]; //dismiss keyboard
+}
+
+#pragma mark - Filter Value Helpers
+
++ (NSNumber *)amountSliderValue:(NSInteger)sliderValue {
+    
+    if (sliderValue == 0) {
+        return @0;
+    }
+    
+    NSInteger quotient = (sliderValue - 1) / 3;
+    NSInteger rest = (sliderValue - 1) % 3;
+    
+    switch (rest) {
+        case 0:
+            return @(10 * (NSInteger)pow(10, quotient));
+            break;
+        case 1:
+            return @(25 * (NSInteger)pow(10, quotient));
+            break;
+        case 2:
+            return @(50 * (NSInteger)pow(10, quotient));
+            break;
+        default:
+            return @0;
+            break;
+    }
+}
+
++ (NSString *)amountSliderStringValue:(NSInteger)sliderValue {
+    
+    if (sliderValue > 0)
+    {
+        return [NSString stringWithFormat:@"Greater than %@", [[ExpenseViewController amountSliderValue:sliderValue] currencyStringRepresentationWithoutDecimals]];
+    }
+    else
+    {
+        return @"All expenses";
+    }
+}
+
++ (NSInteger)dateSliderValue:(NSInteger)sliderValue {
+    switch (sliderValue) {
+        case 1:
+            return 1; //1 week
+            break;
+        case 2:
+            return 2; //2 weeks
+            break;
+        case 3:
+            return 3; //3 weeks
+            break;
+        case 4:
+            return 4; //1 month
+            break;
+        case 5:
+            return 8; //2 months
+            break;
+        case 6:
+            return 12; //3 months
+            break;
+        case 7:
+            return 24; //6 months
+            break;
+        case 8:
+            return 52; //12 months
+            break;
+        default:
+            return -1; //all
+            break;
+    }
+}
+
++ (NSString *)dateSliderStringValue:(NSInteger)sliderValue {
+    switch (sliderValue) {
+        case 1:
+            return @"This week"; //1 week
+            break;
+        case 2:
+            return @"2 weeks"; //2 weeks
+            break;
+        case 3:
+            return @"3 weeks"; //3 weeks
+            break;
+        case 4:
+            return @"This month"; //1 month
+            break;
+        case 5:
+            return @"2 months"; //2 months
+            break;
+        case 6:
+            return @"3 months"; //3 months
+            break;
+        case 7:
+            return @"6 months"; //6 months
+            break;
+        case 8:
+            return @"12 months"; //12 months
+            break;
+        default:
+            return @"All dates"; //all
+            break;
+    }
+}
+
++ (SortingMethod)dateSegmentedControlValue:(NSInteger)selectedIndex {
+    return selectedIndex;
+}
 
 @end
+
+
+#pragma mark - ExpenseTableViewCell (Data)
+
 
 @implementation ExpenseTableViewCell (Data)
 
 - (void)fillWithExpenseData:(Expense *)expense {
     
-    self.expenseLabel.text = [NSString stringWithFormat:@"%@ %@",[expense.amount stringValue], [NSString currencySymbol]];
+    self.expenseLabel.text = [expense.amount currencyStringRepresentation];
     self.descriptionLabel.text = expense.expenseDescription;
     self.commentLabel.text = expense.comment;
     self.dateLabel.text = [expense.date localeDateString];

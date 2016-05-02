@@ -12,8 +12,7 @@
 
 + (NSString *)currencySymbol {
     
-    NSLocale *theLocale = [NSLocale currentLocale];
-    NSString *symbol = [theLocale objectForKey:NSLocaleCurrencySymbol];
+    NSString *symbol = [[NSLocale currentLocale] objectForKey:NSLocaleCurrencySymbol];
     return symbol;
 }
 
