@@ -103,7 +103,7 @@
         && self.dateSlider.value == 0)
     {
         ExpenseTableViewSectionHeaderView *headerView = [ExpenseTableViewSectionHeaderView loadFromNIB];
-        NSNumber *weeklyTotal = [self.logic totalWeeklyAmountOfWeek:section];
+        NSNumber *weeklyTotal = [self.logic totalAmountOfWeek:section];
         headerView.totalAmountLabel.text = [weeklyTotal currencyStringRepresentation];
         headerView.averageAmountLabel.text = [@(weeklyTotal.floatValue / 7) currencyStringRepresentation];
         return headerView;
@@ -187,7 +187,10 @@
     
     UIAlertAction *actionChangeCurrency = [UIAlertAction actionWithTitle:@"Change Currency"
                                                                    style:UIAlertActionStyleDefault
-                                                                 handler:nil];
+                                                                 handler:^(UIAlertAction * _Nonnull action)
+    {
+        [self presentChangeCurrencyAlertController];
+    }];
     
     UIAlertAction *actionLogout = [UIAlertAction actionWithTitle:@"Log Out"
                                                                    style:UIAlertActionStyleDestructive
@@ -199,6 +202,7 @@
     UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:@"Close"
                                                           style:UIAlertActionStyleCancel
                                                         handler:nil];
+    
     [alertController addAction:actionChangeCurrency];
     [alertController addAction:actionLogout];
     [alertController addAction:actionCancel];
@@ -399,6 +403,35 @@
 
 + (SortingMethod)dateSegmentedControlValue:(NSInteger)selectedIndex {
     return selectedIndex;
+}
+
+- (void)presentChangeCurrencyAlertController {
+    
+    NSArray *currencies = @[@"Phone's currency", @"$", @"€", @"£", @"₺"];
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                             message:nil
+                                                                      preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    for (NSInteger i = 0; i < currencies.count; i++)
+    {
+        UIAlertAction *action = [UIAlertAction actionWithTitle:currencies[i]
+                                                         style:UIAlertActionStyleDefault
+                                                       handler:^(UIAlertAction * _Nonnull action) {
+                                                           [ExpenseLogic changeLocaleForCurrency:currencies[i]];
+                                                           [self.tableView reloadData];
+                                                       }];
+        
+        [alertController addAction:action];
+    }
+    
+    
+    UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:@"Close"
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:nil];
+    [alertController addAction:actionCancel];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 @end

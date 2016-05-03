@@ -29,16 +29,16 @@
     return manager;
 }
 
-+ (void) showAlertWithTitle:(NSString *)title
-                    message:(NSString *)message
-          cancelButtonTitle:(NSString *)cancelButtonTitle
-          otherButtonTitles:(NSArray *)otherButtonTitles
-             viewController:(UIViewController *)viewController
-          completionHandler:(void (^)(NSInteger buttonClicked))completionHandler
++ (void)showAlertWithTitle:(NSString *)title
+                   message:(NSString *)message
+         cancelButtonTitle:(NSString *)cancelButtonTitle
+         otherButtonTitles:(NSArray *)otherButtonTitles
+            viewController:(UIViewController *)viewController
+         completionHandler:(void (^)(NSInteger buttonClicked))completionHandler
 {
     [AlertManager sharedInstance].alertController = [UIAlertController alertControllerWithTitle:title.copy
-                                                                                          message:message.copy
-                                                                                   preferredStyle:UIAlertControllerStyleAlert];
+                                                                                        message:message.copy
+                                                                                preferredStyle:UIAlertControllerStyleAlert];
     
     
     if(cancelButtonTitle)

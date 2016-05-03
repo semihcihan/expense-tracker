@@ -35,6 +35,7 @@
 		49DFFCCB1CD9019700D0158C /* ExpenseTableViewSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DFFCCA1CD9019700D0158C /* ExpenseTableViewSectionHeaderView.m */; };
 		49DFFCCD1CD901A300D0158C /* ExpenseTableViewSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49DFFCCC1CD901A300D0158C /* ExpenseTableViewSectionHeaderView.xib */; };
 		49DFFCD01CD904A100D0158C /* UIView+NibLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DFFCCF1CD904A100D0158C /* UIView+NibLoading.m */; };
+		49DFFCD31CD9163B00D0158C /* NSLocale+ExpenseTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DFFCD21CD9163B00D0158C /* NSLocale+ExpenseTracker.m */; };
 		B959B702B9003C0D7C3F22D1 /* libPods-ExpenseTracker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48643D2BCC4AB6E4857ED818 /* libPods-ExpenseTracker.a */; };
 /* End PBXBuildFile section */
 
@@ -104,6 +105,8 @@
 		49DFFCCC1CD901A300D0158C /* ExpenseTableViewSectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExpenseTableViewSectionHeaderView.xib; sourceTree = "<group>"; };
 		49DFFCCE1CD904A100D0158C /* UIView+NibLoading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+NibLoading.h"; sourceTree = "<group>"; };
 		49DFFCCF1CD904A100D0158C /* UIView+NibLoading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+NibLoading.m"; sourceTree = "<group>"; };
+		49DFFCD11CD9163B00D0158C /* NSLocale+ExpenseTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLocale+ExpenseTracker.h"; sourceTree = "<group>"; };
+		49DFFCD21CD9163B00D0158C /* NSLocale+ExpenseTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLocale+ExpenseTracker.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -168,6 +171,8 @@
 				49015D8E1CD7753300164FED /* UITableView+Register.m */,
 				49DFFCCE1CD904A100D0158C /* UIView+NibLoading.h */,
 				49DFFCCF1CD904A100D0158C /* UIView+NibLoading.m */,
+				49DFFCD11CD9163B00D0158C /* NSLocale+ExpenseTracker.h */,
+				49DFFCD21CD9163B00D0158C /* NSLocale+ExpenseTracker.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -429,6 +434,7 @@
 				497F07F31CD53C1F003DC694 /* AppDelegate.m in Sources */,
 				49015D8F1CD7753300164FED /* UITableView+Register.m in Sources */,
 				49015D841CD7719D00164FED /* TableViewCell.m in Sources */,
+				49DFFCD31CD9163B00D0158C /* NSLocale+ExpenseTracker.m in Sources */,
 				49015D7D1CD66E2E00164FED /* NavigationBarStyler.m in Sources */,
 				49015D981CD780AA00164FED /* NSDate+ExpenseTracker.m in Sources */,
 				49015D881CD771D700164FED /* ExpenseTableViewCell.m in Sources */,

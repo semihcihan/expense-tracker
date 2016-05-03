@@ -7,12 +7,13 @@
 //
 
 #import "NSNumber+ExpenseTracker.h"
+#import "NSLocale+ExpenseTracker.h"
 
 @implementation NSNumber (ExpenseTracker)
 
 - (NSString *)currencyStringRepresentation {
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    numberFormatter.locale = [NSLocale currentLocale];
+    numberFormatter.locale = [NSLocale expenseTrackerLocale];
     numberFormatter.numberStyle = NSNumberFormatterCurrencyStyle;
     NSString *numberAsString = [numberFormatter stringFromNumber:self];
     return numberAsString;
@@ -20,7 +21,7 @@
 
 - (NSString *)currencyStringRepresentationWithoutDecimals {
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    numberFormatter.locale = [NSLocale currentLocale];
+    numberFormatter.locale = [NSLocale expenseTrackerLocale];
     numberFormatter.maximumFractionDigits = 0;
     numberFormatter.numberStyle = NSNumberFormatterCurrencyStyle;
     NSString *numberAsString = [numberFormatter stringFromNumber:self];

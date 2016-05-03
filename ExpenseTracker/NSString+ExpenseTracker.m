@@ -7,12 +7,13 @@
 //
 
 #import "NSString+ExpenseTracker.h"
+#import "NSLocale+ExpenseTracker.h"
 
 @implementation NSString (ExpenseTracker)
 
 + (NSString *)currencySymbol {
     
-    NSString *symbol = [[NSLocale currentLocale] objectForKey:NSLocaleCurrencySymbol];
+    NSString *symbol = [[NSLocale expenseTrackerLocale] objectForKey:NSLocaleCurrencySymbol];
     return symbol;
 }
 

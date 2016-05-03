@@ -9,6 +9,7 @@
 #import "ExpenseLogic.h"
 #import "Expense.h"
 #import "NSDate+ExpenseTracker.h"
+#import "NSLocale+ExpenseTracker.h"
 
 @interface ExpenseLogic ()
 
@@ -53,14 +54,15 @@
 - (NSNumber *)totalExpense {
     
     CGFloat total = 0.f;
-    for (Expense *expense in self.shownExpenses) {
+    for (Expense *expense in self.shownExpenses)
+    {
         total += expense.amount.floatValue;
     }
     
     return @(total);
 }
 
-- (NSNumber *)totalWeeklyAmountOfWeek:(NSInteger)week {
+- (NSNumber *)totalAmountOfWeek:(NSInteger)week {
     
     CGFloat total = 0.f;
     for (Expense *expense in self.shownExpensesPerWeek[week])
@@ -141,6 +143,29 @@
     NSNumber *sortSegmentValue = [[NSUserDefaults standardUserDefaults] objectForKey:@"ETSortSegmentValue"];
     
     return (sortSegmentValue != nil) ? sortSegmentValue.integerValue : 0;
+}
+
++ (void)changeLocaleForCurrency:(NSString *)currency {
+    if ([currency isEqualToString:@"Phone's currency"])
+    {
+        [NSLocale cleanExpenseTrackerLocale];
+    }
+    else if([currency isEqualToString:@"$"])
+    {
+        [NSLocale setExpenseTrackerLocaleWithIdentifier:@"en_US"];
+    }
+    else if([currency isEqualToString:@"€"])
+    {
+        [NSLocale setExpenseTrackerLocaleWithIdentifier:@"fr_FR"];
+    }
+    else if([currency isEqualToString:@"£"])
+    {
+        [NSLocale setExpenseTrackerLocaleWithIdentifier:@"en_GB"];
+    }
+    else if([currency isEqualToString:@"₺"])
+    {
+        [NSLocale setExpenseTrackerLocaleWithIdentifier:@"tr_TR"];
+    }
 }
 
 #pragma mark - Helpers

@@ -32,17 +32,12 @@ typedef NS_ENUM(NSUInteger, SortingMethod) {
                    sortSegmentValue:(NSInteger)sortSegmentValue;
 
 - (NSNumber *)totalExpense;
-
 - (void)sortExpenses:(SortingMethod)sortingMethod;
-
-+ (CGFloat)getDateSliderValue;
-
-+ (CGFloat)getAmountSliderValue;
-
-+ (NSInteger)getSortSegmentValue;
-
 + (void)logout;
-
-- (NSNumber *)totalWeeklyAmountOfWeek:(NSInteger)week;
+- (NSNumber *)totalAmountOfWeek:(NSInteger)week;
++ (CGFloat)getDateSliderValue;
++ (CGFloat)getAmountSliderValue;
++ (NSInteger)getSortSegmentValue;
++ (void)changeLocaleForCurrency:(NSString *)currency;
 
 @end

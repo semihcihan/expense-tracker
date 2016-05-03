@@ -7,6 +7,7 @@
 //
 
 #import "NSDate+ExpenseTracker.h"
+#import "NSLocale+ExpenseTracker.h"
 
 @implementation NSDate (ExpenseTracker)
 
@@ -19,7 +20,7 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-    [dateFormatter setLocale:[NSLocale currentLocale]];
+    [dateFormatter setLocale:[NSLocale expenseTrackerLocale]];
     NSString *fullDateString = [dateFormatter stringFromDate:self];
     return fullDateString;
 }
