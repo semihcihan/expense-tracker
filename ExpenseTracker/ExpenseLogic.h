@@ -26,6 +26,18 @@ typedef NS_ENUM(NSUInteger, SortingMethod) {
                    inRecentWeeks:(NSInteger)weeks
                    sortingMethod:(SortingMethod)sortingMethod;
 
+- (void)saveFilterAmountSliderValue:(CGFloat)amountSliderValue
+                    dateSliderValue:(CGFloat)dateSliderValue
+                   sortSegmentValue:(NSInteger)sortSegmentValue;
+
+- (NSNumber *)totalExpense;
+
 - (void)sortExpenses:(SortingMethod)sortingMethod;
+
++ (CGFloat)getDateSliderValue;
+
++ (CGFloat)getAmountSliderValue;
+
++ (NSInteger)getSortSegmentValue;
 
 @end

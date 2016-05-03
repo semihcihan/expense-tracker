@@ -151,10 +151,10 @@
 				49015D9A1CD7C4EB00164FED /* NSNumber+ExpenseTracker.m */,
 				49015D961CD780AA00164FED /* NSDate+ExpenseTracker.h */,
 				49015D971CD780AA00164FED /* NSDate+ExpenseTracker.m */,
-				49015D751CD657A800164FED /* UIView+Loading.h */,
 				49015D761CD657A800164FED /* UIView+Loading.m */,
 				49015D8D1CD7753300164FED /* UITableView+Register.h */,
 				49015D8E1CD7753300164FED /* UITableView+Register.m */,
+				49015D751CD657A800164FED /* UIView+Loading.h */,
 			);
 			name = Categories;
 			sourceTree = "<group>";

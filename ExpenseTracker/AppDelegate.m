@@ -20,9 +20,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
 
-    [NetworkManager sharedInstance];
-    [NavigationBarStyler styleNavigationBar];
-    [CSToastManager setQueueEnabled:NO];
+    [AppDelegate customizeClasses];
 
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
     
@@ -42,8 +40,6 @@
         self.window.rootViewController = viewController;
         [self.window makeKeyAndVisible];
     }
-    
-//    [PFUser logOut];
     
     return YES;
 }
@@ -68,6 +64,14 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - Helpers
+
++ (void)customizeClasses {
+    [NetworkManager sharedInstance];
+    [NavigationBarStyler styleNavigationBar];
+    [CSToastManager setQueueEnabled:NO];
 }
 
 @end

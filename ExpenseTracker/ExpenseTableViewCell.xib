@@ -50,25 +50,39 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hto-0S-5W8">
+                        <rect key="frame" x="15" y="128" width="367" height="1"/>
+                        <color key="backgroundColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="YXq-Zl-Pol"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="kF9-Id-RYg" firstAttribute="trailing" secondItem="tv1-Is-QLS" secondAttribute="trailing" id="0dH-MF-gRq"/>
+                    <constraint firstAttribute="trailing" secondItem="Hto-0S-5W8" secondAttribute="trailing" id="1Iz-wH-iZU"/>
                     <constraint firstItem="kF9-Id-RYg" firstAttribute="leading" secondItem="4QO-WH-OQl" secondAttribute="leading" id="9Za-3w-hYS"/>
                     <constraint firstItem="4QO-WH-OQl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="Dcp-oc-j1a"/>
+                    <constraint firstItem="V90-IT-aWW" firstAttribute="top" secondItem="Hto-0S-5W8" secondAttribute="bottom" id="Hno-sl-n1M"/>
                     <constraint firstItem="V90-IT-aWW" firstAttribute="leading" secondItem="kF9-Id-RYg" secondAttribute="leading" id="WNG-do-AHL"/>
+                    <constraint firstAttribute="bottom" secondItem="Hto-0S-5W8" secondAttribute="bottom" id="ZQx-AS-wB6"/>
                     <constraint firstItem="kF9-Id-RYg" firstAttribute="top" secondItem="4QO-WH-OQl" secondAttribute="bottom" constant="5" id="ald-FX-a7N"/>
                     <constraint firstAttribute="trailing" secondItem="tv1-Is-QLS" secondAttribute="trailing" constant="15" id="df3-ER-dAI"/>
                     <constraint firstItem="tv1-Is-QLS" firstAttribute="leading" secondItem="4QO-WH-OQl" secondAttribute="trailing" constant="20" id="ekP-Cl-kMm"/>
                     <constraint firstItem="V90-IT-aWW" firstAttribute="top" secondItem="kF9-Id-RYg" secondAttribute="bottom" constant="5" id="iIM-Eo-TdH"/>
+                    <constraint firstItem="Hto-0S-5W8" firstAttribute="leading" secondItem="4QO-WH-OQl" secondAttribute="leading" id="iMv-0e-reg"/>
                     <constraint firstItem="V90-IT-aWW" firstAttribute="trailing" secondItem="kF9-Id-RYg" secondAttribute="trailing" id="jEn-Uc-WdO"/>
                     <constraint firstItem="4QO-WH-OQl" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="jYf-oc-E2g"/>
                     <constraint firstItem="4QO-WH-OQl" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="nBe-Ku-TZS"/>
+                    <constraint firstItem="Hto-0S-5W8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="rrO-pV-fRK"/>
                     <constraint firstItem="tv1-Is-QLS" firstAttribute="leading" secondItem="4QO-WH-OQl" secondAttribute="trailing" constant="20" id="uch-RE-DEZ"/>
                     <constraint firstItem="tv1-Is-QLS" firstAttribute="top" secondItem="4QO-WH-OQl" secondAttribute="top" id="z92-zw-Ksx"/>
                 </constraints>
                 <variation key="default">
                     <mask key="constraints">
                         <exclude reference="jYf-oc-E2g"/>
+                        <exclude reference="Hno-sl-n1M"/>
+                        <exclude reference="rrO-pV-fRK"/>
                         <exclude reference="ekP-Cl-kMm"/>
                     </mask>
                 </variation>

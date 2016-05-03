@@ -17,8 +17,6 @@
 #import "NavigationBarStyler.h"
 #include <math.h>
 
-static const CGFloat kHiddenFilterViewVerticalSpace = -180.f;
-
 @interface ExpenseViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, ErrorActionProtocol>
 
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
@@ -30,6 +28,10 @@ static const CGFloat kHiddenFilterViewVerticalSpace = -180.f;
 @property (strong, nonatomic) IBOutlet UIView *filterView;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *filterViewVerticalSpaceToTopLayoutGuideConstraint;
+@property (strong, nonatomic) IBOutlet UILabel *noDataLabel;
+@property (strong, nonatomic) IBOutlet UILabel *headerTotalLabel;
+@property (strong, nonatomic) IBOutlet UILabel *headerAmountLabel;
+@property (strong, nonatomic) IBOutlet UIView *tableHeaderView;
 
 @end
 
@@ -45,13 +47,20 @@ static const CGFloat kHiddenFilterViewVerticalSpace = -180.f;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    self.navigationController.navigationBarHidden = NO;
+    
     self.navigationItem.title = @"Expenses";
     [NavigationBarStyler styleLeftNavigationItem:self.navigationItem image:[UIImage imageNamed:@"filtering"] target:self action:@selector(filterButtonTapped)];
     [NavigationBarStyler styleRightNavigationItem:self.navigationItem firstButtonAction:@selector(newExpenseButtonTapped) firstButtonImage:[UIImage imageNamed:@"new_expense"] secondButtonAction:@selector(moreButtonTapped) secondButtonImage:[UIImage imageNamed:@"more"] target:self];
     
-    [self.amountSlider addTarget:self action:@selector(filterValueChanged) forControlEvents:UIControlEventValueChanged];
-    [self.dateSlider addTarget:self action:@selector(filterValueChanged) forControlEvents:UIControlEventValueChanged];
+    self.tableView.tableHeaderView = nil;
+    
+    [self.amountSlider addTarget:self action:@selector(filterValueChanged:) forControlEvents:UIControlEventValueChanged];
+    [self.dateSlider addTarget:self action:@selector(filterValueChanged:) forControlEvents:UIControlEventValueChanged];
     [self.sortSegmentedControl addTarget:self action:@selector(sortMethodChanged) forControlEvents:UIControlEventValueChanged];
+    
+    [self getFilterValues];
     
     [self.tableView registerCellClassForDefaultReuseIdentifier:[ExpenseTableViewCell class]];
     
@@ -65,7 +74,7 @@ static const CGFloat kHiddenFilterViewVerticalSpace = -180.f;
     [self.logic getExpensesWithSuccessBlock:^(NSArray *expenses)
      {
          [self.view dismissLoadingView];
-         [self.tableView reloadData];
+         [self filterValueChanged:NO];
      }
                                failureBlock:^(NSString *error)
      {
@@ -77,6 +86,19 @@ static const CGFloat kHiddenFilterViewVerticalSpace = -180.f;
     [self.view endEditing:YES]; //dismiss keyboard
 }
 
+- (void)getFilterValues {
+    
+    self.amountSlider.value = [ExpenseLogic getAmountSliderValue];
+    self.dateSlider.value = [ExpenseLogic getDateSliderValue];
+    self.sortSegmentedControl.selectedSegmentIndex = [ExpenseLogic getSortSegmentValue];
+}
+
+- (void)updateSliderLabelTexts {
+    
+    self.amountFilterLabel.text = [ExpenseViewController amountSliderStringValue:self.amountSlider.value];
+    self.dateFilterLabel.text = [ExpenseViewController dateSliderStringValue:self.dateSlider.value];
+}
+
 #pragma mark - TableView Data Source
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -85,7 +107,7 @@ static const CGFloat kHiddenFilterViewVerticalSpace = -180.f;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 90;
+    return 90.f;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -106,6 +128,8 @@ static const CGFloat kHiddenFilterViewVerticalSpace = -180.f;
 
 - (void)filterButtonTapped {
     
+    static const CGFloat kHiddenFilterViewVerticalSpace = -180.f;
+
     if (self.filterViewVerticalSpaceToTopLayoutGuideConstraint.constant == 0) //close it
     {
         self.filterViewVerticalSpaceToTopLayoutGuideConstraint.constant = kHiddenFilterViewVerticalSpace;
@@ -131,32 +155,53 @@ static const CGFloat kHiddenFilterViewVerticalSpace = -180.f;
     
 }
 
-- (void)filterValueChanged {
+- (void)filterValueChanged:(BOOL)fromSearch {
     
     self.dateSlider.value = roundf(self.dateSlider.value);
     self.amountSlider.value = roundf(self.amountSlider.value);
     
     [self updateSliderLabelTexts];
     
+    [self.logic saveFilterAmountSliderValue:self.amountSlider.value
+                            dateSliderValue:self.dateSlider.value
+                           sortSegmentValue:self.sortSegmentedControl.selectedSegmentIndex];
+    
     [self.logic filterExpenseWithKeyword:self.searchBar.text
                       amountsGreaterThan:[ExpenseViewController amountSliderValue:self.amountSlider.value]
                            inRecentWeeks:[ExpenseViewController dateSliderValue:self.dateSlider.value]
                            sortingMethod:[ExpenseViewController dateSegmentedControlValue:self.sortSegmentedControl.selectedSegmentIndex]];
     
+    if (self.logic.shownExpenses.count == 0)
+    {
+        self.noDataLabel.hidden = NO;
+        self.tableView.tableHeaderView = nil;
+    }
+    else
+    {
+        self.noDataLabel.hidden = YES;
+        self.headerAmountLabel.text = [[self.logic totalExpense] currencyStringRepresentation];
+        self.tableView.tableHeaderView = self.tableHeaderView;
+    }
+    
     [self.tableView reloadData];
+    
+    if (!fromSearch)
+    {
+        [self.view endEditing:YES];
+    }
 }
 
 - (void)sortMethodChanged {
+    
+    [self.logic saveFilterAmountSliderValue:self.amountSlider.value
+                            dateSliderValue:self.dateSlider.value
+                           sortSegmentValue:self.sortSegmentedControl.selectedSegmentIndex];
+    
     [self.logic sortExpenses:[ExpenseViewController dateSegmentedControlValue:self.sortSegmentedControl.selectedSegmentIndex]];
     
     [self.tableView reloadData];
-}
-
-- (void)updateSliderLabelTexts {
     
-    self.amountFilterLabel.text = [ExpenseViewController amountSliderStringValue:self.amountSlider.value];
-    self.dateFilterLabel.text = [ExpenseViewController dateSliderStringValue:self.dateSlider.value];
-
+    [self.view endEditing:YES];
 }
 
 - (void)errorViewTapped:(UIGestureRecognizer *)recognizer {
@@ -170,7 +215,7 @@ static const CGFloat kHiddenFilterViewVerticalSpace = -180.f;
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     
-    [self filterValueChanged];
+    [self filterValueChanged:YES];
     [self.tableView reloadData];
 }
 
