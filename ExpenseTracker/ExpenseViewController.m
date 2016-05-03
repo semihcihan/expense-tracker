@@ -60,7 +60,7 @@
     [self.dateSlider addTarget:self action:@selector(filterValueChanged:) forControlEvents:UIControlEventValueChanged];
     [self.sortSegmentedControl addTarget:self action:@selector(sortMethodChanged) forControlEvents:UIControlEventValueChanged];
     
-    [self getFilterValues];
+    [self loadFilterValues];
     
     [self.tableView registerCellClassForDefaultReuseIdentifier:[ExpenseTableViewCell class]];
     
@@ -84,19 +84,6 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.view endEditing:YES]; //dismiss keyboard
-}
-
-- (void)getFilterValues {
-    
-    self.amountSlider.value = [ExpenseLogic getAmountSliderValue];
-    self.dateSlider.value = [ExpenseLogic getDateSliderValue];
-    self.sortSegmentedControl.selectedSegmentIndex = [ExpenseLogic getSortSegmentValue];
-}
-
-- (void)updateSliderLabelTexts {
-    
-    self.amountFilterLabel.text = [ExpenseViewController amountSliderStringValue:self.amountSlider.value];
-    self.dateFilterLabel.text = [ExpenseViewController dateSliderStringValue:self.dateSlider.value];
 }
 
 #pragma mark - TableView Data Source
@@ -248,10 +235,20 @@
     [self.view endEditing:YES]; //dismiss keyboard
 }
 
-#pragma mark - UIActionSheetDelegate
-
-
 #pragma mark - Filter Value Helpers
+
+- (void)loadFilterValues {
+    
+    self.amountSlider.value = [ExpenseLogic getAmountSliderValue];
+    self.dateSlider.value = [ExpenseLogic getDateSliderValue];
+    self.sortSegmentedControl.selectedSegmentIndex = [ExpenseLogic getSortSegmentValue];
+}
+
+- (void)updateSliderLabelTexts {
+    
+    self.amountFilterLabel.text = [ExpenseViewController amountSliderStringValue:self.amountSlider.value];
+    self.dateFilterLabel.text = [ExpenseViewController dateSliderStringValue:self.dateSlider.value];
+}
 
 + (NSNumber *)amountSliderValue:(NSInteger)sliderValue {
     
