@@ -10,6 +10,7 @@
 #import "NetworkManager.h"
 #import "NavigationBarStyler.h"
 #import <UIView+Toast.h>
+#import "ViewController.h"
 
 @interface AppDelegate ()
 
@@ -34,10 +35,7 @@
     }
     else
     {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"RegularUser" bundle:nil];
-        UIViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"RegularUserInitialNavigationController"];
-        
-        self.window.rootViewController = viewController;
+        [ViewController goToOpeningViewController];
         [self.window makeKeyAndVisible];
     }
     

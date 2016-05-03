@@ -149,10 +149,34 @@
 
 - (void)moreButtonTapped {
     
-}
-
-- (void)filterClearButtonTapped {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                             message:nil
+                                                                      preferredStyle:UIAlertControllerStyleActionSheet];
     
+    UIAlertAction *actionPrint = [UIAlertAction actionWithTitle:@"Print"
+                                                          style:UIAlertActionStyleDefault
+                                                        handler:nil];
+    
+    UIAlertAction *actionChangeCurrency = [UIAlertAction actionWithTitle:@"Change currency"
+                                                                   style:UIAlertActionStyleDefault
+                                                                 handler:nil];
+    
+    UIAlertAction *actionLogout = [UIAlertAction actionWithTitle:@"Log out"
+                                                                   style:UIAlertActionStyleDestructive
+                                                                 handler:^(UIAlertAction * _Nonnull action) {
+                                                                     [ExpenseLogic logout];
+                                                                     [ViewController goToOpeningViewController];
+                                                                 }];
+    
+    UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:@"Close"
+                                                          style:UIAlertActionStyleCancel
+                                                        handler:nil];
+    [alertController addAction:actionPrint];
+    [alertController addAction:actionChangeCurrency];
+    [alertController addAction:actionLogout];
+    [alertController addAction:actionCancel];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)filterValueChanged:(BOOL)fromSearch {
@@ -223,6 +247,9 @@
     
     [self.view endEditing:YES]; //dismiss keyboard
 }
+
+#pragma mark - UIActionSheetDelegate
+
 
 #pragma mark - Filter Value Helpers
 

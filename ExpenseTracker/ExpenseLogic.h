@@ -40,4 +40,6 @@ typedef NS_ENUM(NSUInteger, SortingMethod) {
 
 + (NSInteger)getSortSegmentValue;
 
++ (void)logout;
+
 @end

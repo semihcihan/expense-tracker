@@ -10,5 +10,7 @@
 
 @interface ViewController : UIViewController
 
++ (void)goToOpeningViewController;
+
 @end
 

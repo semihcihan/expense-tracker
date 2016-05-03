@@ -15,6 +15,8 @@ typedef void (^FailureBlock)(NSString *error);
 
 + (PFUser *)currentUser;
 
++ (void)logout;
+
 + (instancetype)sharedInstance;
 
 - (void)signUpWithEmail:(NSString *)email

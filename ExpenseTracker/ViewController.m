@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "AppDelegate.h"
 
 @interface ViewController ()
 
@@ -17,9 +18,6 @@
 - (void)viewDidLoad {
     
     self.navigationController.navigationBar.translucent = NO;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-    });
     
     [super viewDidLoad];
 }
@@ -27,6 +25,13 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
++ (void)goToOpeningViewController {
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"RegularUser" bundle:nil];
+    UIViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"RegularUserInitialNavigationController"];
+    ((AppDelegate *)[UIApplication sharedApplication].delegate).window.rootViewController = viewController;
 }
 
 @end

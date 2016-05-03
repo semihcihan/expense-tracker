@@ -29,6 +29,10 @@
     return [PFUser currentUser];
 }
 
++ (void)logout {
+    [PFUser logOut];
+}
+
 - (void)signUpWithEmail:(NSString *)email
                password:(NSString *)password
            successBlock:(void (^)(PFUser *))successBlock

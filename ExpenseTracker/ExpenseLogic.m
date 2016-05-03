@@ -26,6 +26,14 @@
     return self;
 }
 
++ (void)logout {
+    [NetworkManager logout];
+    
+    //clear user defaults
+    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+}
+
 - (void)getExpensesWithSuccessBlock:(void (^)(NSArray *))successBlock
                        failureBlock:(FailureBlock)failureBlock {
     
