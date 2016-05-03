@@ -32,6 +32,9 @@
 		497F08091CD53C1F003DC694 /* ExpenseTrackerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 497F08081CD53C1F003DC694 /* ExpenseTrackerTests.m */; };
 		497F08161CD54F36003DC694 /* OpeningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497F08151CD54F36003DC694 /* OpeningViewController.m */; };
 		497F08191CD5522F003DC694 /* OpeningLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 497F08181CD5522F003DC694 /* OpeningLogic.m */; };
+		49DFFCCB1CD9019700D0158C /* ExpenseTableViewSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DFFCCA1CD9019700D0158C /* ExpenseTableViewSectionHeaderView.m */; };
+		49DFFCCD1CD901A300D0158C /* ExpenseTableViewSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49DFFCCC1CD901A300D0158C /* ExpenseTableViewSectionHeaderView.xib */; };
+		49DFFCD01CD904A100D0158C /* UIView+NibLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DFFCCF1CD904A100D0158C /* UIView+NibLoading.m */; };
 		B959B702B9003C0D7C3F22D1 /* libPods-ExpenseTracker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48643D2BCC4AB6E4857ED818 /* libPods-ExpenseTracker.a */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +99,11 @@
 		497F08151CD54F36003DC694 /* OpeningViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpeningViewController.m; sourceTree = "<group>"; };
 		497F08171CD5522F003DC694 /* OpeningLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpeningLogic.h; sourceTree = "<group>"; };
 		497F08181CD5522F003DC694 /* OpeningLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpeningLogic.m; sourceTree = "<group>"; };
+		49DFFCC91CD9019700D0158C /* ExpenseTableViewSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpenseTableViewSectionHeaderView.h; sourceTree = "<group>"; };
+		49DFFCCA1CD9019700D0158C /* ExpenseTableViewSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpenseTableViewSectionHeaderView.m; sourceTree = "<group>"; };
+		49DFFCCC1CD901A300D0158C /* ExpenseTableViewSectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExpenseTableViewSectionHeaderView.xib; sourceTree = "<group>"; };
+		49DFFCCE1CD904A100D0158C /* UIView+NibLoading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+NibLoading.h"; sourceTree = "<group>"; };
+		49DFFCCF1CD904A100D0158C /* UIView+NibLoading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+NibLoading.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +141,9 @@
 				49015D6F1CD6561C00164FED /* ExpenseViewController.m */,
 				49015D711CD6563200164FED /* ExpenseLogic.h */,
 				49015D721CD6563200164FED /* ExpenseLogic.m */,
+				49DFFCC91CD9019700D0158C /* ExpenseTableViewSectionHeaderView.h */,
+				49DFFCCA1CD9019700D0158C /* ExpenseTableViewSectionHeaderView.m */,
+				49DFFCCC1CD901A300D0158C /* ExpenseTableViewSectionHeaderView.xib */,
 				49015D851CD771D700164FED /* ExpenseTableViewCell.h */,
 				49015D861CD771D700164FED /* ExpenseTableViewCell.m */,
 				49015D871CD771D700164FED /* ExpenseTableViewCell.xib */,
@@ -151,10 +162,12 @@
 				49015D9A1CD7C4EB00164FED /* NSNumber+ExpenseTracker.m */,
 				49015D961CD780AA00164FED /* NSDate+ExpenseTracker.h */,
 				49015D971CD780AA00164FED /* NSDate+ExpenseTracker.m */,
+				49015D751CD657A800164FED /* UIView+Loading.h */,
 				49015D761CD657A800164FED /* UIView+Loading.m */,
 				49015D8D1CD7753300164FED /* UITableView+Register.h */,
 				49015D8E1CD7753300164FED /* UITableView+Register.m */,
-				49015D751CD657A800164FED /* UIView+Loading.h */,
+				49DFFCCE1CD904A100D0158C /* UIView+NibLoading.h */,
+				49DFFCCF1CD904A100D0158C /* UIView+NibLoading.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -338,6 +351,7 @@
 			files = (
 				49015D891CD771D700164FED /* ExpenseTableViewCell.xib in Resources */,
 				49015D6C1CD608A900164FED /* RegularUser.storyboard in Resources */,
+				49DFFCCD1CD901A300D0158C /* ExpenseTableViewSectionHeaderView.xib in Resources */,
 				497F07FE1CD53C1F003DC694 /* LaunchScreen.storyboard in Resources */,
 				497F07FB1CD53C1F003DC694 /* Assets.xcassets in Resources */,
 			);
@@ -407,6 +421,7 @@
 			files = (
 				497F07F61CD53C1F003DC694 /* ViewController.m in Sources */,
 				49015D7A1CD657E700164FED /* AlertManager.m in Sources */,
+				49DFFCCB1CD9019700D0158C /* ExpenseTableViewSectionHeaderView.m in Sources */,
 				49015D951CD77FDA00164FED /* NSString+ExpenseTracker.m in Sources */,
 				49015D701CD6561C00164FED /* ExpenseViewController.m in Sources */,
 				497F08191CD5522F003DC694 /* OpeningLogic.m in Sources */,
@@ -418,6 +433,7 @@
 				49015D981CD780AA00164FED /* NSDate+ExpenseTracker.m in Sources */,
 				49015D881CD771D700164FED /* ExpenseTableViewCell.m in Sources */,
 				49015D691CD5EC0D00164FED /* NetworkManager.m in Sources */,
+				49DFFCD01CD904A100D0158C /* UIView+NibLoading.m in Sources */,
 				49015D811CD76F8800164FED /* Expense.m in Sources */,
 				49015D9B1CD7C4EB00164FED /* NSNumber+ExpenseTracker.m in Sources */,
 				497F07F01CD53C1F003DC694 /* main.m in Sources */,

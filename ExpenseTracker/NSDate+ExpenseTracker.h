@@ -13,5 +13,6 @@
 - (NSString *)localeDateString;
 - (NSInteger)weekDifferenceWithDate:(NSDate *)date;
 - (NSInteger)monthDifferenceWithDate:(NSDate *)date;
+- (NSDateComponents *)weekOfYearAndYearComponents;
 
 @end

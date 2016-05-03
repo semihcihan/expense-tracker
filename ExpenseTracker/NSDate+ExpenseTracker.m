@@ -10,6 +10,10 @@
 
 @implementation NSDate (ExpenseTracker)
 
+#warning try
+//- (NSDateComponents *)components:(NSCalendarUnit)unitFlags fromDateComponents:(NSDateComponents *)startingDateComp toDateComponents:(NSDateComponents *)resultDateComp options:(NSCalendarOptions)options NS_AVAILABLE(10_9, 8_0);
+
+
 - (NSString *)localeDateString {
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -54,6 +58,14 @@
     ;
     
     return (month + (year - dateYear) * numberOfMonthsInAYear) - dateMonth;
+}
+
+- (NSDateComponents *)weekOfYearAndYearComponents {
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components:NSCalendarUnitWeekOfYear|NSCalendarUnitYear fromDate:self];
+    
+    return components;
 }
 
 @end

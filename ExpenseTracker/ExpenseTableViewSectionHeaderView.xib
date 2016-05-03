@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="T0F-Xi-ZF3" customClass="ExpenseTableViewSectionHeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weekly Total" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="2Bv-XS-cKa">
+                    <rect key="frame" x="15" y="25" width="88" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.23921568630000001" green="0.40784313729999999" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="ZIw-jk-GIJ">
+                    <rect key="frame" x="185" y="25" width="120" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="120" id="OpQ-2U-eEp"/>
+                        <constraint firstAttribute="height" constant="21" id="pYd-E9-WTC"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.76570861999999995" green="0.095219323389999999" blue="0.1809298547" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B7Z-Pr-3Hs">
+                    <rect key="frame" x="15" y="0.0" width="305" height="1"/>
+                    <color key="backgroundColor" red="0.23921568630000001" green="0.40784313729999999" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="gX0-CD-gkw"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Daily Average" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="EWw-Ud-NrW">
+                    <rect key="frame" x="15" y="47" width="94" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.23921568630000001" green="0.40784313729999999" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="WjE-Ua-uRZ">
+                    <rect key="frame" x="185" y="46" width="120" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="120" id="N92-01-W8O"/>
+                        <constraint firstAttribute="height" constant="21" id="fJ6-BD-WU0"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.76570861999999995" green="0.095219323389999999" blue="0.1809298547" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="EWw-Ud-NrW" firstAttribute="top" secondItem="2Bv-XS-cKa" secondAttribute="bottom" constant="4" id="5z7-c9-yun"/>
+                <constraint firstItem="B7Z-Pr-3Hs" firstAttribute="top" secondItem="T0F-Xi-ZF3" secondAttribute="top" id="Amm-aE-FbA"/>
+                <constraint firstItem="B7Z-Pr-3Hs" firstAttribute="top" secondItem="T0F-Xi-ZF3" secondAttribute="top" id="F0l-vj-FIt"/>
+                <constraint firstItem="B7Z-Pr-3Hs" firstAttribute="leading" secondItem="T0F-Xi-ZF3" secondAttribute="leading" constant="15" id="HUK-Ex-Sgf"/>
+                <constraint firstAttribute="trailing" secondItem="ZIw-jk-GIJ" secondAttribute="trailing" constant="15" id="HWO-iS-J4Q"/>
+                <constraint firstAttribute="bottom" secondItem="B7Z-Pr-3Hs" secondAttribute="bottom" id="JeB-WU-MRY"/>
+                <constraint firstItem="WjE-Ua-uRZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="EWw-Ud-NrW" secondAttribute="trailing" constant="5" id="Ljk-MI-QQF"/>
+                <constraint firstAttribute="trailing" secondItem="B7Z-Pr-3Hs" secondAttribute="trailing" id="SWQ-Rp-JXx"/>
+                <constraint firstAttribute="bottom" secondItem="B7Z-Pr-3Hs" secondAttribute="bottom" id="Sr4-ib-Ayc"/>
+                <constraint firstItem="WjE-Ua-uRZ" firstAttribute="trailing" secondItem="ZIw-jk-GIJ" secondAttribute="trailing" id="Yx9-ng-ZkK"/>
+                <constraint firstItem="WjE-Ua-uRZ" firstAttribute="centerY" secondItem="EWw-Ud-NrW" secondAttribute="centerY" id="cAs-Ht-dEx"/>
+                <constraint firstItem="2Bv-XS-cKa" firstAttribute="leading" secondItem="T0F-Xi-ZF3" secondAttribute="leading" constant="15" id="cYA-HT-g9k"/>
+                <constraint firstItem="ZIw-jk-GIJ" firstAttribute="top" secondItem="2Bv-XS-cKa" secondAttribute="top" id="lBH-g8-air"/>
+                <constraint firstItem="EWw-Ud-NrW" firstAttribute="leading" secondItem="2Bv-XS-cKa" secondAttribute="leading" id="lCU-kV-z88"/>
+                <constraint firstItem="2Bv-XS-cKa" firstAttribute="top" secondItem="T0F-Xi-ZF3" secondAttribute="top" constant="25" id="me9-rn-jI5"/>
+                <constraint firstItem="ZIw-jk-GIJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="2Bv-XS-cKa" secondAttribute="trailing" constant="5" id="oJp-aW-gvf"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="F0l-vj-FIt"/>
+                    <exclude reference="JeB-WU-MRY"/>
+                    <exclude reference="Sr4-ib-Ayc"/>
+                </mask>
+            </variation>
+            <connections>
+                <outlet property="averageAmountLabel" destination="WjE-Ua-uRZ" id="6E4-QN-TcQ"/>
+                <outlet property="averageLabel" destination="EWw-Ud-NrW" id="3WQ-LU-oUe"/>
+                <outlet property="totalAmountLabel" destination="ZIw-jk-GIJ" id="NGO-Io-MrB"/>
+                <outlet property="totalLabel" destination="2Bv-XS-cKa" id="i0a-zM-eLc"/>
+            </connections>
+            <point key="canvasLocation" x="503" y="129"/>
+        </view>
+    </objects>
+</document>

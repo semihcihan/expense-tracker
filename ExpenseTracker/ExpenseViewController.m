@@ -16,6 +16,8 @@
 #import "NSNumber+ExpenseTracker.h"
 #import "NavigationBarStyler.h"
 #include <math.h>
+#import "UIView+NibLoading.h"
+#import "ExpenseTableViewSectionHeaderView.h"
 
 @interface ExpenseViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, ErrorActionProtocol>
 
@@ -88,20 +90,63 @@
 
 #pragma mark - TableView Data Source
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    
+    return ([ExpenseViewController dateSegmentedControlValue:self.sortSegmentedControl.selectedSegmentIndex] == SortingMethodDate
+            && self.amountSlider.value == 0
+            && self.dateSlider.value == 0) ? [ExpenseTableViewSectionHeaderView height] : 0.f;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    if ([ExpenseViewController dateSegmentedControlValue:self.sortSegmentedControl.selectedSegmentIndex] == SortingMethodDate
+        && self.amountSlider.value == 0
+        && self.dateSlider.value == 0)
+    {
+        ExpenseTableViewSectionHeaderView *headerView = [ExpenseTableViewSectionHeaderView loadFromNIB];
+        NSNumber *weeklyTotal = [self.logic totalWeeklyAmountOfWeek:section];
+        headerView.totalAmountLabel.text = [weeklyTotal currencyStringRepresentation];
+        headerView.averageAmountLabel.text = [@(weeklyTotal.floatValue / 7) currencyStringRepresentation];
+        return headerView;
+    }
+    else
+    {
+        return nil;
+    }
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
+    return ([ExpenseViewController dateSegmentedControlValue:self.sortSegmentedControl.selectedSegmentIndex] == SortingMethodDate
+            && self.amountSlider.value == 0
+            && self.dateSlider.value == 0) ? self.logic.shownExpensesPerWeek.count : 1;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.logic.shownExpenses.count;
+    
+    return ([ExpenseViewController dateSegmentedControlValue:self.sortSegmentedControl.selectedSegmentIndex] == SortingMethodDate
+            && self.amountSlider.value == 0
+            && self.dateSlider.value == 0) ? ((NSArray *)self.logic.shownExpensesPerWeek[section]).count : self.logic.shownExpenses.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return 90.f;
+    return [ExpenseTableViewCell height];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+
     ExpenseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[ExpenseTableViewCell reuseIdentifier]];
     
-    [cell fillWithExpenseData:self.logic.shownExpenses[indexPath.row]];
+    if ([ExpenseViewController dateSegmentedControlValue:self.sortSegmentedControl.selectedSegmentIndex] == SortingMethodDate
+        && self.amountSlider.value == 0
+        && self.dateSlider.value == 0)
+    {
+        [cell fillWithExpenseData:self.logic.shownExpensesPerWeek[indexPath.section][indexPath.row]];
+    }
+    else
+    {
+        [cell fillWithExpenseData:self.logic.shownExpenses[indexPath.row]];
+    }
     
     return cell;
 }
@@ -140,15 +185,11 @@
                                                                              message:nil
                                                                       preferredStyle:UIAlertControllerStyleActionSheet];
     
-    UIAlertAction *actionPrint = [UIAlertAction actionWithTitle:@"Print"
-                                                          style:UIAlertActionStyleDefault
-                                                        handler:nil];
-    
-    UIAlertAction *actionChangeCurrency = [UIAlertAction actionWithTitle:@"Change currency"
+    UIAlertAction *actionChangeCurrency = [UIAlertAction actionWithTitle:@"Change Currency"
                                                                    style:UIAlertActionStyleDefault
                                                                  handler:nil];
     
-    UIAlertAction *actionLogout = [UIAlertAction actionWithTitle:@"Log out"
+    UIAlertAction *actionLogout = [UIAlertAction actionWithTitle:@"Log Out"
                                                                    style:UIAlertActionStyleDestructive
                                                                  handler:^(UIAlertAction * _Nonnull action) {
                                                                      [ExpenseLogic logout];
@@ -158,7 +199,6 @@
     UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:@"Close"
                                                           style:UIAlertActionStyleCancel
                                                         handler:nil];
-    [alertController addAction:actionPrint];
     [alertController addAction:actionChangeCurrency];
     [alertController addAction:actionLogout];
     [alertController addAction:actionCancel];
@@ -192,6 +232,12 @@
         self.noDataLabel.hidden = YES;
         self.headerAmountLabel.text = [[self.logic totalExpense] currencyStringRepresentation];
         self.tableView.tableHeaderView = self.tableHeaderView;
+    }
+    
+    if ([ExpenseViewController dateSegmentedControlValue:self.sortSegmentedControl.selectedSegmentIndex] == SortingMethodDate
+        && self.amountSlider.value == 0
+        && self.dateSlider.value == 0) {
+        self.tableView.tableHeaderView = nil;
     }
     
     [self.tableView reloadData];

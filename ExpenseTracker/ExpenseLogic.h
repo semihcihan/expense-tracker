@@ -17,6 +17,7 @@ typedef NS_ENUM(NSUInteger, SortingMethod) {
 @interface ExpenseLogic : NSObject
 
 @property (strong, nonatomic) NSMutableArray *shownExpenses;
+@property (strong, nonatomic) NSMutableArray *shownExpensesPerWeek;
 
 - (void)getExpensesWithSuccessBlock:(void (^)(NSArray *expenses))successBlock
                        failureBlock:(FailureBlock)failureBlock;
@@ -41,5 +42,7 @@ typedef NS_ENUM(NSUInteger, SortingMethod) {
 + (NSInteger)getSortSegmentValue;
 
 + (void)logout;
+
+- (NSNumber *)totalWeeklyAmountOfWeek:(NSInteger)week;
 
 @end

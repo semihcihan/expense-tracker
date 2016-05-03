@@ -16,4 +16,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *commentLabel;
 @property (strong, nonatomic) IBOutlet UILabel *expenseLabel;
 
++ (CGFloat)height;
+
 @end
