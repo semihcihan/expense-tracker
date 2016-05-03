@@ -419,6 +419,7 @@
                                                          style:UIAlertActionStyleDefault
                                                        handler:^(UIAlertAction * _Nonnull action) {
                                                            [ExpenseLogic changeLocaleForCurrency:currencies[i]];
+                                                           [self updateSliderLabelTexts];
                                                            [self.tableView reloadData];
                                                        }];
         
