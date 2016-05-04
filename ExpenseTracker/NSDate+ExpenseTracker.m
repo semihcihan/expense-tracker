@@ -20,7 +20,7 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
     [dateFormatter setTimeStyle:NSDateFormatterNoStyle];
-    [dateFormatter setLocale:[NSLocale expenseTrackerLocale]];
+    [dateFormatter setLocale:[NSLocale currentLocale]];
     NSString *fullDateString = [dateFormatter stringFromDate:self];
     return fullDateString;
 }

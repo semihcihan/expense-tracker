@@ -36,6 +36,8 @@
 		49DFFCCD1CD901A300D0158C /* ExpenseTableViewSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49DFFCCC1CD901A300D0158C /* ExpenseTableViewSectionHeaderView.xib */; };
 		49DFFCD01CD904A100D0158C /* UIView+NibLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DFFCCF1CD904A100D0158C /* UIView+NibLoading.m */; };
 		49DFFCD31CD9163B00D0158C /* NSLocale+ExpenseTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DFFCD21CD9163B00D0158C /* NSLocale+ExpenseTracker.m */; };
+		49FFC3481CDA3B5900C58323 /* ExpenseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FFC3471CDA3B5900C58323 /* ExpenseDetailViewController.m */; };
+		49FFC34C1CDA4F0200C58323 /* ExpenseDetailLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FFC34B1CDA4F0200C58323 /* ExpenseDetailLogic.m */; };
 		B959B702B9003C0D7C3F22D1 /* libPods-ExpenseTracker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48643D2BCC4AB6E4857ED818 /* libPods-ExpenseTracker.a */; };
 /* End PBXBuildFile section */
 
@@ -107,6 +109,10 @@
 		49DFFCCF1CD904A100D0158C /* UIView+NibLoading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+NibLoading.m"; sourceTree = "<group>"; };
 		49DFFCD11CD9163B00D0158C /* NSLocale+ExpenseTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLocale+ExpenseTracker.h"; sourceTree = "<group>"; };
 		49DFFCD21CD9163B00D0158C /* NSLocale+ExpenseTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLocale+ExpenseTracker.m"; sourceTree = "<group>"; };
+		49FFC3461CDA3B5900C58323 /* ExpenseDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpenseDetailViewController.h; sourceTree = "<group>"; };
+		49FFC3471CDA3B5900C58323 /* ExpenseDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpenseDetailViewController.m; sourceTree = "<group>"; };
+		49FFC34A1CDA4F0200C58323 /* ExpenseDetailLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpenseDetailLogic.h; sourceTree = "<group>"; };
+		49FFC34B1CDA4F0200C58323 /* ExpenseDetailLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpenseDetailLogic.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,22 +215,14 @@
 		497F07ED1CD53C1F003DC694 /* ExpenseTracker */ = {
 			isa = PBXGroup;
 			children = (
-				49015D7E1CD76F7A00164FED /* Models */,
-				49015D741CD657A000164FED /* Categories */,
-				49015D671CD5EC0D00164FED /* NetworkManager.h */,
-				49015D681CD5EC0D00164FED /* NetworkManager.m */,
-				49015D6D1CD6560500164FED /* ExpenseViewController */,
-				497F08131CD54F18003DC694 /* OpeningViewController */,
 				497F07F11CD53C1F003DC694 /* AppDelegate.h */,
 				497F07F21CD53C1F003DC694 /* AppDelegate.m */,
-				497F07F41CD53C1F003DC694 /* ViewController.h */,
-				497F07F51CD53C1F003DC694 /* ViewController.m */,
-				49015D781CD657E700164FED /* AlertManager.h */,
-				49015D791CD657E700164FED /* AlertManager.m */,
-				49015D7B1CD66E2E00164FED /* NavigationBarStyler.h */,
-				49015D7C1CD66E2E00164FED /* NavigationBarStyler.m */,
-				49015D821CD7719D00164FED /* TableViewCell.h */,
-				49015D831CD7719D00164FED /* TableViewCell.m */,
+				49FFC3491CDA3B9400C58323 /* ManagersHelpers */,
+				497F08131CD54F18003DC694 /* OpeningViewController */,
+				49015D6D1CD6560500164FED /* ExpenseViewController */,
+				49FFC3451CDA3B3000C58323 /* ExpenseDetailViewController */,
+				49015D7E1CD76F7A00164FED /* Models */,
+				49015D741CD657A000164FED /* Categories */,
 				497F07FA1CD53C1F003DC694 /* Assets.xcassets */,
 				49015D6A1CD608A900164FED /* RegularUser.storyboard */,
 				497F07FC1CD53C1F003DC694 /* LaunchScreen.storyboard */,
@@ -261,6 +259,34 @@
 				497F08181CD5522F003DC694 /* OpeningLogic.m */,
 			);
 			name = OpeningViewController;
+			sourceTree = "<group>";
+		};
+		49FFC3451CDA3B3000C58323 /* ExpenseDetailViewController */ = {
+			isa = PBXGroup;
+			children = (
+				49FFC3461CDA3B5900C58323 /* ExpenseDetailViewController.h */,
+				49FFC3471CDA3B5900C58323 /* ExpenseDetailViewController.m */,
+				49FFC34A1CDA4F0200C58323 /* ExpenseDetailLogic.h */,
+				49FFC34B1CDA4F0200C58323 /* ExpenseDetailLogic.m */,
+			);
+			name = ExpenseDetailViewController;
+			sourceTree = "<group>";
+		};
+		49FFC3491CDA3B9400C58323 /* ManagersHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				497F07F41CD53C1F003DC694 /* ViewController.h */,
+				497F07F51CD53C1F003DC694 /* ViewController.m */,
+				49015D671CD5EC0D00164FED /* NetworkManager.h */,
+				49015D681CD5EC0D00164FED /* NetworkManager.m */,
+				49015D781CD657E700164FED /* AlertManager.h */,
+				49015D791CD657E700164FED /* AlertManager.m */,
+				49015D7B1CD66E2E00164FED /* NavigationBarStyler.h */,
+				49015D7C1CD66E2E00164FED /* NavigationBarStyler.m */,
+				49015D821CD7719D00164FED /* TableViewCell.h */,
+				49015D831CD7719D00164FED /* TableViewCell.m */,
+			);
+			name = ManagersHelpers;
 			sourceTree = "<group>";
 		};
 		EE5AAA99F3D9F94C95910A26 /* Frameworks */ = {
@@ -427,10 +453,12 @@
 				497F07F61CD53C1F003DC694 /* ViewController.m in Sources */,
 				49015D7A1CD657E700164FED /* AlertManager.m in Sources */,
 				49DFFCCB1CD9019700D0158C /* ExpenseTableViewSectionHeaderView.m in Sources */,
+				49FFC3481CDA3B5900C58323 /* ExpenseDetailViewController.m in Sources */,
 				49015D951CD77FDA00164FED /* NSString+ExpenseTracker.m in Sources */,
 				49015D701CD6561C00164FED /* ExpenseViewController.m in Sources */,
 				497F08191CD5522F003DC694 /* OpeningLogic.m in Sources */,
 				497F08161CD54F36003DC694 /* OpeningViewController.m in Sources */,
+				49FFC34C1CDA4F0200C58323 /* ExpenseDetailLogic.m in Sources */,
 				497F07F31CD53C1F003DC694 /* AppDelegate.m in Sources */,
 				49015D8F1CD7753300164FED /* UITableView+Register.m in Sources */,
 				49015D841CD7719D00164FED /* TableViewCell.m in Sources */,

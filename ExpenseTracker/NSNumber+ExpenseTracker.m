@@ -19,6 +19,17 @@
     return numberAsString;
 }
 
+- (NSArray *)splitNumber {
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    numberFormatter.locale = [NSLocale expenseTrackerLocale];
+    numberFormatter.numberStyle = NSNumberFormatterCurrencyStyle;
+    [numberFormatter setCurrencySymbol:@""];
+    [numberFormatter setPerMillSymbol:@""];
+    [numberFormatter setPercentSymbol:@","];
+    NSString *numberAsString = [numberFormatter stringFromNumber:self];
+    return [numberAsString componentsSeparatedByString:@","];
+}
+
 - (NSString *)currencyStringRepresentationWithoutDecimals {
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     numberFormatter.locale = [NSLocale expenseTrackerLocale];

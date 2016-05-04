@@ -18,13 +18,10 @@
 - (void)viewDidLoad {
     
     self.navigationController.navigationBar.translucent = NO;
-    
-    [super viewDidLoad];
-}
+    self.navigationController.interactivePopGestureRecognizer.delegate = (id<UIGestureRecognizerDelegate>)self;
+    [self.navigationController.interactivePopGestureRecognizer setEnabled:YES];
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    [super viewDidLoad];
 }
 
 + (void)goToOpeningViewController {
@@ -32,6 +29,10 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"RegularUser" bundle:nil];
     UIViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"RegularUserInitialNavigationController"];
     ((AppDelegate *)[UIApplication sharedApplication].delegate).window.rootViewController = viewController;
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES]; //dismiss keyboard
 }
 
 @end

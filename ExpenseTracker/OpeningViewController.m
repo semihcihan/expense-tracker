@@ -9,6 +9,7 @@
 #import "OpeningViewController.h"
 #import <UIView+Toast.h>
 #import "UIView+Loading.h"
+#import "ExpenseViewController.h"
 
 @interface OpeningViewController () <UITextFieldDelegate>
 
@@ -32,6 +33,12 @@
     self.passwordTextField.text = @"22323333";
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+        
+    ((ExpenseViewController *)segue.destinationViewController).logic = [[ExpenseLogic alloc] init];
+}
+
+#pragma mark - Actions
 
 - (IBAction)signInButtonTapped:(id)sender {
     
@@ -75,6 +82,8 @@
     
 }
 
+#pragma mark - Helpers
+
 - (BOOL)validate {
     
     if (self.emailTextField.text.length > 0 && self.passwordTextField.text.length > 0)
@@ -99,10 +108,6 @@
     }
     
     return NO;
-}
-
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self.view endEditing:YES]; //dismiss keyboard
 }
 
 #pragma mark - UITextFieldDelegate

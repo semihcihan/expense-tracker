@@ -11,5 +11,6 @@
 @interface NSString (ExpenseTracker)
 
 + (NSString *)currencySymbol;
++ (NSString *)percentSymbol;
 
 @end

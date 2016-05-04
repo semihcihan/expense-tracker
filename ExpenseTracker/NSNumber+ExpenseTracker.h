@@ -12,5 +12,6 @@
 
 - (NSString *)currencyStringRepresentation;
 - (NSString *)currencyStringRepresentationWithoutDecimals;
+- (NSArray *)splitNumber;
 
 @end

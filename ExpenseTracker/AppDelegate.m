@@ -11,6 +11,7 @@
 #import "NavigationBarStyler.h"
 #import <UIView+Toast.h>
 #import "ViewController.h"
+#import "ExpenseViewController.h"
 
 @interface AppDelegate ()
 
@@ -28,7 +29,9 @@
     if ([NetworkManager currentUser])
     {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"RegularUser" bundle:nil];
-        UIViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"ExpenseViewController"];
+        ExpenseViewController *viewController = (ExpenseViewController *)[storyboard instantiateViewControllerWithIdentifier:@"ExpenseViewController"];
+        viewController.logic = [[ExpenseLogic alloc] init];
+        
         
         self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:viewController];
         [self.window makeKeyAndVisible];

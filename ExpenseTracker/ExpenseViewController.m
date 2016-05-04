@@ -18,6 +18,7 @@
 #include <math.h>
 #import "UIView+NibLoading.h"
 #import "ExpenseTableViewSectionHeaderView.h"
+#import "ExpenseDetailViewController.h"
 
 @interface ExpenseViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, ErrorActionProtocol>
 
@@ -54,7 +55,11 @@
     
     self.navigationItem.title = @"Expenses";
     [NavigationBarStyler styleLeftNavigationItem:self.navigationItem image:[UIImage imageNamed:@"filtering"] target:self action:@selector(filterButtonTapped)];
-    [NavigationBarStyler styleRightNavigationItem:self.navigationItem firstButtonAction:@selector(newExpenseButtonTapped) firstButtonImage:[UIImage imageNamed:@"new_expense"] secondButtonAction:@selector(moreButtonTapped) secondButtonImage:[UIImage imageNamed:@"more"] target:self];
+    [NavigationBarStyler styleRightNavigationItem:self.navigationItem
+                                firstButtonAction:@selector(newExpenseButtonTapped)
+                                 firstButtonImage:[UIImage imageNamed:@"new_expense"]
+                               secondButtonAction:@selector(moreButtonTapped)
+                                secondButtonImage:[UIImage imageNamed:@"more"] target:self];
     
     self.tableView.tableHeaderView = nil;
     
@@ -66,7 +71,6 @@
     
     [self.tableView registerCellClassForDefaultReuseIdentifier:[ExpenseTableViewCell class]];
     
-    self.logic = [[ExpenseLogic alloc] init];
     [self.view showLoadingView];
     [self getData];
 }
@@ -84,9 +88,18 @@
      }];
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    [self.view endEditing:YES]; //dismiss keyboard
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if (sender && [sender isKindOfClass:[Expense class]])
+    {
+        ExpenseDetailLogic *logic = [[ExpenseDetailLogic alloc] init];
+        logic.expense = sender;
+        ((ExpenseDetailViewController *)((UINavigationController *)segue.destinationViewController).topViewController).logic = logic;
+
+    }
+    
 }
+
 
 #pragma mark - TableView Data Source
 
@@ -153,6 +166,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    Expense *expense;
+    
+    if ([ExpenseViewController dateSegmentedControlValue:self.sortSegmentedControl.selectedSegmentIndex] == SortingMethodDate
+        && self.amountSlider.value == 0
+        && self.dateSlider.value == 0)
+    {
+        expense = [self.logic.shownExpensesPerWeek[indexPath.section] objectAtIndex:indexPath.row];
+    }
+    else
+    {
+        expense = self.logic.shownExpenses[indexPath.row];
+    }
+    
+    [self performSegueWithIdentifier:@"ExpenseDetailViewController" sender:expense];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
@@ -160,11 +187,9 @@
 
 - (void)filterButtonTapped {
     
-    static const CGFloat kHiddenFilterViewVerticalSpace = -180.f;
-
     if (self.filterViewVerticalSpaceToTopLayoutGuideConstraint.constant == 0) //close it
     {
-        self.filterViewVerticalSpaceToTopLayoutGuideConstraint.constant = kHiddenFilterViewVerticalSpace;
+        self.filterViewVerticalSpaceToTopLayoutGuideConstraint.constant = CGRectGetHeight(self.filterView.frame);
     }
     else //open it
     {
@@ -177,6 +202,7 @@
 
 - (void)newExpenseButtonTapped {
     
+    [self performSegueWithIdentifier:@"ExpenseDetailViewController" sender:nil];
 }
 
 - (void)moreButtonTapped {

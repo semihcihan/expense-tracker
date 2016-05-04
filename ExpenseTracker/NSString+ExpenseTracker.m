@@ -17,4 +17,11 @@
     return symbol;
 }
 
++ (NSString *)percentSymbol {
+    
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    numberFormatter.locale = [NSLocale expenseTrackerLocale];
+    return numberFormatter.decimalSeparator;
+}
+
 @end
