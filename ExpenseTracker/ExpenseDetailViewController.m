@@ -11,6 +11,10 @@
 #import "NSNumber+ExpenseTracker.h"
 #import "NSDate+ExpenseTracker.h"
 #import "NSString+ExpenseTracker.h"
+#import <ActionSheetPicker-3.0/ActionSheetDatePicker.h>
+#import "UIColor+ExpenseTracker.h"
+#import "UIView+Loading.h"
+#import <UIView+Toast.h>
 
 @interface ExpenseDetailViewController () <UITextFieldDelegate>
 
@@ -21,9 +25,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *amountTextField;
 @property (strong, nonatomic) IBOutlet UITextField *amountDecimalTextField;
 @property (strong, nonatomic) IBOutlet UITextField *amountSeparatorTextField;
-@property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
 - (IBAction)dateButtonTapped:(id)sender;
-@property (strong, nonatomic) IBOutlet NSLayoutConstraint *datePickerTopLayoutConstraint;
 
 @end
 
@@ -42,9 +44,8 @@
 
     [NavigationBarStyler styleLeftNavigationItem:self.navigationItem image:[UIImage imageNamed:@"close"] target:self action:@selector(closeButtonTapped)];
     
-    [self.scrollView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissControls)]];
+    [self.scrollView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)]];
     
-    [self.datePicker setMaximumDate:[NSDate date]];
     [self fillExpenseData];
 }
 
@@ -64,49 +65,74 @@
 
 #pragma mark - Actions
 
+- (void)dismissKeyboard {
+    
+    [self.scrollView endEditing:YES];
+}
+
 - (void)closeButtonTapped {
+    
+    [self dismissKeyboard];
     
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)dismissControls {
-    
-    [self.scrollView endEditing:YES];
-    [self dismissDatePicker];
-}
-
-- (void)dismissDatePicker {
-    
-    self.datePickerTopLayoutConstraint.constant = 0;
-    [UIView animateWithDuration:0.4 animations:^{[self.view layoutIfNeeded];}];
-}
-
 - (void)deleteButtonTapped {
     
+    [self dismissKeyboard];
+    
+#warning show alert ok tapped delete item and tell it to expenselogic so it can remove it too
+#warning New expense
 }
 
 - (void)saveButtonTapped {
     
+    [self dismissKeyboard];
+    
+    //update object
+    self.logic.expense.expenseDescription = self.descriptionTextField.text;
+    self.logic.expense.comment = self.commentTextField.text;
+#warning amount update
+    
+    [self.view showLoadingView];
+    [self.logic saveChangesOnExpenseWithSuccessBlock:^
+    {
+        [self.view dismissLoadingView];
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    }
+                                        failureBlock:^(NSString *error)
+    {
+        [self.view dismissLoadingView];
+        [self.view makeToast:error duration:2 position:CSToastPositionCenter];
+    }];
 }
 
 - (void)dateButtonTapped:(id)sender {
     
-    if (self.datePickerTopLayoutConstraint.constant == 0) //close it
+    ActionSheetDatePicker *picker = [ActionSheetDatePicker showPickerWithTitle:nil
+                                                                datePickerMode:UIDatePickerModeDate
+                                                                  selectedDate:self.logic.expense.date
+                                                                   minimumDate:nil
+                                                                   maximumDate:[NSDate date]
+                                                                     doneBlock:^(ActionSheetDatePicker *picker, id selectedDate, id origin)
     {
-        self.datePickerTopLayoutConstraint.constant = CGRectGetHeight(self.datePicker.frame);
+        self.logic.expense.date = selectedDate;
+        [self.dateButton setTitle:[self.logic.expense.date localeDateString] forState:UIControlStateNormal];
     }
-    else //open it
+                                                                   cancelBlock:^(ActionSheetDatePicker *picker)
     {
-        self.datePickerTopLayoutConstraint.constant = 0;
+        
     }
-    [UIView animateWithDuration:0.4 animations:^{[self.view layoutIfNeeded];}];
+                                        origin:self.view];
+    
+    picker.toolbar.tintColor = [UIColor mainBlueColor];
 }
 
 #pragma mark - TextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
-    [self dismissControls];
+    [self dismissKeyboard];
     return YES;
 }
 

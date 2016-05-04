@@ -13,4 +13,7 @@
 
 @property (strong, nonatomic) Expense *expense;
 
+- (void)saveChangesOnExpenseWithSuccessBlock:(void (^) (void))successBlock
+                                failureBlock:(void (^) (NSString *error))failureBlock;
+
 @end

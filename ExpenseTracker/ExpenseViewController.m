@@ -75,6 +75,16 @@
     [self getData];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    //so we can filter for the changed expenses made on expense details
+    if (self.logic.shownExpenses.count > 0)
+    {
+        [self filterValueChanged:NO];
+    }
+}
+
 - (void)getData {
     
     [self.logic getExpensesWithSuccessBlock:^(NSArray *expenses)
@@ -303,7 +313,6 @@
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     
     [self filterValueChanged:YES];
-    [self.tableView reloadData];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {

@@ -10,4 +10,19 @@
 
 @implementation ExpenseDetailLogic
 
+- (void)saveChangesOnExpenseWithSuccessBlock:(void (^)(void))successBlock failureBlock:(void (^)(NSString *))failureBlock
+{
+    [self.expense saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error)
+    {
+        if (succeeded)
+        {
+            successBlock();
+        }
+        else
+        {
+            failureBlock([error localizedDescription]);
+        }
+    }];
+}
+
 @end

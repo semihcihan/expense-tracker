@@ -512,27 +512,15 @@
                                     </mask>
                                 </variation>
                             </scrollView>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Wnd-is-NuB">
-                                <rect key="frame" x="0.0" y="416" width="320" height="250"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="250" id="a2d-sh-DIl"/>
-                                </constraints>
-                                <date key="date" timeIntervalSinceReferenceDate="484074769.468319">
-                                    <!--2016-05-04 17:12:49 +0000-->
-                                </date>
-                            </datePicker>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="p3k-xd-DLf" firstAttribute="leading" secondItem="jcz-H3-2GA" secondAttribute="leading" id="72Z-12-GKk"/>
-                            <constraint firstItem="JdC-Ua-Gut" firstAttribute="top" secondItem="Wnd-is-NuB" secondAttribute="top" id="IYQ-sX-aqT"/>
                             <constraint firstAttribute="trailing" secondItem="p3k-xd-DLf" secondAttribute="trailing" id="J3c-CO-WUu"/>
-                            <constraint firstItem="Wnd-is-NuB" firstAttribute="leading" secondItem="jcz-H3-2GA" secondAttribute="leading" id="M0z-he-Kai"/>
                             <constraint firstItem="3H2-QV-L03" firstAttribute="width" secondItem="jcz-H3-2GA" secondAttribute="width" multiplier="0.4" id="Voq-Xj-1tn"/>
                             <constraint firstItem="JdC-Ua-Gut" firstAttribute="top" secondItem="p3k-xd-DLf" secondAttribute="bottom" id="VsZ-E2-xVo"/>
                             <constraint firstItem="5qy-RM-y4H" firstAttribute="centerX" secondItem="jcz-H3-2GA" secondAttribute="centerX" id="Yom-Qw-dnj"/>
                             <constraint firstItem="p3k-xd-DLf" firstAttribute="top" secondItem="jcz-H3-2GA" secondAttribute="top" id="Yyt-Uo-Xzv"/>
-                            <constraint firstAttribute="trailing" secondItem="Wnd-is-NuB" secondAttribute="trailing" id="ipL-lB-00e"/>
                             <constraint firstItem="5qy-RM-y4H" firstAttribute="width" secondItem="jcz-H3-2GA" secondAttribute="width" constant="-40" id="phH-K9-XFj"/>
                         </constraints>
                     </view>
@@ -545,8 +533,6 @@
                         <outlet property="amountTextField" destination="S34-kI-B2E" id="xLM-Bd-uER"/>
                         <outlet property="commentTextField" destination="cS7-Lo-VOG" id="47f-xr-KCa"/>
                         <outlet property="dateButton" destination="3H2-QV-L03" id="cNp-Zy-Wyu"/>
-                        <outlet property="datePicker" destination="Wnd-is-NuB" id="zLW-dG-fg9"/>
-                        <outlet property="datePickerTopLayoutConstraint" destination="IYQ-sX-aqT" id="cC0-7b-JZG"/>
                         <outlet property="descriptionTextField" destination="5qy-RM-y4H" id="OEl-JB-e7f"/>
                         <outlet property="scrollView" destination="p3k-xd-DLf" id="y2F-X7-GYb"/>
                     </connections>

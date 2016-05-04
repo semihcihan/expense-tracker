@@ -13,6 +13,8 @@
 
 @interface ExpenseLogic ()
 
+@property (strong, nonatomic) NSMutableArray *shownExpenses;
+@property (strong, nonatomic) NSMutableArray *shownExpensesPerWeek;
 @property (strong, nonatomic) NSArray *allExpenses;
 
 @end
