@@ -45,35 +45,11 @@
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error)
         {
-            PFQuery *queryRole = [PFRole query];
-            [queryRole whereKey:@"name" equalTo:@"regular"];
-            [queryRole getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-                if (!error)
-                {
-                    PFRole *role = (PFRole *)object;
-                    [role.users addObject:[NetworkManager currentUser]];
-                    [role saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-                        if (!error)
-                        {
-                            successBlock([NetworkManager currentUser]);
-                        }
-                        else
-                        {
-                            failureBlock(@"An error occurred.");
-                        }
-                        
-                    }];
-                }
-                else
-                {
-                    failureBlock(@"An error occurred.");
-                }
-            }];
+            successBlock([NetworkManager currentUser]);
         }
         else
         {
-            NSString *errorString = [error userInfo][@"error"];
-            failureBlock(errorString);
+            failureBlock(@"An error occurred.");
         }
     }];
 }
@@ -99,7 +75,7 @@
              successBlock:(void (^)(NSArray *expenses))successBlock
              failureBlock:(FailureBlock)failureBlock {
     
-    PFQuery *query = [PFQuery queryWithClassName:@"Expense"];
+    PFQuery *query = [Expense query];
     [query whereKey:@"user" equalTo:user];
     [query orderByDescending:@"date"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
@@ -119,17 +95,44 @@
                 successBlock:(void (^)(void))successBlock
                 failureBlock:(void (^)(NSString *))failureBlock {
     
-    [expense saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error)
-    {
-         if (succeeded)
-         {
-             successBlock();
-         }
-         else
-         {
-             failureBlock([error localizedDescription]);
-         }
+#warning we are setting the user of the expense, attention when saving from admin
+    expense.user = [NetworkManager currentUser];
+    PFACL *acl = [PFACL ACL];
+    [acl setPublicReadAccess:NO];
+    [acl setPublicWriteAccess:NO];
+    [acl setReadAccess:YES forUser:[NetworkManager currentUser]];
+    [acl setWriteAccess:YES forUser:[NetworkManager currentUser]];
+    
+    PFQuery *queryRole = [PFRole query];
+    [queryRole whereKey:@"name" equalTo:@"admin"];
+    [queryRole getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        if (!error)
+        {
+            PFRole *role = (PFRole *)object;
+            [acl setReadAccess:YES forRole:role];
+            [acl setWriteAccess:YES forRole:role];
+            expense.ACL = acl;
+            
+            [expense saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error)
+             {
+                 if (succeeded)
+                 {
+                     successBlock();
+                 }
+                 else
+                 {
+                     failureBlock(@"An error occurred.");
+                 }
+             }];
+        }
+        else
+        {
+            failureBlock(@"An error occurred.");
+        }
     }];
+
+    
+
 }
 
 + (void)deleteExpense:(Expense *)expense

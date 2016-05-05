@@ -13,8 +13,7 @@
 
 - (void)saveChangesOnExpenseWithSuccessBlock:(void (^)(void))successBlock failureBlock:(void (^)(NSString *))failureBlock
 {
-#warning we are setting the user of the expense, attention when saving from admin
-    self.expense.user = [NetworkManager currentUser];
+    
     [NetworkManager saveChangesOnExpense:self.expense
                             successBlock:^
     {
