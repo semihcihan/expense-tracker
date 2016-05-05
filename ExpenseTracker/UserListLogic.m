@@ -52,4 +52,20 @@
     return userDetailsArrayOrdered;
 }
 
+- (void)banUser:(PFUser *)user
+         banned:(BOOL)banned
+    userDetails:(UserDetails *)userDetails
+   successBlock:(void (^)(void))successBlock
+   failureBlock:(FailureBlock)failureBlock {
+    
+    [NetworkManager banUser:user banned:banned userDetails:userDetails successBlock:^
+    {
+        successBlock();
+    }
+               failureBlock:^(NSString *error)
+    {
+        failureBlock(error);
+    }];
+}
+
 @end

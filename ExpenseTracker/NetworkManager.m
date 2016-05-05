@@ -255,6 +255,29 @@
     }];
 }
 
++ (void)banUser:(PFUser *)user
+         banned:(BOOL)banned
+   userDetails:(UserDetails *)userDetails
+   successBlock:(void (^)(void))successBlock
+   failureBlock:(FailureBlock)failureBlock {
+ 
+    userDetails.banned = banned;
+    
+    [userDetails saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error)
+    {
+        if (succeeded)
+        {
+            successBlock();
+        }
+        else
+        {
+            failureBlock(@"An error occurred");
+        }
+    }];
+    
+
+}
+
 + (UserRole)currentUserRole {
     NSNumber *userRole = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserRole"];
     if (!userRole)

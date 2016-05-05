@@ -19,4 +19,10 @@
 
 + (void)logout;
 
+- (void)banUser:(PFUser *)user
+         banned:(BOOL)banned
+    userDetails:(UserDetails *)userDetails
+   successBlock:(void (^)(void))successBlock
+   failureBlock:(FailureBlock)failureBlock;
+
 @end

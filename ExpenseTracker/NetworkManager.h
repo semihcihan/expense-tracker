@@ -55,6 +55,10 @@ typedef void (^FailureBlock)(NSString *error);
 + (void)getUsersAndUserDetailsWithSuccessBlock:(void (^)(NSArray *usersAndUserDetails))successBlock
                                   failureBlock:(FailureBlock)failureBlock;
 
-
++ (void)banUser:(PFUser *)user
+         banned:(BOOL)banned
+    userDetails:(UserDetails *)userDetails
+   successBlock:(void (^)(void))successBlock
+   failureBlock:(FailureBlock)failureBlock;
 
 @end

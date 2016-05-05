@@ -12,6 +12,7 @@
 #import "UITableView+Register.h"
 #import "UserListTableViewCell.h"
 #import "AlertManager.h"
+#import <UIView+Toast.h>
 
 @interface UserListViewController () <ErrorActionProtocol, UITableViewDelegate, UITableViewDataSource, UserListTableViewCellDelegate>
 
@@ -48,11 +49,12 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [self.view showLoadingView];
     [self getData];
 }
 
 - (void)getData {
+    
+    [self.view showLoadingView];
     
     [self.logic getUsersAndUserDetailsWithSuccessBlock:^(NSArray *usersAndUserDetails)
      {
@@ -124,16 +126,32 @@
 
 - (void)banButtonTapped:(id)sender {
     
+    NSInteger userIndex = ((UIView *)sender).tag;
+    BOOL ban = !((UserDetails *)self.logic.userDetails[userIndex]).banned;
+    NSString *message = ban ? @"Are you sure you want to ban this user?" : @"Are you sure you want to unban this user?";
+    NSString *buttonTitle = ban ? @"Ban User" : @"Unban User";
+    
     [AlertManager showAlertWithTitle:nil
-                             message:@"Are you sure you want to ban this user?"
+                             message:message
                    cancelButtonTitle:@"Cancel"
-                   otherButtonTitles:@[@"Ban User"]
+                   otherButtonTitles:@[buttonTitle]
                       viewController:self
                    completionHandler:^(NSInteger buttonClicked)
      {
          if (buttonClicked == 1)
          {
-#warning ban user
+             [self.view showLoadingView];
+             [self.logic banUser:self.logic.users[userIndex]
+                          banned:ban
+                     userDetails:self.logic.userDetails[userIndex]
+                    successBlock:^
+             {
+                 [self getData];
+             }
+                    failureBlock:^(NSString *error)
+             {
+                 [self.view makeToast:error duration:3 position:CSToastPositionBottom];
+             }];
          }
      }];
     
@@ -159,7 +177,7 @@
     }
     else
     {
-        [self.banButton setTitle:@"normalllll" forState:UIControlStateNormal];
+        [self.banButton setTitle:(userDetails.banned) ? @"Unban User" : @"Ban User" forState:UIControlStateNormal];
     }
     
 }
