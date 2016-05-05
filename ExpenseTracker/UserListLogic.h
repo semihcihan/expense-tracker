@@ -11,8 +11,8 @@
 
 @interface UserListLogic : NSObject
 
-@property (strong, nonatomic) NSArray *users;
-@property (strong, nonatomic) NSArray *userDetails;
+@property (strong, nonatomic) NSMutableArray *shownUsers;
+@property (strong, nonatomic) NSMutableArray *shownUserDetails;
 
 - (void)getUsersAndUserDetailsWithSuccessBlock:(void (^)(NSArray *usersAndUserDetails))successBlock
                                   failureBlock:(FailureBlock)failureBlock;
@@ -24,5 +24,7 @@
     userDetails:(UserDetails *)userDetails
    successBlock:(void (^)(void))successBlock
    failureBlock:(FailureBlock)failureBlock;
+
+- (void)filterEmailsWithKeyword:(NSString *)keyword;
 
 @end

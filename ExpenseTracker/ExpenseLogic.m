@@ -44,6 +44,7 @@
                          successBlock:^(NSArray *expenses)
     {
         self.allExpenses = expenses;
+        [self.shownExpenses removeAllObjects];
         [self.shownExpenses addObjectsFromArray:self.allExpenses];
         successBlock(expenses);
     }

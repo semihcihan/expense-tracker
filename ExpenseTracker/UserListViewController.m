@@ -14,9 +14,10 @@
 #import "AlertManager.h"
 #import <UIView+Toast.h>
 
-@interface UserListViewController () <ErrorActionProtocol, UITableViewDelegate, UITableViewDataSource, UserListTableViewCellDelegate>
+@interface UserListViewController () <ErrorActionProtocol, UITableViewDelegate, UITableViewDataSource, UserListTableViewCellDelegate, UISearchBarDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 
 @end
 
@@ -70,7 +71,7 @@
 #pragma mark - TableView Data Source Delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.logic.users.count;
+    return self.logic.shownUsers.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -79,7 +80,7 @@
     cell.tag = indexPath.row;
     cell.delegate = self;
     
-    [cell fillWithUser:self.logic.users[indexPath.row] userDetails:self.logic.userDetails[indexPath.row]];
+    [cell fillWithUser:self.logic.shownUsers[indexPath.row] userDetails:self.logic.shownUserDetails[indexPath.row]];
     
     return cell;
 }
@@ -122,12 +123,30 @@
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
+#pragma mark - UISearchBarDelegate
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    
+    [self.logic filterEmailsWithKeyword:searchText];
+    [self.tableView reloadData];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    
+    [self.view endEditing:YES];
+}
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    
+    [self.view endEditing:YES];
+}
+
 #pragma mark - UserListTableViewCellDelegate
 
 - (void)banButtonTapped:(id)sender {
     
     NSInteger userIndex = ((UIView *)sender).tag;
-    BOOL ban = !((UserDetails *)self.logic.userDetails[userIndex]).banned;
+    BOOL ban = !((UserDetails *)self.logic.shownUserDetails[userIndex]).banned;
     NSString *message = ban ? @"Are you sure you want to ban this user?" : @"Are you sure you want to unban this user?";
     NSString *buttonTitle = ban ? @"Ban User" : @"Unban User";
     
@@ -141,9 +160,9 @@
          if (buttonClicked == 1)
          {
              [self.view showLoadingView];
-             [self.logic banUser:self.logic.users[userIndex]
+             [self.logic banUser:self.logic.shownUsers[userIndex]
                           banned:ban
-                     userDetails:self.logic.userDetails[userIndex]
+                     userDetails:self.logic.shownUserDetails[userIndex]
                     successBlock:^
              {
                  [self getData];
