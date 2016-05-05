@@ -15,6 +15,7 @@
 #import "UIColor+ExpenseTracker.h"
 #import "UIView+Loading.h"
 #import <UIView+Toast.h>
+#import "AlertManager.h"
 
 @interface ExpenseDetailViewController () <UITextFieldDelegate>
 
@@ -36,13 +37,28 @@
     
     self.navigationItem.title = @"Expense Detail";
     
-    [NavigationBarStyler styleRightNavigationItem:self.navigationItem
-                                firstButtonAction:@selector(deleteButtonTapped)
-                                 firstButtonImage:[UIImage imageNamed:@"trash"]
-                               secondButtonAction:@selector(saveButtonTapped)
-                                secondButtonImage:[UIImage imageNamed:@"ok"] target:self];
+    [NavigationBarStyler styleLeftNavigationItem:self.navigationItem
+                                           image:[UIImage imageNamed:@"close"]
+                                          target:self
+                                          action:@selector(closeButtonTapped)];
 
-    [NavigationBarStyler styleLeftNavigationItem:self.navigationItem image:[UIImage imageNamed:@"close"] target:self action:@selector(closeButtonTapped)];
+
+    if (self.logic.expense)
+    {
+        [NavigationBarStyler styleRightNavigationItem:self.navigationItem
+                                    firstButtonAction:@selector(deleteButtonTapped)
+                                     firstButtonImage:[UIImage imageNamed:@"trash"]
+                                   secondButtonAction:@selector(saveButtonTapped)
+                                    secondButtonImage:[UIImage imageNamed:@"ok"]
+                                               target:self];
+    }
+    else
+    {
+        [NavigationBarStyler styleRightNavigationItem:self.navigationItem
+                                                image:[UIImage imageNamed:@"ok"]
+                                               target:self
+                                               action:@selector(saveButtonTapped)];
+    }
     
     [self.scrollView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)]];
     
@@ -51,7 +67,7 @@
 
 - (void)fillExpenseData {
     
-    if (self.logic.expense)
+    if (self.logic.expense) //update or delete an old expense
     {
         [self.dateButton setTitle:[self.logic.expense.date localeDateString] forState:UIControlStateNormal];
         self.descriptionTextField.text = self.logic.expense.expenseDescription;
@@ -60,6 +76,11 @@
         self.amountTextField.text = amountSeparated[0];
         self.amountDecimalTextField.text = amountSeparated[1];
         self.amountSeparatorTextField.text = [NSString percentSymbol];
+    }
+    else //new expense
+    {
+        self.logic.expense = [[Expense alloc] init];
+        self.logic.expense.date = [NSDate date];
     }
 }
 
@@ -80,19 +101,64 @@
 - (void)deleteButtonTapped {
     
     [self dismissKeyboard];
-    
-#warning show alert ok tapped delete item and tell it to expenselogic so it can remove it too
-#warning New expense
+
+    [AlertManager showAlertWithTitle:nil
+                             message:@"Are you sure you want to delete this expense?"
+                   cancelButtonTitle:@"Cancel"
+                   otherButtonTitles:@[@"Delete"]
+                      viewController:self
+                   completionHandler:^(NSInteger buttonClicked)
+    {
+        if (buttonClicked == 1)
+        {
+            [self.view showLoadingView];
+            [self.logic deleteExpenseWithSuccessBlock:^
+            {
+                [self.view dismissLoadingView];
+                [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+            }
+                                         failureBlock:^(NSString *error)
+            {
+                [self.view dismissLoadingView];
+                [self.view makeToast:error duration:2 position:CSToastPositionCenter];
+            }];
+        }
+    }];
 }
 
 - (void)saveButtonTapped {
-    
+        
     [self dismissKeyboard];
+    
+    //check mandatory fields
+    if (!(self.amountDecimalTextField.text.length > 0 || self.amountTextField.text.length > 0))
+    {
+        [AlertManager showAlertWithTitle:nil
+                                 message:@"Please set the amount of expense"
+                       cancelButtonTitle:@"OK"
+                       otherButtonTitles:nil
+                          viewController:self
+                       completionHandler:nil];
+        return;
+    }
+    else if ([self.dateButton.titleLabel.text isEqualToString:@"Select Date"])
+    {
+        [AlertManager showAlertWithTitle:nil
+                                 message:@"Please set the date of expense"
+                       cancelButtonTitle:@"OK"
+                       otherButtonTitles:nil
+                          viewController:self
+                       completionHandler:nil];
+        
+        return;
+    }
     
     //update object
     self.logic.expense.expenseDescription = self.descriptionTextField.text;
     self.logic.expense.comment = self.commentTextField.text;
-#warning amount update
+    CGFloat amount = [self.amountTextField.text integerValue];
+    amount += [self.amountDecimalTextField.text floatValue] / 100;
+    self.logic.expense.amount = @(amount);
     
     [self.view showLoadingView];
     [self.logic saveChangesOnExpenseWithSuccessBlock:^
@@ -109,6 +175,8 @@
 
 - (void)dateButtonTapped:(id)sender {
     
+    [self dismissKeyboard];
+
     ActionSheetDatePicker *picker = [ActionSheetDatePicker showPickerWithTitle:nil
                                                                 datePickerMode:UIDatePickerModeDate
                                                                   selectedDate:self.logic.expense.date
@@ -129,6 +197,37 @@
 }
 
 #pragma mark - TextFieldDelegate
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    //allow backspace
+    if (!string.length)
+    {
+        return YES;
+    }
+    
+    // Prevent non numeric character input
+    if (textField.keyboardType == UIKeyboardTypeNumberPad)
+    {
+        if ([string rangeOfCharacterFromSet:[[NSCharacterSet decimalDigitCharacterSet] invertedSet]].location != NSNotFound)
+        {
+            return NO;
+        }
+    }
+    
+    if (textField == self.amountDecimalTextField)
+    {
+        // verify max length has not been exceeded
+        NSString *updatedText = [textField.text stringByReplacingCharactersInRange:range withString:string];
+        
+        if (updatedText.length > 2) // 4 was chosen for SSN verification
+        {    
+            return NO;
+        }
+    }
+    
+    return YES;
+}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     

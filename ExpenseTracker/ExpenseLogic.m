@@ -40,14 +40,14 @@
 - (void)getExpensesWithSuccessBlock:(void (^)(NSArray *))successBlock
                        failureBlock:(FailureBlock)failureBlock {
     
-    [[NetworkManager sharedInstance] getExpensesOfUser:[NetworkManager currentUser]
-                                          successBlock:^(NSArray *expenses)
+    [NetworkManager getExpensesOfUser:[NetworkManager currentUser]
+                         successBlock:^(NSArray *expenses)
     {
         self.allExpenses = expenses;
         [self.shownExpenses addObjectsFromArray:self.allExpenses];
         successBlock(expenses);
     }
-                                          failureBlock:^(NSString *error)
+                         failureBlock:^(NSString *error)
     {
         failureBlock(error);
     }];
@@ -158,7 +158,7 @@
     }
     else if([currency isEqualToString:@"€"])
     {
-        [NSLocale setExpenseTrackerLocaleWithIdentifier:@"fr_FR"];
+        [NSLocale setExpenseTrackerLocaleWithIdentifier:@"de_DE"];
     }
     else if([currency isEqualToString:@"£"])
     {

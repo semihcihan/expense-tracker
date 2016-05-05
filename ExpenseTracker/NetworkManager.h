@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
+#import "Expense.h"
 
 @interface NetworkManager : NSObject
 
@@ -19,18 +20,27 @@ typedef void (^FailureBlock)(NSString *error);
 
 + (instancetype)sharedInstance;
 
-- (void)signUpWithEmail:(NSString *)email
++ (void)signUpWithEmail:(NSString *)email
                password:(NSString *)password
            successBlock:(void (^)(PFUser *))successBlock
            failureBlock:(FailureBlock)failureBlock;
 
-- (void)loginWithEmail:(NSString *)email
++ (void)loginWithEmail:(NSString *)email
               password:(NSString *)password
           successBlock:(void (^)(PFUser *))successBlock
           failureBlock:(FailureBlock)failureBlock;
 
-- (void)getExpensesOfUser:(PFUser *)user
++ (void)getExpensesOfUser:(PFUser *)user
              successBlock:(void (^)(NSArray *expenses))successBlock
              failureBlock:(FailureBlock)failureBlock;
+
++ (void)saveChangesOnExpense:(Expense *)expense
+                successBlock:(void (^)(void))successBlock
+                failureBlock:(void (^)(NSString *))failureBlock;
+
++ (void)deleteExpense:(Expense *)expense
+         successBlock:(void (^)(void))successBlock
+         failureBlock:(void (^)(NSString *))failureBlock;
+
 
 @end

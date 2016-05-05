@@ -34,13 +34,13 @@
   successBlock:(void (^)(PFUser *))successBlock
   failureBlock:(FailureBlock)failureBlock {
     
-    [[NetworkManager sharedInstance] signUpWithEmail:email
-                                            password:password
-                                        successBlock:^(PFUser *user)
+    [NetworkManager signUpWithEmail:email
+                           password:password
+                       successBlock:^(PFUser *user)
     {
         successBlock(user);
     }
-                                        failureBlock:^(NSString *error)
+                       failureBlock:^(NSString *error)
     {
         failureBlock(error);
     }];
@@ -52,13 +52,13 @@
  successBlock:(void (^)(PFUser *))successBlock
  failureBlock:(FailureBlock)failureBlock {
     
-    [[NetworkManager sharedInstance] loginWithEmail:email
-                                           password:password
-                                       successBlock:^(PFUser *user)
+    [NetworkManager loginWithEmail:email
+                          password:password
+                      successBlock:^(PFUser *user)
      {
          successBlock(user);
      }
-                                       failureBlock:^(NSString *error)
+                      failureBlock:^(NSString *error)
      {
          failureBlock(error);
      }];

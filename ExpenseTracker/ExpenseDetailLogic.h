@@ -16,4 +16,6 @@
 - (void)saveChangesOnExpenseWithSuccessBlock:(void (^) (void))successBlock
                                 failureBlock:(void (^) (NSString *error))failureBlock;
 
+- (void)deleteExpenseWithSuccessBlock:(void (^) (void))successBlock
+                         failureBlock:(void (^) (NSString *error))failureBlock;
 @end

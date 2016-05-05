@@ -71,8 +71,6 @@
     
     [self.tableView registerCellClassForDefaultReuseIdentifier:[ExpenseTableViewCell class]];
     
-    [self.view showLoadingView];
-    [self getData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -83,6 +81,9 @@
     {
         [self filterValueChanged:NO];
     }
+    
+    [self.view showLoadingView];
+    [self getData];
 }
 
 - (void)getData {
@@ -100,14 +101,13 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if (sender && [sender isKindOfClass:[Expense class]])
+    ExpenseDetailLogic *logic = [[ExpenseDetailLogic alloc] init];
+    if (sender && [sender isKindOfClass:[Expense class]]) //update or delete expense
     {
-        ExpenseDetailLogic *logic = [[ExpenseDetailLogic alloc] init];
         logic.expense = sender;
-        ((ExpenseDetailViewController *)((UINavigationController *)segue.destinationViewController).topViewController).logic = logic;
-
     }
     
+    ((ExpenseDetailViewController *)((UINavigationController *)segue.destinationViewController).topViewController).logic = logic;
 }
 
 
@@ -199,7 +199,7 @@
     
     if (self.filterViewVerticalSpaceToTopLayoutGuideConstraint.constant == 0) //close it
     {
-        self.filterViewVerticalSpaceToTopLayoutGuideConstraint.constant = CGRectGetHeight(self.filterView.frame);
+        self.filterViewVerticalSpaceToTopLayoutGuideConstraint.constant = -CGRectGetHeight(self.filterView.frame);
     }
     else //open it
     {
@@ -442,7 +442,7 @@
 
 - (void)presentChangeCurrencyAlertController {
     
-    NSArray *currencies = @[@"Phone's currency", @"$", @"€", @"£", @"₺"];
+    NSArray *currencies = @[@"Phone's Currency", @"$", @"€", @"£", @"₺"];
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
                                                                              message:nil

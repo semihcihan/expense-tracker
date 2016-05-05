@@ -7,22 +7,37 @@
 //
 
 #import "ExpenseDetailLogic.h"
+#import "NetworkManager.h"
 
 @implementation ExpenseDetailLogic
 
 - (void)saveChangesOnExpenseWithSuccessBlock:(void (^)(void))successBlock failureBlock:(void (^)(NSString *))failureBlock
 {
-    [self.expense saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error)
+#warning we are setting the user of the expense, attention when saving from admin
+    self.expense.user = [NetworkManager currentUser];
+    [NetworkManager saveChangesOnExpense:self.expense
+                            successBlock:^
     {
-        if (succeeded)
-        {
-            successBlock();
-        }
-        else
-        {
-            failureBlock([error localizedDescription]);
-        }
+        successBlock();
+    }
+                            failureBlock:^(NSString *error)
+    {
+        failureBlock(error);
     }];
+}
+
+- (void)deleteExpenseWithSuccessBlock:(void (^)(void))successBlock
+                         failureBlock:(void (^)(NSString *))failureBlock {
+    
+    [NetworkManager deleteExpense:self.expense
+                     successBlock:^
+     {
+         successBlock();
+     }
+                     failureBlock:^(NSString *error)
+     {
+         failureBlock(error);
+     }];
 }
 
 @end

@@ -33,7 +33,7 @@
     [PFUser logOut];
 }
 
-- (void)signUpWithEmail:(NSString *)email
++ (void)signUpWithEmail:(NSString *)email
                password:(NSString *)password
            successBlock:(void (^)(PFUser *))successBlock
            failureBlock:(FailureBlock)failureBlock {
@@ -78,7 +78,7 @@
     }];
 }
 
-- (void)loginWithEmail:(NSString *)email
++ (void)loginWithEmail:(NSString *)email
               password:(NSString *)password
           successBlock:(void (^)(PFUser *))successBlock
           failureBlock:(FailureBlock)failureBlock {
@@ -95,7 +95,7 @@
                                     }];
 }
 
-- (void)getExpensesOfUser:(PFUser *)user
++ (void)getExpensesOfUser:(PFUser *)user
              successBlock:(void (^)(NSArray *expenses))successBlock
              failureBlock:(FailureBlock)failureBlock {
     
@@ -113,6 +113,40 @@
         }
     }];
     
+}
+
++ (void)saveChangesOnExpense:(Expense *)expense
+                successBlock:(void (^)(void))successBlock
+                failureBlock:(void (^)(NSString *))failureBlock {
+    
+    [expense saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error)
+    {
+         if (succeeded)
+         {
+             successBlock();
+         }
+         else
+         {
+             failureBlock([error localizedDescription]);
+         }
+    }];
+}
+
++ (void)deleteExpense:(Expense *)expense
+         successBlock:(void (^)(void))successBlock
+         failureBlock:(void (^)(NSString *))failureBlock {
+    
+    [expense deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error)
+    {
+        if (succeeded)
+        {
+            successBlock();
+        }
+        else
+        {
+            failureBlock([error localizedDescription]);
+        }
+    }];
 }
 
 @end

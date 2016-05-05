@@ -23,11 +23,20 @@
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     numberFormatter.locale = [NSLocale expenseTrackerLocale];
     numberFormatter.numberStyle = NSNumberFormatterCurrencyStyle;
+    numberFormatter.maximumFractionDigits = 2;
+    numberFormatter.minimumFractionDigits = 2;
+    [numberFormatter setUsesGroupingSeparator:NO];
     [numberFormatter setCurrencySymbol:@""];
-    [numberFormatter setPerMillSymbol:@""];
-    [numberFormatter setPercentSymbol:@","];
     NSString *numberAsString = [numberFormatter stringFromNumber:self];
-    return [numberAsString componentsSeparatedByString:@","];
+    NSArray *components = [numberAsString componentsSeparatedByString:@","];
+    if (components.count == 2)
+    {
+        return components;
+    }
+    else
+    {
+        return [numberAsString componentsSeparatedByString:@"."];
+    }
 }
 
 - (NSString *)currencyStringRepresentationWithoutDecimals {

@@ -451,7 +451,7 @@
                                         <color key="tintColor" red="0.23921568630000001" green="0.40784313729999999" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="textColor" red="0.76570861999999995" green="0.095219323389999999" blue="0.1809298547" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad"/>
                                         <connections>
                                             <outlet property="delegate" destination="Zfs-Jn-Q3z" id="GSz-EO-pBI"/>
                                         </connections>
@@ -469,7 +469,10 @@
                                         </constraints>
                                         <color key="textColor" red="0.76570861999999995" green="0.095219323389999999" blue="0.1809298547" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="Zfs-Jn-Q3z" id="bzI-6T-jhB"/>
+                                        </connections>
                                     </textField>
                                 </subviews>
                                 <constraints>
