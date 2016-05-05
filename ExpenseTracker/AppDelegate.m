@@ -12,6 +12,7 @@
 #import <UIView+Toast.h>
 #import "ViewController.h"
 #import "ExpenseViewController.h"
+#import "UserListViewController.h"
 
 @interface AppDelegate ()
 
@@ -26,21 +27,30 @@
 
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
     
-    if ([NetworkManager currentUser])
+    PFUser *currentUser = [NetworkManager currentUser];
+    
+    if(!currentUser)
     {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"RegularUser" bundle:nil];
+        [ViewController goToOpeningViewController];
+    }
+    else if (currentUser && [NetworkManager currentUserRole] == UserRoleRegular)
+    {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         ExpenseViewController *viewController = (ExpenseViewController *)[storyboard instantiateViewControllerWithIdentifier:@"ExpenseViewController"];
         viewController.logic = [[ExpenseLogic alloc] init];
         
+        self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    }
+    else //admin or user-admin
+    {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UserListViewController *viewController = (UserListViewController *)[storyboard instantiateViewControllerWithIdentifier:@"UserListViewController"];
+        viewController.logic = [[UserListLogic alloc] init];
         
         self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:viewController];
-        [self.window makeKeyAndVisible];
     }
-    else
-    {
-        [ViewController goToOpeningViewController];
-        [self.window makeKeyAndVisible];
-    }
+    
+    [self.window makeKeyAndVisible];
     
     return YES;
 }

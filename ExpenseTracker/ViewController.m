@@ -26,7 +26,7 @@
 
 + (void)goToOpeningViewController {
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"RegularUser" bundle:nil];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController *viewController = [storyboard instantiateViewControllerWithIdentifier:@"RegularUserInitialNavigationController"];
     ((AppDelegate *)[UIApplication sharedApplication].delegate).window.rootViewController = viewController;
 }

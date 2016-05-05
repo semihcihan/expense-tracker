@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		49015D691CD5EC0D00164FED /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49015D681CD5EC0D00164FED /* NetworkManager.m */; };
-		49015D6C1CD608A900164FED /* RegularUser.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49015D6A1CD608A900164FED /* RegularUser.storyboard */; };
+		49015D6C1CD608A900164FED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49015D6A1CD608A900164FED /* Main.storyboard */; };
 		49015D701CD6561C00164FED /* ExpenseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49015D6F1CD6561C00164FED /* ExpenseViewController.m */; };
 		49015D731CD6563200164FED /* ExpenseLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 49015D721CD6563200164FED /* ExpenseLogic.m */; };
 		49015D771CD657A800164FED /* UIView+Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = 49015D761CD657A800164FED /* UIView+Loading.m */; };
@@ -36,6 +36,11 @@
 		49DFFCCD1CD901A300D0158C /* ExpenseTableViewSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49DFFCCC1CD901A300D0158C /* ExpenseTableViewSectionHeaderView.xib */; };
 		49DFFCD01CD904A100D0158C /* UIView+NibLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DFFCCF1CD904A100D0158C /* UIView+NibLoading.m */; };
 		49DFFCD31CD9163B00D0158C /* NSLocale+ExpenseTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DFFCD21CD9163B00D0158C /* NSLocale+ExpenseTracker.m */; };
+		49F185DB1CDB77DA004F51E1 /* UserListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F185DA1CDB77DA004F51E1 /* UserListViewController.m */; };
+		49F185DE1CDB77EC004F51E1 /* UserListLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F185DD1CDB77EC004F51E1 /* UserListLogic.m */; };
+		49F185E11CDB7E64004F51E1 /* UserListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F185E01CDB7E64004F51E1 /* UserListTableViewCell.m */; };
+		49F185E61CDB9D48004F51E1 /* UserDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F185E51CDB9D48004F51E1 /* UserDetails.m */; };
+		49F185E81CDBB88E004F51E1 /* UserListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F185E71CDBB88E004F51E1 /* UserListTableViewCell.xib */; };
 		49FFC3481CDA3B5900C58323 /* ExpenseDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FFC3471CDA3B5900C58323 /* ExpenseDetailViewController.m */; };
 		49FFC34C1CDA4F0200C58323 /* ExpenseDetailLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 49FFC34B1CDA4F0200C58323 /* ExpenseDetailLogic.m */; };
 		B959B702B9003C0D7C3F22D1 /* libPods-ExpenseTracker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48643D2BCC4AB6E4857ED818 /* libPods-ExpenseTracker.a */; };
@@ -57,7 +62,7 @@
 		48643D2BCC4AB6E4857ED818 /* libPods-ExpenseTracker.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ExpenseTracker.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49015D671CD5EC0D00164FED /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
 		49015D681CD5EC0D00164FED /* NetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
-		49015D6B1CD608A900164FED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/RegularUser.storyboard; sourceTree = "<group>"; };
+		49015D6B1CD608A900164FED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		49015D6E1CD6561C00164FED /* ExpenseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpenseViewController.h; sourceTree = "<group>"; };
 		49015D6F1CD6561C00164FED /* ExpenseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpenseViewController.m; sourceTree = "<group>"; };
 		49015D711CD6563200164FED /* ExpenseLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpenseLogic.h; sourceTree = "<group>"; };
@@ -109,6 +114,15 @@
 		49DFFCCF1CD904A100D0158C /* UIView+NibLoading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+NibLoading.m"; sourceTree = "<group>"; };
 		49DFFCD11CD9163B00D0158C /* NSLocale+ExpenseTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLocale+ExpenseTracker.h"; sourceTree = "<group>"; };
 		49DFFCD21CD9163B00D0158C /* NSLocale+ExpenseTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLocale+ExpenseTracker.m"; sourceTree = "<group>"; };
+		49F185D91CDB77DA004F51E1 /* UserListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserListViewController.h; sourceTree = "<group>"; };
+		49F185DA1CDB77DA004F51E1 /* UserListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserListViewController.m; sourceTree = "<group>"; };
+		49F185DC1CDB77EC004F51E1 /* UserListLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserListLogic.h; sourceTree = "<group>"; };
+		49F185DD1CDB77EC004F51E1 /* UserListLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserListLogic.m; sourceTree = "<group>"; };
+		49F185DF1CDB7E64004F51E1 /* UserListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserListTableViewCell.h; sourceTree = "<group>"; };
+		49F185E01CDB7E64004F51E1 /* UserListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserListTableViewCell.m; sourceTree = "<group>"; };
+		49F185E41CDB9D48004F51E1 /* UserDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDetails.h; sourceTree = "<group>"; };
+		49F185E51CDB9D48004F51E1 /* UserDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDetails.m; sourceTree = "<group>"; };
+		49F185E71CDBB88E004F51E1 /* UserListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserListTableViewCell.xib; sourceTree = "<group>"; };
 		49FFC3461CDA3B5900C58323 /* ExpenseDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpenseDetailViewController.h; sourceTree = "<group>"; };
 		49FFC3471CDA3B5900C58323 /* ExpenseDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpenseDetailViewController.m; sourceTree = "<group>"; };
 		49FFC34A1CDA4F0200C58323 /* ExpenseDetailLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpenseDetailLogic.h; sourceTree = "<group>"; };
@@ -188,6 +202,8 @@
 			children = (
 				49015D7F1CD76F8800164FED /* Expense.h */,
 				49015D801CD76F8800164FED /* Expense.m */,
+				49F185E41CDB9D48004F51E1 /* UserDetails.h */,
+				49F185E51CDB9D48004F51E1 /* UserDetails.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -221,10 +237,11 @@
 				497F08131CD54F18003DC694 /* OpeningViewController */,
 				49015D6D1CD6560500164FED /* ExpenseViewController */,
 				49FFC3451CDA3B3000C58323 /* ExpenseDetailViewController */,
+				49F185D81CDB77C8004F51E1 /* UserListViewController */,
 				49015D7E1CD76F7A00164FED /* Models */,
 				49015D741CD657A000164FED /* Categories */,
 				497F07FA1CD53C1F003DC694 /* Assets.xcassets */,
-				49015D6A1CD608A900164FED /* RegularUser.storyboard */,
+				49015D6A1CD608A900164FED /* Main.storyboard */,
 				497F07FC1CD53C1F003DC694 /* LaunchScreen.storyboard */,
 				497F07FF1CD53C1F003DC694 /* Info.plist */,
 				497F07EE1CD53C1F003DC694 /* Supporting Files */,
@@ -259,6 +276,20 @@
 				497F08181CD5522F003DC694 /* OpeningLogic.m */,
 			);
 			name = OpeningViewController;
+			sourceTree = "<group>";
+		};
+		49F185D81CDB77C8004F51E1 /* UserListViewController */ = {
+			isa = PBXGroup;
+			children = (
+				49F185D91CDB77DA004F51E1 /* UserListViewController.h */,
+				49F185DA1CDB77DA004F51E1 /* UserListViewController.m */,
+				49F185DC1CDB77EC004F51E1 /* UserListLogic.h */,
+				49F185DD1CDB77EC004F51E1 /* UserListLogic.m */,
+				49F185DF1CDB7E64004F51E1 /* UserListTableViewCell.h */,
+				49F185E01CDB7E64004F51E1 /* UserListTableViewCell.m */,
+				49F185E71CDBB88E004F51E1 /* UserListTableViewCell.xib */,
+			);
+			name = UserListViewController;
 			sourceTree = "<group>";
 		};
 		49FFC3451CDA3B3000C58323 /* ExpenseDetailViewController */ = {
@@ -381,7 +412,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				49015D891CD771D700164FED /* ExpenseTableViewCell.xib in Resources */,
-				49015D6C1CD608A900164FED /* RegularUser.storyboard in Resources */,
+				49015D6C1CD608A900164FED /* Main.storyboard in Resources */,
+				49F185E81CDBB88E004F51E1 /* UserListTableViewCell.xib in Resources */,
 				49DFFCCD1CD901A300D0158C /* ExpenseTableViewSectionHeaderView.xib in Resources */,
 				497F07FE1CD53C1F003DC694 /* LaunchScreen.storyboard in Resources */,
 				497F07FB1CD53C1F003DC694 /* Assets.xcassets in Resources */,
@@ -451,11 +483,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				497F07F61CD53C1F003DC694 /* ViewController.m in Sources */,
+				49F185DB1CDB77DA004F51E1 /* UserListViewController.m in Sources */,
 				49015D7A1CD657E700164FED /* AlertManager.m in Sources */,
 				49DFFCCB1CD9019700D0158C /* ExpenseTableViewSectionHeaderView.m in Sources */,
 				49FFC3481CDA3B5900C58323 /* ExpenseDetailViewController.m in Sources */,
 				49015D951CD77FDA00164FED /* NSString+ExpenseTracker.m in Sources */,
 				49015D701CD6561C00164FED /* ExpenseViewController.m in Sources */,
+				49F185DE1CDB77EC004F51E1 /* UserListLogic.m in Sources */,
 				497F08191CD5522F003DC694 /* OpeningLogic.m in Sources */,
 				497F08161CD54F36003DC694 /* OpeningViewController.m in Sources */,
 				49FFC34C1CDA4F0200C58323 /* ExpenseDetailLogic.m in Sources */,
@@ -467,11 +501,13 @@
 				49015D981CD780AA00164FED /* NSDate+ExpenseTracker.m in Sources */,
 				49015D881CD771D700164FED /* ExpenseTableViewCell.m in Sources */,
 				49015D691CD5EC0D00164FED /* NetworkManager.m in Sources */,
+				49F185E11CDB7E64004F51E1 /* UserListTableViewCell.m in Sources */,
 				49DFFCD01CD904A100D0158C /* UIView+NibLoading.m in Sources */,
 				49015D811CD76F8800164FED /* Expense.m in Sources */,
 				49015D9B1CD7C4EB00164FED /* NSNumber+ExpenseTracker.m in Sources */,
 				497F07F01CD53C1F003DC694 /* main.m in Sources */,
 				49015D731CD6563200164FED /* ExpenseLogic.m in Sources */,
+				49F185E61CDB9D48004F51E1 /* UserDetails.m in Sources */,
 				49015D771CD657A800164FED /* UIView+Loading.m in Sources */,
 				49015D921CD77D0700164FED /* UIColor+ExpenseTracker.m in Sources */,
 			);
@@ -497,12 +533,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		49015D6A1CD608A900164FED /* RegularUser.storyboard */ = {
+		49015D6A1CD608A900164FED /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				49015D6B1CD608A900164FED /* Base */,
 			);
-			name = RegularUser.storyboard;
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		497F07FC1CD53C1F003DC694 /* LaunchScreen.storyboard */ = {

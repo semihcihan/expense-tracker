@@ -65,5 +65,10 @@
     
 }
 
+- (BOOL)isUserRegular {
+    
+    return [NetworkManager currentUserRole] == UserRoleRegular;
+}
+
 
 @end

@@ -53,6 +53,8 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationController.navigationBarHidden = NO;
     
+    [self.navigationController.interactivePopGestureRecognizer setEnabled:NO];
+    
     self.navigationItem.title = @"Expenses";
     [NavigationBarStyler styleLeftNavigationItem:self.navigationItem image:[UIImage imageNamed:@"filtering"] target:self action:@selector(filterButtonTapped)];
     [NavigationBarStyler styleRightNavigationItem:self.navigationItem
@@ -111,7 +113,7 @@
 }
 
 
-#pragma mark - TableView Data Source
+#pragma mark - TableView Data Source Delegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     

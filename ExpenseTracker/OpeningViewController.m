@@ -10,6 +10,7 @@
 #import <UIView+Toast.h>
 #import "UIView+Loading.h"
 #import "ExpenseViewController.h"
+#import "UserListViewController.h"
 
 @interface OpeningViewController () <UITextFieldDelegate>
 
@@ -34,8 +35,15 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-        
-    ((ExpenseViewController *)segue.destinationViewController).logic = [[ExpenseLogic alloc] init];
+    
+    if ([segue.identifier isEqualToString:@"ExpenseViewController"])
+    {
+        ((ExpenseViewController *)segue.destinationViewController).logic = [[ExpenseLogic alloc] init];
+    }
+    else
+    {
+        ((UserListViewController *)segue.destinationViewController).logic = [[UserListLogic alloc] init];
+    }
 }
 
 #pragma mark - Actions
@@ -51,7 +59,14 @@
              successBlock:^(PFUser *user)
          {
              [self.view dismissLoadingView];
-             [self performSegueWithIdentifier:@"FeedViewController" sender:self];
+             if ([self.logic isUserRegular])
+             {
+                [self performSegueWithIdentifier:@"ExpenseViewController" sender:self];
+             }
+             else
+             {
+                 [self performSegueWithIdentifier:@"UserListViewController" sender:self];
+             }
          }
              failureBlock:^(NSString *error)
          {
@@ -66,12 +81,21 @@
     
     if ([self validate])
     {
+        [self.view showLoadingView];
+        
         [self.logic signUp:self.emailTextField.text
                   password:self.passwordTextField.text
               successBlock:^(PFUser *user)
         {
             [self.view dismissLoadingView];
-            [self performSegueWithIdentifier:@"FeedViewController" sender:self];
+            if ([self.logic isUserRegular])
+            {
+                [self performSegueWithIdentifier:@"ExpenseViewController" sender:self];
+            }
+            else
+            {
+                [self performSegueWithIdentifier:@"UserListViewController" sender:self];
+            }
         }
               failureBlock:^(NSString *error)
         {
@@ -85,6 +109,8 @@
 #pragma mark - Helpers
 
 - (BOOL)validate {
+    
+    [self.view endEditing:YES];
     
     if (self.emailTextField.text.length > 0 && self.passwordTextField.text.length > 0)
     {

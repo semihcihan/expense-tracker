@@ -9,12 +9,22 @@
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
 #import "Expense.h"
+#import "UserDetails.h"
+
+typedef NS_ENUM(NSUInteger, UserRole) {
+    UserRoleUndefined,
+    UserRoleRegular,
+    UserRoleAdmin,
+    UserRoleUserAdmin,
+};
 
 @interface NetworkManager : NSObject
 
 typedef void (^FailureBlock)(NSString *error);
 
 + (PFUser *)currentUser;
+
++ (UserRole)currentUserRole;
 
 + (void)logout;
 
@@ -41,6 +51,10 @@ typedef void (^FailureBlock)(NSString *error);
 + (void)deleteExpense:(Expense *)expense
          successBlock:(void (^)(void))successBlock
          failureBlock:(void (^)(NSString *))failureBlock;
+
++ (void)getUsersAndUserDetailsWithSuccessBlock:(void (^)(NSArray *usersAndUserDetails))successBlock
+                                  failureBlock:(FailureBlock)failureBlock;
+
 
 
 @end

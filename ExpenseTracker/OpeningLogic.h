@@ -26,5 +26,6 @@
  successBlock:(void (^)(PFUser *))successBlock
  failureBlock:(FailureBlock)failureBlock;
 
+- (BOOL)isUserRegular;
 
 @end

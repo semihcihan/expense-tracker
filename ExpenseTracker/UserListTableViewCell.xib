@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="215" id="cQW-TK-BNF" customClass="UserListTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="506" height="215"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cQW-TK-BNF" id="TRI-f5-tPm">
+                <rect key="frame" x="0.0" y="0.0" width="506" height="214"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jlt-kO-21g">
+                        <rect key="frame" x="15" y="97" width="390" height="21"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bRu-Yb-6Hg">
+                        <rect key="frame" x="445" y="92" width="46" height="30"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="tintColor" red="0.23921568630000001" green="0.40784313729999999" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <state key="normal" title="Button">
+                            <color key="titleColor" red="0.23921568630000001" green="0.40784313729999999" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="banButtonTapped:" destination="cQW-TK-BNF" eventType="touchUpInside" id="ePd-X9-Ljg"/>
+                        </connections>
+                    </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R7E-Ih-owi">
+                        <rect key="frame" x="15" y="213" width="491" height="1"/>
+                        <color key="backgroundColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="DIR-Ix-Z6s"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="jlt-kO-21g" firstAttribute="leading" secondItem="TRI-f5-tPm" secondAttribute="leading" constant="15" id="HJ1-pq-A8r"/>
+                    <constraint firstItem="R7E-Ih-owi" firstAttribute="leading" secondItem="TRI-f5-tPm" secondAttribute="leading" constant="15" id="LQt-hE-vmk"/>
+                    <constraint firstAttribute="trailing" secondItem="bRu-Yb-6Hg" secondAttribute="trailing" constant="15" id="Xgu-Fx-2fr"/>
+                    <constraint firstItem="bRu-Yb-6Hg" firstAttribute="leading" secondItem="jlt-kO-21g" secondAttribute="trailing" constant="40" id="YLW-O1-Lrf"/>
+                    <constraint firstItem="bRu-Yb-6Hg" firstAttribute="centerY" secondItem="TRI-f5-tPm" secondAttribute="centerY" id="Yyn-Ol-WwJ"/>
+                    <constraint firstAttribute="bottom" secondItem="R7E-Ih-owi" secondAttribute="bottom" id="jd5-j9-3cU"/>
+                    <constraint firstItem="jlt-kO-21g" firstAttribute="centerY" secondItem="TRI-f5-tPm" secondAttribute="centerY" id="rjC-cI-BhC"/>
+                    <constraint firstAttribute="trailing" secondItem="R7E-Ih-owi" secondAttribute="trailing" id="tCz-xX-Fau"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="banButton" destination="bRu-Yb-6Hg" id="kqb-mf-o5q"/>
+                <outlet property="emailLabel" destination="jlt-kO-21g" id="xHe-bt-8pV"/>
+            </connections>
+            <point key="canvasLocation" x="264" y="371.5"/>
+        </tableViewCell>
+    </objects>
+</document>
