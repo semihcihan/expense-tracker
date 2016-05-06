@@ -276,12 +276,6 @@
         self.tableView.tableHeaderView = self.tableHeaderView;
     }
     
-    if ([ExpenseViewController dateSegmentedControlValue:self.sortSegmentedControl.selectedSegmentIndex] == SortingMethodDate
-        && self.amountSlider.value == 0
-        && self.dateSlider.value == 0) {
-        self.tableView.tableHeaderView = nil;
-    }
-    
     [self.tableView reloadData];
     
     if (!fromSearch)
@@ -457,6 +451,7 @@
                                                        handler:^(UIAlertAction * _Nonnull action) {
                                                            [ExpenseLogic changeLocaleForCurrency:currencies[i]];
                                                            [self updateSliderLabelTexts];
+                                                           self.headerAmountLabel.text = [[self.logic totalExpense] currencyStringRepresentation];
                                                            [self.tableView reloadData];
                                                        }];
         

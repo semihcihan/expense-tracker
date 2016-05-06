@@ -149,7 +149,7 @@
 }
 
 + (void)changeLocaleForCurrency:(NSString *)currency {
-    if ([currency isEqualToString:@"Phone's currency"])
+    if ([currency isEqualToString:@"Phone's Currency"])
     {
         [NSLocale cleanExpenseTrackerLocale];
     }
