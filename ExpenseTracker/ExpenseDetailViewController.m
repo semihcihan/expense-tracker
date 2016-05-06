@@ -157,7 +157,7 @@
     self.logic.expense.expenseDescription = self.descriptionTextField.text;
     self.logic.expense.comment = self.commentTextField.text;
     CGFloat amount = [self.amountTextField.text integerValue];
-    amount += [self.amountDecimalTextField.text floatValue] / 100;
+    amount += [self.amountDecimalTextField.text floatValue] / powf(10, self.amountDecimalTextField.text.length);
     self.logic.expense.amount = @(amount);
     
     [self.view showLoadingView];
