@@ -185,7 +185,7 @@
     NSString *keywordLowercase = keyword.lowercaseString;
     for (Expense *expense in expenses)
     {
-        if ((keyword.length == 0 || [expense.description.lowercaseString containsString:keywordLowercase] || [expense.comment.lowercaseString containsString:keywordLowercase])
+        if ((keyword.length == 0 || [expense.expenseDescription.lowercaseString containsString:keywordLowercase] || [expense.comment.lowercaseString containsString:keywordLowercase])
             && [expense.amount compare:amount] != NSOrderedAscending
             && [self isDateWithinRecentWeeks:expense.date weeks:weeks])
         {

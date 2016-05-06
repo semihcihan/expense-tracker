@@ -195,6 +195,11 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self.searchBar resignFirstResponder];
+}
+
 #pragma mark - Actions
 
 - (void)filterButtonTapped {

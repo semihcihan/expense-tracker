@@ -93,6 +93,11 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    [self.searchBar resignFirstResponder];
+}
     
 #pragma mark - Actions
 
@@ -132,11 +137,6 @@
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
-    
-    [self.view endEditing:YES];
-}
-
-- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     
     [self.view endEditing:YES];
 }
