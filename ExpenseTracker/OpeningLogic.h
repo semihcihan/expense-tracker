@@ -11,7 +11,6 @@
 
 @interface OpeningLogic : NSObject
 
-
 + (BOOL)validateEmail:(NSString *)email;
 
 + (BOOL)validatePassword:(NSString *)password;

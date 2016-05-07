@@ -12,6 +12,7 @@
 @interface NavigationBarStyler : NSObject
 
 + (void)styleNavigationBar;
+
 + (void)styleLeftNavigationItem:(UINavigationItem *)navigationItem
                           image:(UIImage *)image
                          target:(id)target
