@@ -11,10 +11,12 @@
 
 @implementation ExpenseDetailLogic
 
-- (void)saveChangesOnExpenseWithSuccessBlock:(void (^)(void))successBlock failureBlock:(void (^)(NSString *))failureBlock
+- (void)saveChangesOnExpenseWithSuccessBlock:(void (^)(void))successBlock
+                                failureBlock:(void (^)(NSString *))failureBlock
 {
     
     [NetworkManager saveChangesOnExpense:self.expense
+                                  ofUser:self.user
                             successBlock:^
     {
         successBlock();

@@ -102,6 +102,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     ExpenseDetailLogic *logic = [[ExpenseDetailLogic alloc] init];
+    logic.user = self.logic.user;
     if (sender && [sender isKindOfClass:[Expense class]]) //update or delete expense
     {
         logic.expense = sender;

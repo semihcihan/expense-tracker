@@ -160,16 +160,16 @@
 }
 
 + (void)saveChangesOnExpense:(Expense *)expense
+                      ofUser:(PFUser *)user
                 successBlock:(void (^)(void))successBlock
                 failureBlock:(void (^)(NSString *))failureBlock {
     
-#warning we are setting the user of the expense, attention when saving from admin
-    expense.user = [NetworkManager currentUser];
+    expense.user = user;
     PFACL *acl = [PFACL ACL];
     [acl setPublicReadAccess:NO];
     [acl setPublicWriteAccess:NO];
-    [acl setReadAccess:YES forUser:[NetworkManager currentUser]];
-    [acl setWriteAccess:YES forUser:[NetworkManager currentUser]];
+    [acl setReadAccess:YES forUser:user];
+    [acl setWriteAccess:YES forUser:user];
     
     PFQuery *queryRole = [PFRole query];
     [queryRole whereKey:@"name" equalTo:@"admin"];

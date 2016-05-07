@@ -38,6 +38,7 @@ typedef void (^FailureBlock)(NSString *error);
              failureBlock:(FailureBlock)failureBlock;
 
 + (void)saveChangesOnExpense:(Expense *)expense
+                      ofUser:(PFUser *)user
                 successBlock:(void (^)(void))successBlock
                 failureBlock:(void (^)(NSString *))failureBlock;
 

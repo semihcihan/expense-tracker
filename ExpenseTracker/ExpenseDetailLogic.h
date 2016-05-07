@@ -12,6 +12,7 @@
 @interface ExpenseDetailLogic : NSObject
 
 @property (strong, nonatomic) Expense *expense;
+@property (strong, nonatomic) PFUser *user;
 
 - (void)saveChangesOnExpenseWithSuccessBlock:(void (^) (void))successBlock
                                 failureBlock:(void (^) (NSString *error))failureBlock;
