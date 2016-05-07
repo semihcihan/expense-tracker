@@ -6,9 +6,9 @@
 //  Copyright © 2016 Semih Cihan. All rights reserved.
 //
 
-#import "ExpenseTableViewSectionHeaderView.h"
+#import "ExpenseListTableViewSectionHeaderView.h"
 
-@implementation ExpenseTableViewSectionHeaderView
+@implementation ExpenseListTableViewSectionHeaderView
 
 + (CGFloat)height {
     

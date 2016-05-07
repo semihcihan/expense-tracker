@@ -7,10 +7,10 @@
 //
 
 #import "ViewController.h"
-#import "ExpenseLogic.h"
+#import "ExpenseListLogic.h"
 
-@interface ExpenseViewController : ViewController
+@interface ExpenseListViewController : ViewController
 
-@property (strong, nonatomic) ExpenseLogic *logic;
+@property (strong, nonatomic) ExpenseListLogic *logic;
 
 @end

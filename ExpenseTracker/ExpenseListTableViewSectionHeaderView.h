@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ExpenseTableViewSectionHeaderView : UIView
+@interface ExpenseListTableViewSectionHeaderView : UIView
 
 @property (strong, nonatomic) IBOutlet UILabel *totalLabel;
 @property (strong, nonatomic) IBOutlet UILabel *totalAmountLabel;

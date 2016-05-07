@@ -166,7 +166,7 @@
                     <connections>
                         <outlet property="emailTextField" destination="yJB-lE-cNu" id="Ghi-oh-3Wa"/>
                         <outlet property="passwordTextField" destination="ZIL-t3-xco" id="ijI-dB-58m"/>
-                        <segue destination="0IA-bj-okG" kind="show" identifier="ExpenseViewController" id="ShY-Rr-nCd"/>
+                        <segue destination="0IA-bj-okG" kind="show" identifier="ExpenseListViewController" id="ShY-Rr-nCd"/>
                         <segue destination="TyR-Tx-m6N" kind="show" identifier="UserListViewController" id="dgg-ey-gjz"/>
                     </connections>
                 </viewController>
@@ -174,10 +174,10 @@
             </objects>
             <point key="canvasLocation" x="1361.5" y="466.5"/>
         </scene>
-        <!--Expense View Controller-->
+        <!--Expense List View Controller-->
         <scene sceneID="pfi-jc-JLT">
             <objects>
-                <viewController storyboardIdentifier="ExpenseViewController" automaticallyAdjustsScrollViewInsets="NO" id="0IA-bj-okG" customClass="ExpenseViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ExpenseListViewController" automaticallyAdjustsScrollViewInsets="NO" id="0IA-bj-okG" customClass="ExpenseListViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="0T0-DG-7Tm"/>
                         <viewControllerLayoutGuide type="bottom" id="bvI-5R-4t6"/>
@@ -422,7 +422,7 @@
                     <connections>
                         <outlet property="searchBar" destination="q8I-dE-lkv" id="p6o-oO-QAd"/>
                         <outlet property="tableView" destination="6Lv-dC-ZyC" id="wXn-EG-ZWz"/>
-                        <segue destination="0IA-bj-okG" kind="show" identifier="ExpenseViewController" id="qfW-g8-nPz"/>
+                        <segue destination="0IA-bj-okG" kind="show" identifier="ExpenseListViewController" id="qfW-g8-nPz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w5d-R3-SBI" userLabel="First Responder" sceneMemberID="firstResponder"/>

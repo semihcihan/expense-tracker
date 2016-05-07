@@ -9,15 +9,15 @@
 /* Begin PBXBuildFile section */
 		49015D691CD5EC0D00164FED /* NetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49015D681CD5EC0D00164FED /* NetworkManager.m */; };
 		49015D6C1CD608A900164FED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49015D6A1CD608A900164FED /* Main.storyboard */; };
-		49015D701CD6561C00164FED /* ExpenseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49015D6F1CD6561C00164FED /* ExpenseViewController.m */; };
-		49015D731CD6563200164FED /* ExpenseLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 49015D721CD6563200164FED /* ExpenseLogic.m */; };
+		49015D701CD6561C00164FED /* ExpenseListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49015D6F1CD6561C00164FED /* ExpenseListViewController.m */; };
+		49015D731CD6563200164FED /* ExpenseListLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 49015D721CD6563200164FED /* ExpenseListLogic.m */; };
 		49015D771CD657A800164FED /* UIView+Loading.m in Sources */ = {isa = PBXBuildFile; fileRef = 49015D761CD657A800164FED /* UIView+Loading.m */; };
 		49015D7A1CD657E700164FED /* AlertManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 49015D791CD657E700164FED /* AlertManager.m */; };
 		49015D7D1CD66E2E00164FED /* NavigationBarStyler.m in Sources */ = {isa = PBXBuildFile; fileRef = 49015D7C1CD66E2E00164FED /* NavigationBarStyler.m */; };
 		49015D811CD76F8800164FED /* Expense.m in Sources */ = {isa = PBXBuildFile; fileRef = 49015D801CD76F8800164FED /* Expense.m */; };
 		49015D841CD7719D00164FED /* TableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49015D831CD7719D00164FED /* TableViewCell.m */; };
-		49015D881CD771D700164FED /* ExpenseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49015D861CD771D700164FED /* ExpenseTableViewCell.m */; };
-		49015D891CD771D700164FED /* ExpenseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49015D871CD771D700164FED /* ExpenseTableViewCell.xib */; };
+		49015D881CD771D700164FED /* ExpenseListTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 49015D861CD771D700164FED /* ExpenseListTableViewCell.m */; };
+		49015D891CD771D700164FED /* ExpenseListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49015D871CD771D700164FED /* ExpenseListTableViewCell.xib */; };
 		49015D8F1CD7753300164FED /* UITableView+Register.m in Sources */ = {isa = PBXBuildFile; fileRef = 49015D8E1CD7753300164FED /* UITableView+Register.m */; };
 		49015D921CD77D0700164FED /* UIColor+ExpenseTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 49015D911CD77D0700164FED /* UIColor+ExpenseTracker.m */; };
 		49015D951CD77FDA00164FED /* NSString+ExpenseTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 49015D941CD77FDA00164FED /* NSString+ExpenseTracker.m */; };
@@ -32,8 +32,8 @@
 		497F08091CD53C1F003DC694 /* ExpenseTrackerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 497F08081CD53C1F003DC694 /* ExpenseTrackerTests.m */; };
 		497F08161CD54F36003DC694 /* OpeningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497F08151CD54F36003DC694 /* OpeningViewController.m */; };
 		497F08191CD5522F003DC694 /* OpeningLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 497F08181CD5522F003DC694 /* OpeningLogic.m */; };
-		49DFFCCB1CD9019700D0158C /* ExpenseTableViewSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DFFCCA1CD9019700D0158C /* ExpenseTableViewSectionHeaderView.m */; };
-		49DFFCCD1CD901A300D0158C /* ExpenseTableViewSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49DFFCCC1CD901A300D0158C /* ExpenseTableViewSectionHeaderView.xib */; };
+		49DFFCCB1CD9019700D0158C /* ExpenseListTableViewSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DFFCCA1CD9019700D0158C /* ExpenseListTableViewSectionHeaderView.m */; };
+		49DFFCCD1CD901A300D0158C /* ExpenseListTableViewSectionHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49DFFCCC1CD901A300D0158C /* ExpenseListTableViewSectionHeaderView.xib */; };
 		49DFFCD01CD904A100D0158C /* UIView+NibLoading.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DFFCCF1CD904A100D0158C /* UIView+NibLoading.m */; };
 		49DFFCD31CD9163B00D0158C /* NSLocale+ExpenseTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 49DFFCD21CD9163B00D0158C /* NSLocale+ExpenseTracker.m */; };
 		49F185DB1CDB77DA004F51E1 /* UserListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 49F185DA1CDB77DA004F51E1 /* UserListViewController.m */; };
@@ -63,10 +63,10 @@
 		49015D671CD5EC0D00164FED /* NetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkManager.h; sourceTree = "<group>"; };
 		49015D681CD5EC0D00164FED /* NetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkManager.m; sourceTree = "<group>"; };
 		49015D6B1CD608A900164FED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		49015D6E1CD6561C00164FED /* ExpenseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpenseViewController.h; sourceTree = "<group>"; };
-		49015D6F1CD6561C00164FED /* ExpenseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpenseViewController.m; sourceTree = "<group>"; };
-		49015D711CD6563200164FED /* ExpenseLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpenseLogic.h; sourceTree = "<group>"; };
-		49015D721CD6563200164FED /* ExpenseLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpenseLogic.m; sourceTree = "<group>"; };
+		49015D6E1CD6561C00164FED /* ExpenseListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpenseListViewController.h; sourceTree = "<group>"; };
+		49015D6F1CD6561C00164FED /* ExpenseListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpenseListViewController.m; sourceTree = "<group>"; };
+		49015D711CD6563200164FED /* ExpenseListLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpenseListLogic.h; sourceTree = "<group>"; };
+		49015D721CD6563200164FED /* ExpenseListLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpenseListLogic.m; sourceTree = "<group>"; };
 		49015D751CD657A800164FED /* UIView+Loading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Loading.h"; sourceTree = "<group>"; };
 		49015D761CD657A800164FED /* UIView+Loading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Loading.m"; sourceTree = "<group>"; };
 		49015D781CD657E700164FED /* AlertManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertManager.h; sourceTree = "<group>"; };
@@ -77,9 +77,9 @@
 		49015D801CD76F8800164FED /* Expense.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Expense.m; sourceTree = "<group>"; };
 		49015D821CD7719D00164FED /* TableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewCell.h; sourceTree = "<group>"; };
 		49015D831CD7719D00164FED /* TableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewCell.m; sourceTree = "<group>"; };
-		49015D851CD771D700164FED /* ExpenseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpenseTableViewCell.h; sourceTree = "<group>"; };
-		49015D861CD771D700164FED /* ExpenseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpenseTableViewCell.m; sourceTree = "<group>"; };
-		49015D871CD771D700164FED /* ExpenseTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExpenseTableViewCell.xib; sourceTree = "<group>"; };
+		49015D851CD771D700164FED /* ExpenseListTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpenseListTableViewCell.h; sourceTree = "<group>"; };
+		49015D861CD771D700164FED /* ExpenseListTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpenseListTableViewCell.m; sourceTree = "<group>"; };
+		49015D871CD771D700164FED /* ExpenseListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExpenseListTableViewCell.xib; sourceTree = "<group>"; };
 		49015D8D1CD7753300164FED /* UITableView+Register.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Register.h"; sourceTree = "<group>"; };
 		49015D8E1CD7753300164FED /* UITableView+Register.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Register.m"; sourceTree = "<group>"; };
 		49015D901CD77D0700164FED /* UIColor+ExpenseTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ExpenseTracker.h"; sourceTree = "<group>"; };
@@ -107,9 +107,9 @@
 		497F08151CD54F36003DC694 /* OpeningViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpeningViewController.m; sourceTree = "<group>"; };
 		497F08171CD5522F003DC694 /* OpeningLogic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpeningLogic.h; sourceTree = "<group>"; };
 		497F08181CD5522F003DC694 /* OpeningLogic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpeningLogic.m; sourceTree = "<group>"; };
-		49DFFCC91CD9019700D0158C /* ExpenseTableViewSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpenseTableViewSectionHeaderView.h; sourceTree = "<group>"; };
-		49DFFCCA1CD9019700D0158C /* ExpenseTableViewSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpenseTableViewSectionHeaderView.m; sourceTree = "<group>"; };
-		49DFFCCC1CD901A300D0158C /* ExpenseTableViewSectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExpenseTableViewSectionHeaderView.xib; sourceTree = "<group>"; };
+		49DFFCC91CD9019700D0158C /* ExpenseListTableViewSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpenseListTableViewSectionHeaderView.h; sourceTree = "<group>"; };
+		49DFFCCA1CD9019700D0158C /* ExpenseListTableViewSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpenseListTableViewSectionHeaderView.m; sourceTree = "<group>"; };
+		49DFFCCC1CD901A300D0158C /* ExpenseListTableViewSectionHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExpenseListTableViewSectionHeaderView.xib; sourceTree = "<group>"; };
 		49DFFCCE1CD904A100D0158C /* UIView+NibLoading.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+NibLoading.h"; sourceTree = "<group>"; };
 		49DFFCCF1CD904A100D0158C /* UIView+NibLoading.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+NibLoading.m"; sourceTree = "<group>"; };
 		49DFFCD11CD9163B00D0158C /* NSLocale+ExpenseTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLocale+ExpenseTracker.h"; sourceTree = "<group>"; };
@@ -160,16 +160,16 @@
 		49015D6D1CD6560500164FED /* ExpenseViewController */ = {
 			isa = PBXGroup;
 			children = (
-				49015D6E1CD6561C00164FED /* ExpenseViewController.h */,
-				49015D6F1CD6561C00164FED /* ExpenseViewController.m */,
-				49015D711CD6563200164FED /* ExpenseLogic.h */,
-				49015D721CD6563200164FED /* ExpenseLogic.m */,
-				49DFFCC91CD9019700D0158C /* ExpenseTableViewSectionHeaderView.h */,
-				49DFFCCA1CD9019700D0158C /* ExpenseTableViewSectionHeaderView.m */,
-				49DFFCCC1CD901A300D0158C /* ExpenseTableViewSectionHeaderView.xib */,
-				49015D851CD771D700164FED /* ExpenseTableViewCell.h */,
-				49015D861CD771D700164FED /* ExpenseTableViewCell.m */,
-				49015D871CD771D700164FED /* ExpenseTableViewCell.xib */,
+				49015D6E1CD6561C00164FED /* ExpenseListViewController.h */,
+				49015D6F1CD6561C00164FED /* ExpenseListViewController.m */,
+				49015D711CD6563200164FED /* ExpenseListLogic.h */,
+				49015D721CD6563200164FED /* ExpenseListLogic.m */,
+				49DFFCC91CD9019700D0158C /* ExpenseListTableViewSectionHeaderView.h */,
+				49DFFCCA1CD9019700D0158C /* ExpenseListTableViewSectionHeaderView.m */,
+				49DFFCCC1CD901A300D0158C /* ExpenseListTableViewSectionHeaderView.xib */,
+				49015D851CD771D700164FED /* ExpenseListTableViewCell.h */,
+				49015D861CD771D700164FED /* ExpenseListTableViewCell.m */,
+				49015D871CD771D700164FED /* ExpenseListTableViewCell.xib */,
 			);
 			name = ExpenseViewController;
 			sourceTree = "<group>";
@@ -411,10 +411,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49015D891CD771D700164FED /* ExpenseTableViewCell.xib in Resources */,
+				49015D891CD771D700164FED /* ExpenseListTableViewCell.xib in Resources */,
 				49015D6C1CD608A900164FED /* Main.storyboard in Resources */,
 				49F185E81CDBB88E004F51E1 /* UserListTableViewCell.xib in Resources */,
-				49DFFCCD1CD901A300D0158C /* ExpenseTableViewSectionHeaderView.xib in Resources */,
+				49DFFCCD1CD901A300D0158C /* ExpenseListTableViewSectionHeaderView.xib in Resources */,
 				497F07FE1CD53C1F003DC694 /* LaunchScreen.storyboard in Resources */,
 				497F07FB1CD53C1F003DC694 /* Assets.xcassets in Resources */,
 			);
@@ -485,10 +485,10 @@
 				497F07F61CD53C1F003DC694 /* ViewController.m in Sources */,
 				49F185DB1CDB77DA004F51E1 /* UserListViewController.m in Sources */,
 				49015D7A1CD657E700164FED /* AlertManager.m in Sources */,
-				49DFFCCB1CD9019700D0158C /* ExpenseTableViewSectionHeaderView.m in Sources */,
+				49DFFCCB1CD9019700D0158C /* ExpenseListTableViewSectionHeaderView.m in Sources */,
 				49FFC3481CDA3B5900C58323 /* ExpenseDetailViewController.m in Sources */,
 				49015D951CD77FDA00164FED /* NSString+ExpenseTracker.m in Sources */,
-				49015D701CD6561C00164FED /* ExpenseViewController.m in Sources */,
+				49015D701CD6561C00164FED /* ExpenseListViewController.m in Sources */,
 				49F185DE1CDB77EC004F51E1 /* UserListLogic.m in Sources */,
 				497F08191CD5522F003DC694 /* OpeningLogic.m in Sources */,
 				497F08161CD54F36003DC694 /* OpeningViewController.m in Sources */,
@@ -499,14 +499,14 @@
 				49DFFCD31CD9163B00D0158C /* NSLocale+ExpenseTracker.m in Sources */,
 				49015D7D1CD66E2E00164FED /* NavigationBarStyler.m in Sources */,
 				49015D981CD780AA00164FED /* NSDate+ExpenseTracker.m in Sources */,
-				49015D881CD771D700164FED /* ExpenseTableViewCell.m in Sources */,
+				49015D881CD771D700164FED /* ExpenseListTableViewCell.m in Sources */,
 				49015D691CD5EC0D00164FED /* NetworkManager.m in Sources */,
 				49F185E11CDB7E64004F51E1 /* UserListTableViewCell.m in Sources */,
 				49DFFCD01CD904A100D0158C /* UIView+NibLoading.m in Sources */,
 				49015D811CD76F8800164FED /* Expense.m in Sources */,
 				49015D9B1CD7C4EB00164FED /* NSNumber+ExpenseTracker.m in Sources */,
 				497F07F01CD53C1F003DC694 /* main.m in Sources */,
-				49015D731CD6563200164FED /* ExpenseLogic.m in Sources */,
+				49015D731CD6563200164FED /* ExpenseListLogic.m in Sources */,
 				49F185E61CDB9D48004F51E1 /* UserDetails.m in Sources */,
 				49015D771CD657A800164FED /* UIView+Loading.m in Sources */,
 				49015D921CD77D0700164FED /* UIColor+ExpenseTracker.m in Sources */,

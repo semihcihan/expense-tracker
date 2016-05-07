@@ -9,7 +9,7 @@
 #import "OpeningViewController.h"
 #import <UIView+Toast.h>
 #import "UIView+Loading.h"
-#import "ExpenseViewController.h"
+#import "ExpenseListViewController.h"
 #import "UserListViewController.h"
 
 @interface OpeningViewController () <UITextFieldDelegate>
@@ -36,9 +36,9 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([segue.identifier isEqualToString:@"ExpenseViewController"])
+    if ([segue.identifier isEqualToString:@"ExpenseListViewController"])
     {
-        ((ExpenseViewController *)segue.destinationViewController).logic = [[ExpenseLogic alloc] init];
+        ((ExpenseListViewController *)segue.destinationViewController).logic = [[ExpenseListLogic alloc] init];
     }
     else
     {
@@ -61,7 +61,7 @@
              [self.view dismissLoadingView];
              if ([self.logic isUserRegular])
              {
-                [self performSegueWithIdentifier:@"ExpenseViewController" sender:self];
+                [self performSegueWithIdentifier:@"ExpenseListViewController" sender:self];
              }
              else
              {
@@ -90,7 +90,7 @@
             [self.view dismissLoadingView];
             if ([self.logic isUserRegular])
             {
-                [self performSegueWithIdentifier:@"ExpenseViewController" sender:self];
+                [self performSegueWithIdentifier:@"ExpenseListViewController" sender:self];
             }
             else
             {

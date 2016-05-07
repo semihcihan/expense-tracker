@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "TableViewCell.h"
 
-@interface ExpenseTableViewCell : TableViewCell
+@interface ExpenseListTableViewCell : TableViewCell
 
 @property (strong, nonatomic) IBOutlet UILabel *dateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *descriptionLabel;

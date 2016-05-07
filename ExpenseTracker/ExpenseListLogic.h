@@ -14,7 +14,7 @@ typedef NS_ENUM(NSUInteger, SortingMethod) {
     SortingMethodAmount
 };
 
-@interface ExpenseLogic : NSObject
+@interface ExpenseListLogic : NSObject
 
 @property (strong, nonatomic, readonly) NSMutableArray *shownExpenses;
 @property (strong, nonatomic, readonly) NSMutableArray *shownExpensesPerWeek;

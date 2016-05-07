@@ -6,9 +6,9 @@
 //  Copyright © 2016 Semih Cihan. All rights reserved.
 //
 
-#import "ExpenseTableViewCell.h"
+#import "ExpenseListTableViewCell.h"
 
-@implementation ExpenseTableViewCell
+@implementation ExpenseListTableViewCell
 
 + (CGFloat)height {
     return 90.f;

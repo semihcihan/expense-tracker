@@ -6,10 +6,10 @@
 //  Copyright © 2016 Semih Cihan. All rights reserved.
 //
 
-#import "ExpenseViewController.h"
+#import "ExpenseListViewController.h"
 #import "UIView+Loading.h"
 #import "UITableView+Register.h"
-#import "ExpenseTableViewCell.h"
+#import "ExpenseListTableViewCell.h"
 #import "Expense.h"
 #import "NSString+ExpenseTracker.h"
 #import "NSDate+ExpenseTracker.h"
@@ -17,10 +17,10 @@
 #import "NavigationBarStyler.h"
 #include <math.h>
 #import "UIView+NibLoading.h"
-#import "ExpenseTableViewSectionHeaderView.h"
+#import "ExpenseListTableViewSectionHeaderView.h"
 #import "ExpenseDetailViewController.h"
 
-@interface ExpenseViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, ErrorActionProtocol>
+@interface ExpenseListViewController () <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, ErrorActionProtocol>
 
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
 @property (strong, nonatomic) IBOutlet UILabel *amountFilterLabel;
@@ -38,14 +38,14 @@
 
 @end
 
-@interface ExpenseTableViewCell (Data)
+@interface ExpenseListTableViewCell (Data)
 
 - (void)fillWithExpenseData:(Expense *)expense;
 
 @end
 
 
-@implementation ExpenseViewController
+@implementation ExpenseListViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -75,7 +75,7 @@
     
     [self loadFilterValues];
     
-    [self.tableView registerCellClassForDefaultReuseIdentifier:[ExpenseTableViewCell class]];
+    [self.tableView registerCellClassForDefaultReuseIdentifier:[ExpenseListTableViewCell class]];
     
 }
 
@@ -122,17 +122,17 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     
-    return ([ExpenseViewController dateSegmentedControlValue:self.sortSegmentedControl.selectedSegmentIndex] == SortingMethodDate
+    return ([ExpenseListViewController dateSegmentedControlValue:self.sortSegmentedControl.selectedSegmentIndex] == SortingMethodDate
             && self.amountSlider.value == 0
-            && self.dateSlider.value == 0) ? [ExpenseTableViewSectionHeaderView height] : 0.f;
+            && self.dateSlider.value == 0) ? [ExpenseListTableViewSectionHeaderView height] : 0.f;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    if ([ExpenseViewController dateSegmentedControlValue:self.sortSegmentedControl.selectedSegmentIndex] == SortingMethodDate
+    if ([ExpenseListViewController dateSegmentedControlValue:self.sortSegmentedControl.selectedSegmentIndex] == SortingMethodDate
         && self.amountSlider.value == 0
         && self.dateSlider.value == 0)
     {
-        ExpenseTableViewSectionHeaderView *headerView = [ExpenseTableViewSectionHeaderView loadFromNIB];
+        ExpenseListTableViewSectionHeaderView *headerView = [ExpenseListTableViewSectionHeaderView loadFromNIB];
         NSNumber *weeklyTotal = [self.logic totalAmountOfWeek:section];
         headerView.totalAmountLabel.text = [weeklyTotal currencyStringRepresentation];
         headerView.averageAmountLabel.text = [@(weeklyTotal.floatValue / 7) currencyStringRepresentation];
@@ -146,28 +146,28 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    return ([ExpenseViewController dateSegmentedControlValue:self.sortSegmentedControl.selectedSegmentIndex] == SortingMethodDate
+    return ([ExpenseListViewController dateSegmentedControlValue:self.sortSegmentedControl.selectedSegmentIndex] == SortingMethodDate
             && self.amountSlider.value == 0
             && self.dateSlider.value == 0) ? self.logic.shownExpensesPerWeek.count : 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return ([ExpenseViewController dateSegmentedControlValue:self.sortSegmentedControl.selectedSegmentIndex] == SortingMethodDate
+    return ([ExpenseListViewController dateSegmentedControlValue:self.sortSegmentedControl.selectedSegmentIndex] == SortingMethodDate
             && self.amountSlider.value == 0
             && self.dateSlider.value == 0) ? ((NSArray *)self.logic.shownExpensesPerWeek[section]).count : self.logic.shownExpenses.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    return [ExpenseTableViewCell height];
+    return [ExpenseListTableViewCell height];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    ExpenseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[ExpenseTableViewCell reuseIdentifier]];
+    ExpenseListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:[ExpenseListTableViewCell reuseIdentifier]];
     
-    if ([ExpenseViewController dateSegmentedControlValue:self.sortSegmentedControl.selectedSegmentIndex] == SortingMethodDate
+    if ([ExpenseListViewController dateSegmentedControlValue:self.sortSegmentedControl.selectedSegmentIndex] == SortingMethodDate
         && self.amountSlider.value == 0
         && self.dateSlider.value == 0)
     {
@@ -185,7 +185,7 @@
     
     Expense *expense;
     
-    if ([ExpenseViewController dateSegmentedControlValue:self.sortSegmentedControl.selectedSegmentIndex] == SortingMethodDate
+    if ([ExpenseListViewController dateSegmentedControlValue:self.sortSegmentedControl.selectedSegmentIndex] == SortingMethodDate
         && self.amountSlider.value == 0
         && self.dateSlider.value == 0)
     {
@@ -250,7 +250,7 @@
     UIAlertAction *actionLogout = [UIAlertAction actionWithTitle:@"Log Out"
                                                                    style:UIAlertActionStyleDestructive
                                                                  handler:^(UIAlertAction * _Nonnull action) {
-                                                                     [ExpenseLogic logout];
+                                                                     [ExpenseListLogic logout];
                                                                      [ViewController goToOpeningViewController];
                                                                  }];
     
@@ -277,9 +277,9 @@
                            sortSegmentValue:self.sortSegmentedControl.selectedSegmentIndex];
     
     [self.logic filterExpenseWithKeyword:self.searchBar.text
-                      amountsGreaterThan:[ExpenseViewController amountSliderValue:self.amountSlider.value]
-                           inRecentWeeks:[ExpenseViewController dateSliderValue:self.dateSlider.value]
-                           sortingMethod:[ExpenseViewController dateSegmentedControlValue:self.sortSegmentedControl.selectedSegmentIndex]];
+                      amountsGreaterThan:[ExpenseListViewController amountSliderValue:self.amountSlider.value]
+                           inRecentWeeks:[ExpenseListViewController dateSliderValue:self.dateSlider.value]
+                           sortingMethod:[ExpenseListViewController dateSegmentedControlValue:self.sortSegmentedControl.selectedSegmentIndex]];
     
     if (self.logic.shownExpenses.count == 0)
     {
@@ -307,7 +307,7 @@
                             dateSliderValue:self.dateSlider.value
                            sortSegmentValue:self.sortSegmentedControl.selectedSegmentIndex];
     
-    [self.logic sortExpenses:[ExpenseViewController dateSegmentedControlValue:self.sortSegmentedControl.selectedSegmentIndex]];
+    [self.logic sortExpenses:[ExpenseListViewController dateSegmentedControlValue:self.sortSegmentedControl.selectedSegmentIndex]];
     
     [self.tableView reloadData];
     
@@ -336,15 +336,15 @@
 
 - (void)loadFilterValues {
     
-    self.amountSlider.value = [ExpenseLogic getAmountSliderValue];
-    self.dateSlider.value = [ExpenseLogic getDateSliderValue];
-    self.sortSegmentedControl.selectedSegmentIndex = [ExpenseLogic getSortSegmentValue];
+    self.amountSlider.value = [ExpenseListLogic getAmountSliderValue];
+    self.dateSlider.value = [ExpenseListLogic getDateSliderValue];
+    self.sortSegmentedControl.selectedSegmentIndex = [ExpenseListLogic getSortSegmentValue];
 }
 
 - (void)updateSliderLabelTexts {
     
-    self.amountFilterLabel.text = [ExpenseViewController amountSliderStringValue:self.amountSlider.value];
-    self.dateFilterLabel.text = [ExpenseViewController dateSliderStringValue:self.dateSlider.value];
+    self.amountFilterLabel.text = [ExpenseListViewController amountSliderStringValue:self.amountSlider.value];
+    self.dateFilterLabel.text = [ExpenseListViewController dateSliderStringValue:self.dateSlider.value];
 }
 
 + (NSNumber *)amountSliderValue:(NSInteger)sliderValue {
@@ -376,7 +376,7 @@
     
     if (sliderValue > 0)
     {
-        return [NSString stringWithFormat:@"Greater than %@", [[ExpenseViewController amountSliderValue:sliderValue] currencyStringRepresentationWithoutDecimals]];
+        return [NSString stringWithFormat:@"Greater than %@", [[ExpenseListViewController amountSliderValue:sliderValue] currencyStringRepresentationWithoutDecimals]];
     }
     else
     {
@@ -465,7 +465,7 @@
         UIAlertAction *action = [UIAlertAction actionWithTitle:currencies[i]
                                                          style:UIAlertActionStyleDefault
                                                        handler:^(UIAlertAction * _Nonnull action) {
-                                                           [ExpenseLogic changeLocaleForCurrency:currencies[i]];
+                                                           [ExpenseListLogic changeLocaleForCurrency:currencies[i]];
                                                            [self updateSliderLabelTexts];
                                                            self.headerAmountLabel.text = [[self.logic totalExpense] currencyStringRepresentation];
                                                            [self.tableView reloadData];
@@ -489,7 +489,7 @@
 #pragma mark - ExpenseTableViewCell (Data)
 
 
-@implementation ExpenseTableViewCell (Data)
+@implementation ExpenseListTableViewCell (Data)
 
 - (void)fillWithExpenseData:(Expense *)expense {
     

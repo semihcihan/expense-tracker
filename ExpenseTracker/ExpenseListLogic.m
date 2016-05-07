@@ -6,12 +6,12 @@
 //  Copyright © 2016 Semih Cihan. All rights reserved.
 //
 
-#import "ExpenseLogic.h"
+#import "ExpenseListLogic.h"
 #import "Expense.h"
 #import "NSDate+ExpenseTracker.h"
 #import "NSLocale+ExpenseTracker.h"
 
-@interface ExpenseLogic ()
+@interface ExpenseListLogic ()
 
 @property (strong, nonatomic) NSMutableArray *shownExpenses;
 @property (strong, nonatomic) NSMutableArray *shownExpensesPerWeek;
@@ -19,7 +19,7 @@
 
 @end
 
-@implementation ExpenseLogic
+@implementation ExpenseListLogic
 
 - (instancetype)init {
     self = [super init];
@@ -81,23 +81,23 @@
                    inRecentWeeks:(NSInteger)weeks
                    sortingMethod:(SortingMethod)sortingMethod {
     
-    self.shownExpenses = [ExpenseLogic filterExpenses:self.allExpenses
-                                              keyword:keyword
-                                   amountsGreaterThan:amount
-                                        inRecentWeeks:weeks
-                                        sortingMethod:sortingMethod].mutableCopy;
+    self.shownExpenses = [ExpenseListLogic filterExpenses:self.allExpenses
+                                                  keyword:keyword
+                                       amountsGreaterThan:amount
+                                            inRecentWeeks:weeks
+                                            sortingMethod:sortingMethod].mutableCopy;
     
     if (sortingMethod == SortingMethodDate) {
-        self.shownExpensesPerWeek = [ExpenseLogic expensesPerWeek:self.shownExpenses].mutableCopy;
+        self.shownExpensesPerWeek = [ExpenseListLogic expensesPerWeek:self.shownExpenses].mutableCopy;
     }
 }
 
 - (void)sortExpenses:(SortingMethod)sortingMethod {
-    self.shownExpenses = [ExpenseLogic sortExpenses:self.shownExpenses
-                                      sortingMethod:sortingMethod].mutableCopy;
+    self.shownExpenses = [ExpenseListLogic sortExpenses:self.shownExpenses
+                                          sortingMethod:sortingMethod].mutableCopy;
     
     if (sortingMethod == SortingMethodDate) {
-        self.shownExpensesPerWeek = [ExpenseLogic expensesPerWeek:self.shownExpenses].mutableCopy;
+        self.shownExpensesPerWeek = [ExpenseListLogic expensesPerWeek:self.shownExpenses].mutableCopy;
     }
 }
 
@@ -105,9 +105,9 @@
                     dateSliderValue:(CGFloat)dateSliderValue
                    sortSegmentValue:(NSInteger)sortSegmentValue {
 
-    [ExpenseLogic saveAmountSliderValue:@(amountSliderValue)];
-    [ExpenseLogic saveDateSliderValue:@(dateSliderValue)];
-    [ExpenseLogic saveSortSegmentValue:@(sortSegmentValue)];
+    [ExpenseListLogic saveAmountSliderValue:@(amountSliderValue)];
+    [ExpenseListLogic saveDateSliderValue:@(dateSliderValue)];
+    [ExpenseListLogic saveSortSegmentValue:@(sortSegmentValue)];
 }
 
 #pragma mark - NSUserDefaults
@@ -193,7 +193,7 @@
         }
     }
     
-    return [ExpenseLogic sortExpenses:results
+    return [ExpenseListLogic sortExpenses:results
                 sortingMethod:sortingMethod];
 }
 

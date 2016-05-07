@@ -11,7 +11,7 @@
 #import "NavigationBarStyler.h"
 #import <UIView+Toast.h>
 #import "ViewController.h"
-#import "ExpenseViewController.h"
+#import "ExpenseListViewController.h"
 #import "UserListViewController.h"
 
 @interface AppDelegate ()
@@ -36,8 +36,8 @@
     else if (currentUser && [NetworkManager currentUserRole] == UserRoleRegular)
     {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        ExpenseViewController *viewController = (ExpenseViewController *)[storyboard instantiateViewControllerWithIdentifier:@"ExpenseViewController"];
-        viewController.logic = [[ExpenseLogic alloc] init];
+        ExpenseListViewController *viewController = (ExpenseListViewController *)[storyboard instantiateViewControllerWithIdentifier:@"ExpenseListViewController"];
+        viewController.logic = [[ExpenseListLogic alloc] init];
         
         self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:viewController];
     }
