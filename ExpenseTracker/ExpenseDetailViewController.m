@@ -35,7 +35,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"Expense Detail";
+    self.navigationItem.title = NSLocalizedString(@"Expense Detail", nil);
     
     [NavigationBarStyler styleLeftNavigationItem:self.navigationItem
                                            image:[UIImage imageNamed:@"close"]
@@ -103,9 +103,9 @@
     [self dismissKeyboard];
 
     [AlertManager showAlertWithTitle:nil
-                             message:@"Are you sure you want to delete this expense?"
-                   cancelButtonTitle:@"Cancel"
-                   otherButtonTitles:@[@"Delete"]
+                             message:NSLocalizedString(@"Are you sure you want to delete this expense?", nil)
+                   cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                   otherButtonTitles:@[NSLocalizedString(@"Delete", nil)]
                       viewController:self
                    completionHandler:^(NSInteger buttonClicked)
     {
@@ -134,18 +134,18 @@
     if (!(self.amountDecimalTextField.text.length > 0 || self.amountTextField.text.length > 0))
     {
         [AlertManager showAlertWithTitle:nil
-                                 message:@"Please set the amount of expense"
-                       cancelButtonTitle:@"OK"
+                                 message:NSLocalizedString(@"Please set the amount of expense", nil)
+                       cancelButtonTitle:NSLocalizedString(@"OK", nil)
                        otherButtonTitles:nil
                           viewController:self
                        completionHandler:nil];
         return;
     }
-    else if ([self.dateButton.titleLabel.text isEqualToString:@"Select Date"])
+    else if ([self.dateButton.titleLabel.text isEqualToString:NSLocalizedString(@"Select Date", nil)])
     {
         [AlertManager showAlertWithTitle:nil
-                                 message:@"Please set the date of expense"
-                       cancelButtonTitle:@"OK"
+                                 message:NSLocalizedString(@"Please set the date of expense", nil)
+                       cancelButtonTitle:NSLocalizedString(@"OK", nil)
                        otherButtonTitles:nil
                           viewController:self
                        completionHandler:nil];

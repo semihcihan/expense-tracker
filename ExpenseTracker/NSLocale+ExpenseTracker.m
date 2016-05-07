@@ -8,20 +8,22 @@
 
 #import "NSLocale+ExpenseTracker.h"
 
+static NSString * const kUserDefaultsKey = @"ExpenseTrackerLocaleIdentifier";
+
 @implementation NSLocale (ExpenseTracker)
 
 + (NSLocale *)expenseTrackerLocale {
-    NSString *locaelIdentifier = [[NSUserDefaults standardUserDefaults] objectForKey:@"ExpenseTrackerLocaleIdentifier"];
+    NSString *locaelIdentifier = [[NSUserDefaults standardUserDefaults] objectForKey:kUserDefaultsKey];
     return (locaelIdentifier != nil) ? [NSLocale localeWithLocaleIdentifier:locaelIdentifier] : [NSLocale currentLocale];
 }
 
 + (void)setExpenseTrackerLocaleWithIdentifier:(NSString *)localeIdentifier {
-    [[NSUserDefaults standardUserDefaults] setObject:localeIdentifier forKey:@"ExpenseTrackerLocaleIdentifier"];
+    [[NSUserDefaults standardUserDefaults] setObject:localeIdentifier forKey:kUserDefaultsKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 + (void)cleanExpenseTrackerLocale {
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"ExpenseTrackerLocaleIdentifier"];
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kUserDefaultsKey];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

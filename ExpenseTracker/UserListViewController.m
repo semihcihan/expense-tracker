@@ -34,7 +34,7 @@
     [self.navigationController.interactivePopGestureRecognizer setEnabled:NO];
     self.navigationItem.hidesBackButton = YES;
     
-    self.navigationItem.title = @"Users";
+    self.navigationItem.title = NSLocalizedString(@"Users", nil);
     [NavigationBarStyler styleRightNavigationItem:self.navigationItem
                                             image:[UIImage imageNamed:@"more"]
                                            target:self
@@ -65,7 +65,7 @@
      }
                                failureBlock:^(NSString *error)
      {
-         [self.view showErrorMessage:error actionMessage:@"Tap to retry" actionTarget:self];
+         [self.view showErrorMessage:error actionMessage:NSLocalizedString(@"Tap to retry", nil) actionTarget:self];
      }];
 }
 
@@ -106,7 +106,7 @@
     if ([self.logic shouldShowExpensesOfUserDetails:self.logic.shownUserDetails[indexPath.row]])
     {
         PFUser *user = self.logic.shownUsers[indexPath.row];
-        [self performSegueWithIdentifier:@"ExpenseListViewController" sender:user];
+        [self performSegueWithIdentifier:NSStringFromClass([ExpenseListViewController class]) sender:user];
     }
     
     
@@ -141,14 +141,14 @@
                                                                              message:nil
                                                                       preferredStyle:UIAlertControllerStyleActionSheet];
     
-    UIAlertAction *actionLogout = [UIAlertAction actionWithTitle:@"Log Out"
+    UIAlertAction *actionLogout = [UIAlertAction actionWithTitle:NSLocalizedString(@"Log Out", nil)
                                                            style:UIAlertActionStyleDestructive
                                                          handler:^(UIAlertAction * _Nonnull action) {
                                                              [UserListLogic logout];
                                                              [ViewController goToOpeningViewController];
                                                          }];
     
-    UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:@"Close"
+    UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Close", nil)
                                                            style:UIAlertActionStyleCancel
                                                          handler:nil];
     
@@ -177,12 +177,12 @@
     
     NSInteger userIndex = ((UIView *)sender).tag;
     BOOL ban = !((UserDetails *)self.logic.shownUserDetails[userIndex]).banned;
-    NSString *message = ban ? @"Are you sure you want to ban this user?" : @"Are you sure you want to unban this user?";
-    NSString *buttonTitle = ban ? @"Ban User" : @"Unban User";
+    NSString *message = ban ? NSLocalizedString(@"Are you sure you want to ban this user?", nil) : NSLocalizedString(@"Are you sure you want to unban this user?", nil);
+    NSString *buttonTitle = ban ? NSLocalizedString(@"Ban User", nil) : NSLocalizedString(@"Unban User", nil);
     
     [AlertManager showAlertWithTitle:nil
                              message:message
-                   cancelButtonTitle:@"Cancel"
+                   cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
                    otherButtonTitles:@[buttonTitle]
                       viewController:self
                    completionHandler:^(NSInteger buttonClicked)
@@ -213,13 +213,13 @@
     cell.emailLabel.text = user.username;
     if ([userDetails userRole] != UserRoleRegular)
     {
-        [cell.banButton setTitle:([userDetails userRole] == UserRoleUserManager) ? @"User Manager" : @"Admin" forState:UIControlStateNormal];
+        [cell.banButton setTitle:([userDetails userRole] == UserRoleUserManager) ? NSLocalizedString(@"User Manager", nil) : NSLocalizedString(@"Admin", nil) forState:UIControlStateNormal];
         cell.banButton.enabled = NO;
         [cell.banButton setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
     }
     else
     {
-        [cell.banButton setTitle:(userDetails.banned) ? @"Unban User" : @"Ban User" forState:UIControlStateNormal];
+        [cell.banButton setTitle:(userDetails.banned) ? NSLocalizedString(@"Unban User", nil) : NSLocalizedString(@"Ban User", nil) forState:UIControlStateNormal];
         cell.banButton.enabled = YES;
         [cell.banButton setTitleColor:[UIColor mainBlueColor] forState:UIControlStateNormal];
     }

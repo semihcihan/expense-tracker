@@ -36,7 +36,7 @@
     else if (currentUser && [NetworkManager currentUserRole] == UserRoleRegular)
     {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        ExpenseListViewController *viewController = (ExpenseListViewController *)[storyboard instantiateViewControllerWithIdentifier:@"ExpenseListViewController"];
+        ExpenseListViewController *viewController = (ExpenseListViewController *)[storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([ExpenseListViewController class])];
         viewController.logic = [[ExpenseListLogic alloc] init];
         viewController.logic.user = currentUser;
         
@@ -45,7 +45,7 @@
     else //admin or user-admin
     {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        UserListViewController *viewController = (UserListViewController *)[storyboard instantiateViewControllerWithIdentifier:@"UserListViewController"];
+        UserListViewController *viewController = (UserListViewController *)[storyboard instantiateViewControllerWithIdentifier:NSStringFromClass([UserListViewController class])];
         viewController.logic = [[UserListLogic alloc] init];
         
         self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:viewController];

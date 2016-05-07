@@ -32,8 +32,8 @@
                                     <action selector="signInButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Pj5-Pm-8LH"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expense Tracker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVf-zH-7qj">
-                                <rect key="frame" x="30" y="175" width="315" height="40"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expenses" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVf-zH-7qj">
+                                <rect key="frame" x="144" y="175" width="87" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="B6c-XO-40A"/>
                                 </constraints>
@@ -127,6 +127,7 @@
                             <constraint firstItem="3TJ-R5-gwF" firstAttribute="top" secondItem="InE-00-WTr" secondAttribute="bottom" constant="10" id="GD2-BE-o5c"/>
                             <constraint firstItem="ZIL-t3-xco" firstAttribute="top" secondItem="PUQ-MD-B30" secondAttribute="bottom" id="H22-OC-3jh"/>
                             <constraint firstAttribute="trailing" secondItem="e9S-yY-r3x" secondAttribute="trailing" constant="106" id="Htb-m4-Rcc"/>
+                            <constraint firstItem="e9S-yY-r3x" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Hwk-vf-nai"/>
                             <constraint firstItem="yJB-lE-cNu" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="M7N-Pf-0Ml"/>
                             <constraint firstItem="PUQ-MD-B30" firstAttribute="top" secondItem="yJB-lE-cNu" secondAttribute="bottom" id="Pcl-oQ-xme"/>
                             <constraint firstItem="InE-00-WTr" firstAttribute="top" secondItem="EVf-zH-7qj" secondAttribute="bottom" constant="200" id="QKR-1X-N4S"/>
@@ -148,10 +149,15 @@
                             <constraint firstItem="ZIL-t3-xco" firstAttribute="leading" secondItem="yJB-lE-cNu" secondAttribute="leading" id="qdj-2i-r6i"/>
                             <constraint firstItem="MDt-o8-fbI" firstAttribute="top" secondItem="ZIL-t3-xco" secondAttribute="bottom" id="voE-YF-pEH"/>
                             <constraint firstAttribute="trailing" secondItem="PUQ-MD-B30" secondAttribute="trailing" constant="20" id="xAB-IK-UJC"/>
+                            <constraint firstItem="EVf-zH-7qj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="y8z-gt-tfb"/>
                             <constraint firstItem="bZO-O2-RRC" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ycC-mw-f3f"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="Htb-m4-Rcc"/>
+                                <exclude reference="U7h-iE-szF"/>
+                                <exclude reference="EuE-ZV-4cY"/>
+                                <exclude reference="Yg8-4E-Fz7"/>
                                 <exclude reference="hxj-c3-NjK"/>
                                 <exclude reference="faY-1z-8El"/>
                                 <exclude reference="xAB-IK-UJC"/>
@@ -639,6 +645,6 @@
         <image name="diamond_blue" width="164" height="127"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qfW-g8-nPz"/>
+        <segue reference="ShY-Rr-nCd"/>
     </inferredMetricsTieBreakers>
 </document>

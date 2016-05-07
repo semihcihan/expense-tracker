@@ -16,7 +16,43 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="az1-US-daa">
+                                <rect key="frame" x="218" y="213" width="164" height="175"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Expense Tracker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N2h-7E-KAC">
+                                        <rect key="frame" x="8" y="135" width="148" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="gH2-Sz-AqU"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="diamond_blue" translatesAutoresizingMaskIntoConstraints="NO" id="4rB-O1-1UG">
+                                        <rect key="frame" x="0.0" y="0.0" width="164" height="127"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="127" id="T94-Fx-XOH"/>
+                                            <constraint firstAttribute="width" constant="164" id="s6G-Qg-bfa"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="4rB-O1-1UG" firstAttribute="centerX" secondItem="az1-US-daa" secondAttribute="centerX" id="1ZM-6Q-Vb0"/>
+                                    <constraint firstAttribute="width" constant="164" id="CbB-Pw-g7m"/>
+                                    <constraint firstItem="N2h-7E-KAC" firstAttribute="centerX" secondItem="az1-US-daa" secondAttribute="centerX" id="F9E-9f-ail"/>
+                                    <constraint firstAttribute="height" constant="175" id="jk6-is-vpk"/>
+                                    <constraint firstItem="4rB-O1-1UG" firstAttribute="top" secondItem="az1-US-daa" secondAttribute="top" id="meH-qC-H3l"/>
+                                    <constraint firstItem="N2h-7E-KAC" firstAttribute="top" secondItem="4rB-O1-1UG" secondAttribute="bottom" constant="8" id="wDW-ZF-aHo"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="az1-US-daa" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="pcp-IX-JJf"/>
+                            <constraint firstItem="az1-US-daa" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="vwG-hT-Q49"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -24,4 +60,7 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="diamond_blue" width="164" height="127"/>
+    </resources>
 </document>

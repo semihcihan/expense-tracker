@@ -11,10 +11,6 @@
 
 @implementation NSDate (ExpenseTracker)
 
-#warning try
-//- (NSDateComponents *)components:(NSCalendarUnit)unitFlags fromDateComponents:(NSDateComponents *)startingDateComp toDateComponents:(NSDateComponents *)resultDateComp options:(NSCalendarOptions)options NS_AVAILABLE(10_9, 8_0);
-
-
 - (NSString *)localeDateString {
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];

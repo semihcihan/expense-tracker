@@ -114,7 +114,7 @@
                     {
                         if (userDetails.banned)
                         {
-                            failureBlock(@"Sorry, you're banned.");
+                            failureBlock(NSLocalizedString(@"Sorry, you're banned.", nil));
                         }
                         else
                         {

@@ -46,7 +46,7 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationController.navigationBarHidden = NO;
     
-    self.navigationItem.title = @"Expenses";
+    self.navigationItem.title = NSLocalizedString(@"Expenses", nil);
     
     if ([ExpenseListLogic currentUserRole] == UserRoleAdmin)
     {
@@ -114,7 +114,7 @@
      }
                                failureBlock:^(NSString *error)
      {
-         [self.view showErrorMessage:error actionMessage:@"Tap to retry" actionTarget:self];
+         [self.view showErrorMessage:error actionMessage:NSLocalizedString(@"Tap to retry", nil) actionTarget:self];
      }];
 }
 
@@ -209,7 +209,7 @@
         expense = self.logic.shownExpenses[indexPath.row];
     }
     
-    [self performSegueWithIdentifier:@"ExpenseDetailViewController" sender:expense];
+    [self performSegueWithIdentifier:NSStringFromClass([ExpenseDetailViewController class]) sender:expense];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
@@ -248,7 +248,7 @@
 
 - (void)newExpenseButtonTapped {
     
-    [self performSegueWithIdentifier:@"ExpenseDetailViewController" sender:nil];
+    [self performSegueWithIdentifier:NSStringFromClass([ExpenseDetailViewController class]) sender:nil];
 }
 
 - (void)moreButtonTapped {
@@ -257,21 +257,21 @@
                                                                              message:nil
                                                                       preferredStyle:UIAlertControllerStyleActionSheet];
     
-    UIAlertAction *actionChangeCurrency = [UIAlertAction actionWithTitle:@"Change Currency"
+    UIAlertAction *actionChangeCurrency = [UIAlertAction actionWithTitle:NSLocalizedString(@"Change Currency", nil)
                                                                    style:UIAlertActionStyleDefault
                                                                  handler:^(UIAlertAction * _Nonnull action)
     {
         [self presentChangeCurrencyAlertController];
     }];
     
-    UIAlertAction *actionLogout = [UIAlertAction actionWithTitle:@"Log Out"
+    UIAlertAction *actionLogout = [UIAlertAction actionWithTitle:NSLocalizedString(@"Log Out", nil)
                                                                    style:UIAlertActionStyleDestructive
                                                                  handler:^(UIAlertAction * _Nonnull action) {
                                                                      [ExpenseListLogic logout];
                                                                      [ViewController goToOpeningViewController];
                                                                  }];
     
-    UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:@"Close"
+    UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Close", nil)
                                                           style:UIAlertActionStyleCancel
                                                         handler:nil];
     
@@ -339,7 +339,7 @@
 
 - (void)presentChangeCurrencyAlertController {
     
-    NSArray *currencies = @[@"Phone's Currency", @"$", @"€", @"£", @"₺"];
+    NSArray *currencies = @[NSLocalizedString(@"Phone's Currency", nil), @"$", @"€", @"£", @"₺"];
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
                                                                              message:nil
@@ -360,7 +360,7 @@
     }
     
     
-    UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:@"Close"
+    UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:NSLocalizedString(@"Close", nil)
                                                            style:UIAlertActionStyleCancel
                                                          handler:nil];
     [alertController addAction:actionCancel];
@@ -424,11 +424,11 @@
     
     if (sliderValue > 0)
     {
-        return [NSString stringWithFormat:@"Greater than %@", [self.logic currencyStringRepresentationWithoutDecimalsOfAmount:[ExpenseListViewController amountSliderValue:sliderValue]]];
+        return [NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"Greater than", nil), [self.logic currencyStringRepresentationWithoutDecimalsOfAmount:[ExpenseListViewController amountSliderValue:sliderValue]]];
     }
     else
     {
-        return @"All expenses";
+        return NSLocalizedString(@"All expenses", nil);
     }
 }
 
@@ -467,31 +467,31 @@
 + (NSString *)dateSliderStringValue:(NSInteger)sliderValue {
     switch (sliderValue) {
         case 1:
-            return @"This week"; //1 week
+            return NSLocalizedString(@"This week", nil); //1 week
             break;
         case 2:
-            return @"2 weeks"; //2 weeks
+            return NSLocalizedString(@"2 weeks", nil); //2 weeks
             break;
         case 3:
-            return @"3 weeks"; //3 weeks
+            return NSLocalizedString(@"3 weeks", nil); //3 weeks
             break;
         case 4:
-            return @"This month"; //1 month
+            return NSLocalizedString(@"This month", nil); //1 month
             break;
         case 5:
-            return @"2 months"; //2 months
+            return NSLocalizedString(@"2 months", nil); //2 months
             break;
         case 6:
-            return @"3 months"; //3 months
+            return NSLocalizedString(@"3 months", nil); //3 months
             break;
         case 7:
-            return @"6 months"; //6 months
+            return NSLocalizedString(@"6 months", nil); //6 months
             break;
         case 8:
-            return @"12 months"; //12 months
+            return NSLocalizedString(@"12 months", nil); //12 months
             break;
         default:
-            return @"All dates"; //all
+            return NSLocalizedString(@"All dates", nil); //all
             break;
     }
 }

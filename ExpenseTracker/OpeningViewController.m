@@ -36,7 +36,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([segue.identifier isEqualToString:@"ExpenseListViewController"])
+    if ([segue.identifier isEqualToString:NSStringFromClass([ExpenseListViewController class])])
     {
         ExpenseListLogic *logic = [[ExpenseListLogic alloc] init];
         logic.user = [OpeningLogic currentUser];
@@ -63,11 +63,11 @@
              [self.view dismissLoadingView];
              if ([self.logic isUserRegular])
              {
-                [self performSegueWithIdentifier:@"ExpenseListViewController" sender:self];
+                [self performSegueWithIdentifier:NSStringFromClass([ExpenseListViewController class]) sender:self];
              }
              else
              {
-                 [self performSegueWithIdentifier:@"UserListViewController" sender:self];
+                 [self performSegueWithIdentifier:NSStringFromClass([UserListViewController class]) sender:self];
              }
          }
              failureBlock:^(NSString *error)
@@ -92,11 +92,11 @@
             [self.view dismissLoadingView];
             if ([self.logic isUserRegular])
             {
-                [self performSegueWithIdentifier:@"ExpenseListViewController" sender:self];
+                [self performSegueWithIdentifier:NSStringFromClass([ExpenseListViewController class]) sender:self];
             }
             else
             {
-                [self performSegueWithIdentifier:@"UserListViewController" sender:self];
+                [self performSegueWithIdentifier:NSStringFromClass([UserListViewController class]) sender:self];
             }
         }
               failureBlock:^(NSString *error)
@@ -118,12 +118,12 @@
     {
         if (![self.logic validateEmail:self.emailTextField.text])
         {
-            [self.view makeToast:@"Invalid email" duration:2 position:CSToastPositionCenter];
+            [self.view makeToast:NSLocalizedString(@"Invalid email", nil) duration:2 position:CSToastPositionCenter];
             
         }
         else if (![self.logic validatePassword:self.passwordTextField.text])
         {
-            [self.view makeToast:@"Invalid password" duration:2 position:CSToastPositionCenter];
+            [self.view makeToast:NSLocalizedString(@"Invalid password", nil) duration:2 position:CSToastPositionCenter];
         }
         else
         {
@@ -132,7 +132,7 @@
     }
     else
     {
-        [self.view makeToast:@"Please fill in all the fields." duration:2 position:CSToastPositionCenter];
+        [self.view makeToast:NSLocalizedString(@"Please fill in all the fields.", nil) duration:2 position:CSToastPositionCenter];
     }
     
     return NO;
