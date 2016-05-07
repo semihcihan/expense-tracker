@@ -47,7 +47,8 @@ static const NSInteger kHudTag = 1899124;
     hud.mode = MBProgressHUDModeText;
     [hud setLabelText:errorMessage];
     if (actionMessage) {
-        [hud setDetailsLabelText:actionMessage];
+        [hud setLabelText:actionMessage];
+        [hud setDetailsLabelText:errorMessage];
     }
     
     if (target) {

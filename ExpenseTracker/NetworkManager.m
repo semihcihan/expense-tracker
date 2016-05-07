@@ -27,6 +27,32 @@ static NSString * const kDefaultErrorMessage = @"An error occurred.";
     return sharedInstance;
 }
 
++ (void)failureWithError:(NSError *)error
+           customMessage:(NSString *)customMessage
+            failureBlock:(FailureBlock)failureBlock {
+    
+    NSString *errorString = customMessage;
+    NSInteger errorCode = error.code;
+    NSArray *meaningfulParseErrorCodes = @[@100, @124, @2, @4, @101, @200, @201, @202, @203, @204, @205, @206, @209];
+    
+    for (NSNumber *errorCodeNumber in meaningfulParseErrorCodes)
+    {
+        if (errorCodeNumber.integerValue == errorCode)
+        {
+            errorString = [error userInfo][@"error"];
+            break;
+        }
+    }
+    
+    if (!errorString)
+    {
+        errorString = NSLocalizedString(kDefaultErrorMessage, nil);
+    }
+    
+    failureBlock(errorString);
+    
+}
+
 + (PFUser *)currentUser {
     return [PFUser currentUser];
 }
@@ -78,19 +104,24 @@ static NSString * const kDefaultErrorMessage = @"An error occurred.";
                          else
                          {
                              [[NetworkManager currentUser] deleteInBackground];
-                             failureBlock(NSLocalizedString(kDefaultErrorMessage, nil));
+                             [NetworkManager failureWithError:error
+                                                customMessage:nil
+                                                 failureBlock:failureBlock];
                          }
                      }];
                 }
                 else
                 {
-                    failureBlock(NSLocalizedString(kDefaultErrorMessage, nil));
-                }
+                    [NetworkManager failureWithError:error
+                                       customMessage:nil
+                                        failureBlock:failureBlock];                }
             }];
         }
         else
         {
-            failureBlock([error userInfo][@"error"]);
+            [NetworkManager failureWithError:error
+                               customMessage:nil
+                                failureBlock:failureBlock];
         }
         
     }];
@@ -118,7 +149,9 @@ static NSString * const kDefaultErrorMessage = @"An error occurred.";
                     if (userDetails.banned)
                     {
                         [NetworkManager logout];
-                        failureBlock(NSLocalizedString(@"Sorry, you're banned.", nil));
+                        [NetworkManager failureWithError:error
+                                           customMessage:NSLocalizedString(@"Sorry, you're banned.", nil)
+                                            failureBlock:failureBlock];
                     }
                     else
                     {
@@ -129,14 +162,18 @@ static NSString * const kDefaultErrorMessage = @"An error occurred.";
                 else
                 {
                     [NetworkManager logout];
-                    failureBlock(NSLocalizedString(kDefaultErrorMessage, nil));
+                    [NetworkManager failureWithError:error
+                                       customMessage:nil
+                                        failureBlock:failureBlock];
                 }
                 
             }];
         }
         else
         {
-            failureBlock([error userInfo][@"error"]);
+            [NetworkManager failureWithError:error
+                               customMessage:nil
+                                failureBlock:failureBlock];
         }
         
     }];
@@ -157,7 +194,9 @@ static NSString * const kDefaultErrorMessage = @"An error occurred.";
         }
         else
         {
-            failureBlock(NSLocalizedString(kDefaultErrorMessage, nil));
+            [NetworkManager failureWithError:error
+                               customMessage:nil
+                                failureBlock:failureBlock];
         }
     }];
     
@@ -166,7 +205,7 @@ static NSString * const kDefaultErrorMessage = @"An error occurred.";
 + (void)saveChangesOnExpense:(Expense *)expense
                       ofUser:(PFUser *)user
                 successBlock:(void (^)(void))successBlock
-                failureBlock:(void (^)(NSString *))failureBlock {
+                failureBlock:(FailureBlock)failureBlock {
     
     expense.user = user;
     PFACL *acl = [PFACL ACL];
@@ -194,13 +233,17 @@ static NSString * const kDefaultErrorMessage = @"An error occurred.";
                  }
                  else
                  {
-                     failureBlock(NSLocalizedString(kDefaultErrorMessage, nil));
+                     [NetworkManager failureWithError:error
+                                        customMessage:nil
+                                         failureBlock:failureBlock];
                  }
              }];
         }
         else
         {
-            failureBlock(NSLocalizedString(kDefaultErrorMessage, nil));
+            [NetworkManager failureWithError:error
+                               customMessage:nil
+                                failureBlock:failureBlock];
         }
     }];
 
@@ -210,7 +253,7 @@ static NSString * const kDefaultErrorMessage = @"An error occurred.";
 
 + (void)deleteExpense:(Expense *)expense
          successBlock:(void (^)(void))successBlock
-         failureBlock:(void (^)(NSString *))failureBlock {
+         failureBlock:(FailureBlock)failureBlock {
     
     [expense deleteInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error)
     {
@@ -220,7 +263,9 @@ static NSString * const kDefaultErrorMessage = @"An error occurred.";
         }
         else
         {
-            failureBlock(NSLocalizedString(kDefaultErrorMessage, nil));
+            [NetworkManager failureWithError:error
+                               customMessage:nil
+                                failureBlock:failureBlock];
         }
     }];
 }
@@ -249,13 +294,17 @@ static NSString * const kDefaultErrorMessage = @"An error occurred.";
                 }
                 else
                 {
-                    failureBlock(NSLocalizedString(kDefaultErrorMessage, nil));
+                    [NetworkManager failureWithError:error
+                                       customMessage:nil
+                                        failureBlock:failureBlock];
                 }
             }];
         }
         else
         {
-            failureBlock(NSLocalizedString(kDefaultErrorMessage, nil));
+            [NetworkManager failureWithError:error
+                               customMessage:nil
+                                failureBlock:failureBlock];
         }
     }];
 }
@@ -276,7 +325,9 @@ static NSString * const kDefaultErrorMessage = @"An error occurred.";
         }
         else
         {
-            failureBlock(NSLocalizedString(kDefaultErrorMessage, nil));
+            [NetworkManager failureWithError:error
+                               customMessage:nil
+                                failureBlock:failureBlock];
         }
     }];
     

@@ -53,6 +53,12 @@
     [self getData];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.view endEditing:YES];
+}
+
 - (void)getData {
     
     [self.view showLoadingView];
@@ -213,13 +219,21 @@
     cell.emailLabel.text = user.username;
     if ([userDetails userRole] != UserRoleRegular)
     {
-        [cell.banButton setTitle:([userDetails userRole] == UserRoleUserManager) ? NSLocalizedString(@"User Manager", nil) : NSLocalizedString(@"Admin", nil) forState:UIControlStateNormal];
+        [UIView performWithoutAnimation:^
+        {
+            [cell.banButton setTitle:([userDetails userRole] == UserRoleUserManager) ? NSLocalizedString(@"User Manager", nil) : NSLocalizedString(@"Admin", nil) forState:UIControlStateNormal];
+            [cell.banButton layoutIfNeeded];
+        }];
         cell.banButton.enabled = NO;
         [cell.banButton setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
     }
     else
     {
-        [cell.banButton setTitle:(userDetails.banned) ? NSLocalizedString(@"Unban User", nil) : NSLocalizedString(@"Ban User", nil) forState:UIControlStateNormal];
+        [UIView performWithoutAnimation:^
+        {
+            [cell.banButton setTitle:(userDetails.banned) ? NSLocalizedString(@"Unban User", nil) : NSLocalizedString(@"Ban User", nil) forState:UIControlStateNormal];
+            [cell.banButton layoutIfNeeded];
+        }];
         cell.banButton.enabled = YES;
         [cell.banButton setTitleColor:[UIColor mainBlueColor] forState:UIControlStateNormal];
     }

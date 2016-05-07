@@ -103,6 +103,12 @@
     [self getData];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.view endEditing:YES];
+}
+
 - (void)getData {
 
     [self.view showLoadingView];
