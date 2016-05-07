@@ -56,12 +56,12 @@
     {
         [self.view showLoadingView];
         
-        [self.logic login:self.emailTextField.text
-                 password:self.passwordTextField.text
-             successBlock:^(PFUser *user)
+        [OpeningLogic login:self.emailTextField.text
+                   password:self.passwordTextField.text
+               successBlock:^(PFUser *user)
          {
              [self.view dismissLoadingView];
-             if ([self.logic isUserRegular])
+             if ([OpeningLogic isUserRegular])
              {
                 [self performSegueWithIdentifier:NSStringFromClass([ExpenseListViewController class]) sender:self];
              }
@@ -85,12 +85,12 @@
     {
         [self.view showLoadingView];
         
-        [self.logic signUp:self.emailTextField.text
-                  password:self.passwordTextField.text
-              successBlock:^(PFUser *user)
+        [OpeningLogic signUp:self.emailTextField.text
+                    password:self.passwordTextField.text
+                successBlock:^(PFUser *user)
         {
             [self.view dismissLoadingView];
-            if ([self.logic isUserRegular])
+            if ([OpeningLogic isUserRegular])
             {
                 [self performSegueWithIdentifier:NSStringFromClass([ExpenseListViewController class]) sender:self];
             }
@@ -116,14 +116,14 @@
     
     if (self.emailTextField.text.length > 0 && self.passwordTextField.text.length > 0)
     {
-        if (![self.logic validateEmail:self.emailTextField.text])
+        if (![OpeningLogic validateEmail:self.emailTextField.text])
         {
             [self.view makeToast:NSLocalizedString(@"Invalid email", nil) duration:2 position:CSToastPositionCenter];
             
         }
-        else if (![self.logic validatePassword:self.passwordTextField.text])
+        else if (![OpeningLogic validatePassword:self.passwordTextField.text])
         {
-            [self.view makeToast:NSLocalizedString(@"Invalid password", nil) duration:2 position:CSToastPositionCenter];
+            [self.view makeToast:NSLocalizedString(@"The password must be at least 6 characters long.", nil) duration:2 position:CSToastPositionCenter];
         }
         else
         {

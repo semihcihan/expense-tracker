@@ -9,11 +9,11 @@
 #import <XCTest/XCTest.h>
 #import "NSDate+ExpenseTracker.h"
 
-@interface NSDateExpenseTracker : XCTestCase
+@interface NSDateExpenseTrackerTests : XCTestCase
 
 @end
 
-@implementation NSDateExpenseTracker
+@implementation NSDateExpenseTrackerTests
 
 - (void)setUp {
     [super setUp];

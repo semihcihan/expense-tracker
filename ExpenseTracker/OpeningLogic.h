@@ -12,21 +12,21 @@
 @interface OpeningLogic : NSObject
 
 
-- (BOOL)validateEmail:(NSString *)email;
++ (BOOL)validateEmail:(NSString *)email;
 
-- (BOOL)validatePassword:(NSString *)password;
++ (BOOL)validatePassword:(NSString *)password;
 
-- (void)signUp:(NSString *)email
++ (void)signUp:(NSString *)email
       password:(NSString *)password
   successBlock:(void (^)(PFUser *))successBlock
   failureBlock:(FailureBlock)failureBlock;
 
-- (void)login:(NSString *)email
++ (void)login:(NSString *)email
      password:(NSString *)password
  successBlock:(void (^)(PFUser *))successBlock
  failureBlock:(FailureBlock)failureBlock;
 
-- (BOOL)isUserRegular;
++ (BOOL)isUserRegular;
 
 + (PFUser *)currentUser;
 

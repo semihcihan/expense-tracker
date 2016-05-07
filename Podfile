@@ -5,14 +5,16 @@
 
 target 'ExpenseTracker' do
 
-pod 'Toast', '~> 3.0'
-pod 'Parse'
-pod 'MBProgressHUD', '~> 0.9.2'
-pod 'ActionSheetPicker-3.0'
+    pod 'Toast', '~> 3.0'
+    pod 'Parse'
+    pod 'MBProgressHUD', '~> 0.9.2'
+    pod 'ActionSheetPicker-3.0'
 
 end
 
 target 'ExpenseTrackerTests' do
+    
+    pod 'Parse'
 
 end
 

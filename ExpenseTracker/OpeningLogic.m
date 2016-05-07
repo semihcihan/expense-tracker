@@ -10,7 +10,7 @@
 
 @implementation OpeningLogic
 
-- (BOOL)validateEmail:(NSString *)email {
++ (BOOL)validateEmail:(NSString *)email {
     NSString *emailRegex =
     @"(?:[a-z0-9!#$%\\&'*+/=?\\^_`{|}~-]+(?:\\.[a-z0-9!#$%\\&'*+/=?\\^_`{|}"
     @"~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\"
@@ -24,12 +24,12 @@
     return [emailTest evaluateWithObject:email];
 }
 
-- (BOOL)validatePassword:(NSString *)password {
++ (BOOL)validatePassword:(NSString *)password {
     
     return password.length >= 6;
 }
 
-- (void)signUp:(NSString *)email
++ (void)signUp:(NSString *)email
       password:(NSString *)password
   successBlock:(void (^)(PFUser *))successBlock
   failureBlock:(FailureBlock)failureBlock {
@@ -47,7 +47,7 @@
     
 }
 
-- (void)login:(NSString *)email
++ (void)login:(NSString *)email
      password:(NSString *)password
  successBlock:(void (^)(PFUser *))successBlock
  failureBlock:(FailureBlock)failureBlock {
@@ -65,7 +65,7 @@
     
 }
 
-- (BOOL)isUserRegular {
++ (BOOL)isUserRegular {
     
     return [NetworkManager currentUserRole] == UserRoleRegular;
 }
