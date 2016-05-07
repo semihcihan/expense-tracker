@@ -14,6 +14,7 @@
 #import "AlertManager.h"
 #import <UIView+Toast.h>
 #import "ExpenseListViewController.h"
+#import "UIColor+ExpenseTracker.h"
 
 @interface UserListViewController () <ErrorActionProtocol, UITableViewDelegate, UITableViewDataSource, UserListTableViewCellDelegate, UISearchBarDelegate>
 
@@ -212,15 +213,15 @@
     cell.emailLabel.text = user.username;
     if ([userDetails userRole] != UserRoleRegular)
     {
-        NSString *roleName = ([userDetails userRole] == UserRoleUserManager) ? @"User Manager" : @"Admin";
-        
-        [cell.banButton setTitle:roleName forState:UIControlStateNormal];
+        [cell.banButton setTitle:([userDetails userRole] == UserRoleUserManager) ? @"User Manager" : @"Admin" forState:UIControlStateNormal];
         cell.banButton.enabled = NO;
         [cell.banButton setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
     }
     else
     {
         [cell.banButton setTitle:(userDetails.banned) ? @"Unban User" : @"Ban User" forState:UIControlStateNormal];
+        cell.banButton.enabled = YES;
+        [cell.banButton setTitleColor:[UIColor mainBlueColor] forState:UIControlStateNormal];
     }
     
 }
