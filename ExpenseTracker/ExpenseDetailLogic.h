@@ -19,4 +19,7 @@
 
 - (void)deleteExpenseWithSuccessBlock:(void (^) (void))successBlock
                          failureBlock:(void (^) (NSString *error))failureBlock;
+
++ (NSNumber *)amountNumberWithIntegerPartString:(NSString *)integerPart decimalPartString:(NSString *)decimalPart;
+
 @end

@@ -41,4 +41,16 @@
      }];
 }
 
++ (NSNumber *)amountNumberWithIntegerPartString:(NSString *)integerPart decimalPartString:(NSString *)decimalPart {
+    
+    CGFloat amount = [integerPart integerValue];
+    amount += [decimalPart floatValue] / powf(10, decimalPart.length);
+
+    NSDecimal decimalAmount = [@(amount) decimalValue];
+    NSDecimal decimalResult;
+    NSDecimalRound(&decimalResult, &decimalAmount, 2, NSRoundBankers); // round off to 2 fractional
+    
+    return [NSDecimalNumber decimalNumberWithDecimal:decimalResult];
+}
+
 @end

@@ -156,9 +156,7 @@
     //update object
     self.logic.expense.expenseDescription = self.descriptionTextField.text;
     self.logic.expense.comment = self.commentTextField.text;
-    CGFloat amount = [self.amountTextField.text integerValue];
-    amount += [self.amountDecimalTextField.text floatValue] / powf(10, self.amountDecimalTextField.text.length);
-    self.logic.expense.amount = @(amount);
+    self.logic.expense.amount = [ExpenseDetailLogic amountNumberWithIntegerPartString:self.amountTextField.text decimalPartString:self.amountDecimalTextField.text];
     
     [self.view showLoadingView];
     [self.logic saveChangesOnExpenseWithSuccessBlock:^
