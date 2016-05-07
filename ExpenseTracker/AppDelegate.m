@@ -38,6 +38,7 @@
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         ExpenseListViewController *viewController = (ExpenseListViewController *)[storyboard instantiateViewControllerWithIdentifier:@"ExpenseListViewController"];
         viewController.logic = [[ExpenseListLogic alloc] init];
+        viewController.logic.user = currentUser;
         
         self.window.rootViewController = [[UINavigationController alloc] initWithRootViewController:viewController];
     }

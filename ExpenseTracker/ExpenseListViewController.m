@@ -38,13 +38,6 @@
 
 @end
 
-@interface ExpenseListTableViewCell (Data)
-
-- (void)fillWithExpenseData:(Expense *)expense;
-
-@end
-
-
 @implementation ExpenseListViewController
 
 - (void)viewDidLoad {
@@ -134,8 +127,8 @@
     {
         ExpenseListTableViewSectionHeaderView *headerView = [ExpenseListTableViewSectionHeaderView loadFromNIB];
         NSNumber *weeklyTotal = [self.logic totalAmountOfWeek:section];
-        headerView.totalAmountLabel.text = [weeklyTotal currencyStringRepresentation];
-        headerView.averageAmountLabel.text = [@(weeklyTotal.floatValue / 7) currencyStringRepresentation];
+        headerView.totalAmountLabel.text = [self.logic currencyStringRepresentationOfAmount:weeklyTotal];
+        headerView.averageAmountLabel.text = [self.logic currencyStringRepresentationOfAmount:@(weeklyTotal.floatValue / 7)];
         return headerView;
     }
     else
@@ -171,11 +164,11 @@
         && self.amountSlider.value == 0
         && self.dateSlider.value == 0)
     {
-        [cell fillWithExpenseData:self.logic.shownExpensesPerWeek[indexPath.section][indexPath.row]];
+        [self fillCell:cell expenseData:self.logic.shownExpensesPerWeek[indexPath.section][indexPath.row]];
     }
     else
     {
-        [cell fillWithExpenseData:self.logic.shownExpenses[indexPath.row]];
+        [self fillCell:cell expenseData:self.logic.shownExpenses[indexPath.row]];
     }
     
     return cell;
@@ -289,7 +282,7 @@
     else
     {
         self.noDataLabel.hidden = YES;
-        self.headerAmountLabel.text = [[self.logic totalExpense] currencyStringRepresentation];
+        self.headerAmountLabel.text = [self.logic currencyStringRepresentationOfAmount:[self.logic totalExpense]];
         self.tableView.tableHeaderView = self.tableHeaderView;
     }
     
@@ -320,6 +313,37 @@
     [self getData];
 }
 
+- (void)presentChangeCurrencyAlertController {
+    
+    NSArray *currencies = @[@"Phone's Currency", @"$", @"€", @"£", @"₺"];
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
+                                                                             message:nil
+                                                                      preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    for (NSInteger i = 0; i < currencies.count; i++)
+    {
+        UIAlertAction *action = [UIAlertAction actionWithTitle:currencies[i]
+                                                         style:UIAlertActionStyleDefault
+                                                       handler:^(UIAlertAction * _Nonnull action) {
+                                                           [ExpenseListLogic changeLocaleForCurrency:currencies[i]];
+                                                           [self updateSliderLabelTexts];
+                                                           self.headerAmountLabel.text = [self.logic currencyStringRepresentationOfAmount:[self.logic totalExpense]];
+                                                           [self.tableView reloadData];
+                                                       }];
+        
+        [alertController addAction:action];
+    }
+    
+    
+    UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:@"Close"
+                                                           style:UIAlertActionStyleCancel
+                                                         handler:nil];
+    [alertController addAction:actionCancel];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
 #pragma mark - UISearchBarDelegate
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
@@ -343,7 +367,7 @@
 
 - (void)updateSliderLabelTexts {
     
-    self.amountFilterLabel.text = [ExpenseListViewController amountSliderStringValue:self.amountSlider.value];
+    self.amountFilterLabel.text = [self amountSliderStringValue:self.amountSlider.value];
     self.dateFilterLabel.text = [ExpenseListViewController dateSliderStringValue:self.dateSlider.value];
 }
 
@@ -372,11 +396,11 @@
     }
 }
 
-+ (NSString *)amountSliderStringValue:(NSInteger)sliderValue {
+- (NSString *)amountSliderStringValue:(NSInteger)sliderValue {
     
     if (sliderValue > 0)
     {
-        return [NSString stringWithFormat:@"Greater than %@", [[ExpenseListViewController amountSliderValue:sliderValue] currencyStringRepresentationWithoutDecimals]];
+        return [NSString stringWithFormat:@"Greater than %@", [self.logic currencyStringRepresentationWithoutDecimalsOfAmount:[ExpenseListViewController amountSliderValue:sliderValue]]];
     }
     else
     {
@@ -452,51 +476,15 @@
     return selectedIndex;
 }
 
-- (void)presentChangeCurrencyAlertController {
+#pragma mark - Helpers
+
+- (void)fillCell:(ExpenseListTableViewCell *)cell expenseData:(Expense *)expense {
     
-    NSArray *currencies = @[@"Phone's Currency", @"$", @"€", @"£", @"₺"];
-    
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:nil
-                                                                             message:nil
-                                                                      preferredStyle:UIAlertControllerStyleActionSheet];
-    
-    for (NSInteger i = 0; i < currencies.count; i++)
-    {
-        UIAlertAction *action = [UIAlertAction actionWithTitle:currencies[i]
-                                                         style:UIAlertActionStyleDefault
-                                                       handler:^(UIAlertAction * _Nonnull action) {
-                                                           [ExpenseListLogic changeLocaleForCurrency:currencies[i]];
-                                                           [self updateSliderLabelTexts];
-                                                           self.headerAmountLabel.text = [[self.logic totalExpense] currencyStringRepresentation];
-                                                           [self.tableView reloadData];
-                                                       }];
-        
-        [alertController addAction:action];
-    }
-    
-    
-    UIAlertAction *actionCancel = [UIAlertAction actionWithTitle:@"Close"
-                                                           style:UIAlertActionStyleCancel
-                                                         handler:nil];
-    [alertController addAction:actionCancel];
-    
-    [self presentViewController:alertController animated:YES completion:nil];
+    cell.expenseLabel.text = [self.logic currencyStringRepresentationOfAmount:expense.amount];
+    cell.descriptionLabel.text = expense.expenseDescription;
+    cell.commentLabel.text = expense.comment;
+    cell.dateLabel.text = [expense.date localeDateString];
 }
 
-@end
-
-
-#pragma mark - ExpenseTableViewCell (Data)
-
-
-@implementation ExpenseListTableViewCell (Data)
-
-- (void)fillWithExpenseData:(Expense *)expense {
-    
-    self.expenseLabel.text = [expense.amount currencyStringRepresentation];
-    self.descriptionLabel.text = expense.expenseDescription;
-    self.commentLabel.text = expense.comment;
-    self.dateLabel.text = [expense.date localeDateString];
-}
 
 @end

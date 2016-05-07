@@ -13,17 +13,12 @@
 #import "UserListTableViewCell.h"
 #import "AlertManager.h"
 #import <UIView+Toast.h>
+#import "ExpenseListViewController.h"
 
 @interface UserListViewController () <ErrorActionProtocol, UITableViewDelegate, UITableViewDataSource, UserListTableViewCellDelegate, UISearchBarDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
-
-@end
-
-@interface UserListTableViewCell (Data)
-
-- (void)fillWithUser:(PFUser *)user userDetails:(UserDetails *)userDetails;
 
 @end
 
@@ -73,6 +68,17 @@
      }];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if (sender && [sender isKindOfClass:[PFUser class]])
+    {
+        ExpenseListLogic *logic = [[ExpenseListLogic alloc] init];
+        logic.user = sender;
+        ((ExpenseListViewController *)segue.destinationViewController).logic = logic;
+    }
+    
+}
+
 #pragma mark - TableView Data Source Delegate
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -85,7 +91,7 @@
     cell.tag = indexPath.row;
     cell.delegate = self;
     
-    [cell fillWithUser:self.logic.shownUsers[indexPath.row] userDetails:self.logic.shownUserDetails[indexPath.row]];
+    [self fillCell:cell user:self.logic.shownUsers[indexPath.row] userDetails:self.logic.shownUserDetails[indexPath.row]];
     
     return cell;
 }
@@ -95,6 +101,13 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if ([self.logic shouldShowExpensesOfUserDetails:self.logic.shownUserDetails[indexPath.row]])
+    {
+        PFUser *user = self.logic.shownUsers[indexPath.row];
+        [self performSegueWithIdentifier:@"ExpenseListViewController" sender:user];
+    }
+    
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -192,27 +205,22 @@
     
 }
 
-@end
+#pragma mark - Helpers
 
-#pragma mark - ExpenseTableViewCell (Data)
-
-
-@implementation UserListTableViewCell (Data)
-
-- (void)fillWithUser:(PFUser *)user userDetails:(UserDetails *)userDetails {
+- (void)fillCell:(UserListTableViewCell *)cell user:(PFUser *)user userDetails:(UserDetails *)userDetails {
     
-    self.emailLabel.text = user.username;
+    cell.emailLabel.text = user.username;
     if ([userDetails userRole] != UserRoleRegular)
     {
         NSString *roleName = ([userDetails userRole] == UserRoleUserManager) ? @"User Manager" : @"Admin";
-    
-        [self.banButton setTitle:roleName forState:UIControlStateNormal];
-        self.banButton.enabled = NO;
-        [self.banButton setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
+        
+        [cell.banButton setTitle:roleName forState:UIControlStateNormal];
+        cell.banButton.enabled = NO;
+        [cell.banButton setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
     }
     else
     {
-        [self.banButton setTitle:(userDetails.banned) ? @"Unban User" : @"Ban User" forState:UIControlStateNormal];
+        [cell.banButton setTitle:(userDetails.banned) ? @"Unban User" : @"Ban User" forState:UIControlStateNormal];
     }
     
 }

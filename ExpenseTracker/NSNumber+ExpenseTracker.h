@@ -10,8 +10,8 @@
 
 @interface NSNumber (ExpenseTracker)
 
-- (NSString *)currencyStringRepresentation;
-- (NSString *)currencyStringRepresentationWithoutDecimals;
+- (NSString *)currencyStringRepresentationShowCurrencySymbol:(BOOL)showCurrencySymbol;
+- (NSString *)currencyStringRepresentationWithoutDecimalsShowCurrencySymbol:(BOOL)showCurrencySymbol;
 - (NSArray *)splitNumber;
 
 @end

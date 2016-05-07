@@ -10,6 +10,7 @@
 #import "Expense.h"
 #import "NSDate+ExpenseTracker.h"
 #import "NSLocale+ExpenseTracker.h"
+#import "NSNumber+ExpenseTracker.h"
 
 @interface ExpenseListLogic ()
 
@@ -40,7 +41,7 @@
 - (void)getExpensesWithSuccessBlock:(void (^)(NSArray *))successBlock
                        failureBlock:(FailureBlock)failureBlock {
     
-    [NetworkManager getExpensesOfUser:[NetworkManager currentUser]
+    [NetworkManager getExpensesOfUser:self.user
                          successBlock:^(NSArray *expenses)
     {
         self.allExpenses = expenses;
@@ -108,6 +109,16 @@
     [ExpenseListLogic saveAmountSliderValue:@(amountSliderValue)];
     [ExpenseListLogic saveDateSliderValue:@(dateSliderValue)];
     [ExpenseListLogic saveSortSegmentValue:@(sortSegmentValue)];
+}
+
+- (NSString *)currencyStringRepresentationOfAmount:(NSNumber *)amount {
+    
+    return [self.user.objectId isEqualToString:[NetworkManager currentUser].objectId] ? [amount currencyStringRepresentationShowCurrencySymbol:YES] : [amount currencyStringRepresentationShowCurrencySymbol:NO];
+}
+
+- (NSString *)currencyStringRepresentationWithoutDecimalsOfAmount:(NSNumber *)amount {
+    
+    return [self.user.objectId isEqualToString:[NetworkManager currentUser].objectId] ? [amount currencyStringRepresentationWithoutDecimalsShowCurrencySymbol:YES] : [amount currencyStringRepresentationWithoutDecimalsShowCurrencySymbol:NO];
 }
 
 #pragma mark - NSUserDefaults

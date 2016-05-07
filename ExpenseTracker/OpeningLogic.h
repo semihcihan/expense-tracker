@@ -28,4 +28,6 @@
 
 - (BOOL)isUserRegular;
 
++ (PFUser *)currentUser;
+
 @end

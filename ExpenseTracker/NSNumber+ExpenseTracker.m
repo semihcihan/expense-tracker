@@ -11,10 +11,14 @@
 
 @implementation NSNumber (ExpenseTracker)
 
-- (NSString *)currencyStringRepresentation {
+- (NSString *)currencyStringRepresentationShowCurrencySymbol:(BOOL)showCurrencySymbol {
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     numberFormatter.locale = [NSLocale expenseTrackerLocale];
     numberFormatter.numberStyle = NSNumberFormatterCurrencyStyle;
+    if (!showCurrencySymbol)
+    {
+        [numberFormatter setCurrencySymbol:@""];
+    }
     NSString *numberAsString = [numberFormatter stringFromNumber:self];
     return numberAsString;
 }
@@ -39,11 +43,15 @@
     }
 }
 
-- (NSString *)currencyStringRepresentationWithoutDecimals {
+- (NSString *)currencyStringRepresentationWithoutDecimalsShowCurrencySymbol:(BOOL)showCurrencySymbol {
     NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
     numberFormatter.locale = [NSLocale expenseTrackerLocale];
     numberFormatter.maximumFractionDigits = 0;
     numberFormatter.numberStyle = NSNumberFormatterCurrencyStyle;
+    if (!showCurrencySymbol)
+    {
+        [numberFormatter setCurrencySymbol:@""];
+    }
     NSString *numberAsString = [numberFormatter stringFromNumber:self];
     return numberAsString;
 }

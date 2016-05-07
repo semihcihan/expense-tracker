@@ -16,6 +16,8 @@ typedef NS_ENUM(NSUInteger, SortingMethod) {
 
 @interface ExpenseListLogic : NSObject
 
+@property (strong, nonatomic) PFUser *user;
+
 @property (strong, nonatomic, readonly) NSMutableArray *shownExpenses;
 @property (strong, nonatomic, readonly) NSMutableArray *shownExpensesPerWeek;
 
@@ -32,12 +34,18 @@ typedef NS_ENUM(NSUInteger, SortingMethod) {
                    sortSegmentValue:(NSInteger)sortSegmentValue;
 
 - (NSNumber *)totalExpense;
-- (void)sortExpenses:(SortingMethod)sortingMethod;
-+ (void)logout;
 - (NSNumber *)totalAmountOfWeek:(NSInteger)week;
+- (void)sortExpenses:(SortingMethod)sortingMethod;
+
++ (void)logout;
+
 + (CGFloat)getDateSliderValue;
 + (CGFloat)getAmountSliderValue;
 + (NSInteger)getSortSegmentValue;
+
 + (void)changeLocaleForCurrency:(NSString *)currency;
+
+- (NSString *)currencyStringRepresentationOfAmount:(NSNumber *)amount;
+- (NSString *)currencyStringRepresentationWithoutDecimalsOfAmount:(NSNumber *)amount;
 
 @end

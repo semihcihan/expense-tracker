@@ -70,5 +70,9 @@
     return [NetworkManager currentUserRole] == UserRoleRegular;
 }
 
++ (PFUser *)currentUser {
+    return [NetworkManager currentUser];
+}
+
 
 @end

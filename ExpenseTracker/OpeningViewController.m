@@ -38,7 +38,9 @@
     
     if ([segue.identifier isEqualToString:@"ExpenseListViewController"])
     {
-        ((ExpenseListViewController *)segue.destinationViewController).logic = [[ExpenseListLogic alloc] init];
+        ExpenseListLogic *logic = [[ExpenseListLogic alloc] init];
+        logic.user = [OpeningLogic currentUser];
+        ((ExpenseListViewController *)segue.destinationViewController).logic = logic;
     }
     else
     {
