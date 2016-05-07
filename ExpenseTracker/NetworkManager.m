@@ -118,7 +118,7 @@
                         }
                         else
                         {
-                            [NetworkManager saveCurrentUserRole:[NetworkManager userRoleOfRole:userDetails.role]];
+                            [NetworkManager saveCurrentUserRole:[userDetails userRole]];
                             successBlock([NetworkManager currentUser]);
                         }
                     }
@@ -279,6 +279,7 @@
 }
 
 + (UserRole)currentUserRole {
+    
     NSNumber *userRole = [[NSUserDefaults standardUserDefaults] objectForKey:@"UserRole"];
     if (!userRole)
     {
@@ -295,26 +296,6 @@
 + (void)saveCurrentUserRole:(UserRole)role {
     [[NSUserDefaults standardUserDefaults] setObject:@(role) forKey:@"UserRole"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-+ (UserRole)userRoleOfRole:(PFRole *)role {
-    
-    if (!role)
-    {
-        return UserRoleRegular;
-    }
-    else if ([role[@"name"] isEqualToString:@"admin"])
-    {
-        return UserRoleAdmin;
-    }
-    else if ([role.name isEqualToString:@"user_admin"])
-    {
-        return UserRoleUserAdmin;
-    }
-    else
-    {
-        return UserRoleRegular;
-    }
 }
 
 

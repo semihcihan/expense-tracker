@@ -20,4 +20,17 @@
     [self registerSubclass];
 }
 
+- (UserRole)userRole {
+    
+    PFRole * role = self.role;
+    if (role)
+    {
+        return [self.role.name isEqualToString:@"user_admin"] ? UserRoleUserManager : UserRoleAdmin;
+    }
+    else
+    {
+        return UserRoleRegular;
+    }
+}
+
 @end

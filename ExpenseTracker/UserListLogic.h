@@ -27,4 +27,6 @@
 
 - (void)filterEmailsWithKeyword:(NSString *)keyword;
 
+- (BOOL)shouldShowExpensesOfUserDetails:(UserDetails *)userDetails;
+
 @end

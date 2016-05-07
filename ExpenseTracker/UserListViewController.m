@@ -99,8 +99,11 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
-{
+- (BOOL)tableView:(UITableView *)tableView shouldHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [self.logic shouldShowExpensesOfUserDetails:self.logic.shownUserDetails[indexPath.row]];
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     [self.searchBar resignFirstResponder];
 }
     
@@ -199,9 +202,9 @@
 - (void)fillWithUser:(PFUser *)user userDetails:(UserDetails *)userDetails {
     
     self.emailLabel.text = user.username;
-    if (userDetails.role)
+    if ([userDetails userRole] != UserRoleRegular)
     {
-        NSString *roleName = ([userDetails.role.name isEqualToString:@"user_admin"]) ? @"User Manager" : @"Admin";
+        NSString *roleName = ([userDetails userRole] == UserRoleUserManager) ? @"User Manager" : @"Admin";
     
         [self.banButton setTitle:roleName forState:UIControlStateNormal];
         self.banButton.enabled = NO;

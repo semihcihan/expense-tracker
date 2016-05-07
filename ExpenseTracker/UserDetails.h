@@ -8,10 +8,19 @@
 
 #import <Parse/Parse.h>
 
+typedef NS_ENUM(NSUInteger, UserRole) {
+    UserRoleUndefined,
+    UserRoleRegular,
+    UserRoleUserManager,
+    UserRoleAdmin
+};
+
 @interface UserDetails : PFObject <PFSubclassing>
 
 @property (strong, nonatomic) PFUser *user;
 @property (strong, nonatomic) PFRole *role;
 @property (assign, nonatomic) BOOL banned;
+
+- (UserRole)userRole;
 
 @end

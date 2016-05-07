@@ -11,13 +11,6 @@
 #import "Expense.h"
 #import "UserDetails.h"
 
-typedef NS_ENUM(NSUInteger, UserRole) {
-    UserRoleUndefined,
-    UserRoleRegular,
-    UserRoleAdmin,
-    UserRoleUserAdmin,
-};
-
 @interface NetworkManager : NSObject
 
 typedef void (^FailureBlock)(NSString *error);

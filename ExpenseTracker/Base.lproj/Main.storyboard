@@ -289,8 +289,8 @@
                                             <constraint firstAttribute="height" constant="1" id="dDn-Xv-vVl"/>
                                         </constraints>
                                     </view>
-                                    <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="IY9-Dp-gDC">
-                                        <rect key="frame" x="217" y="132" width="150" height="30"/>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="IY9-Dp-gDC">
+                                        <rect key="frame" x="217" y="133" width="150" height="29"/>
                                         <segments>
                                             <segment title="Date"/>
                                             <segment title="Amount"/>

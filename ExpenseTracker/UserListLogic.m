@@ -48,6 +48,14 @@
     }];
 }
 
+- (BOOL)shouldShowExpensesOfUserDetails:(UserDetails *)userDetails {
+    
+    return ([userDetails userRole] == UserRoleRegular && [NetworkManager currentUserRole] == UserRoleAdmin) ? YES : NO;
+}
+
+
+
+
 + (void)logout {
     [NetworkManager logout];
     
