@@ -48,4 +48,6 @@ typedef NS_ENUM(NSUInteger, SortingMethod) {
 - (NSString *)currencyStringRepresentationOfAmount:(NSNumber *)amount;
 - (NSString *)currencyStringRepresentationWithoutDecimalsOfAmount:(NSNumber *)amount;
 
++ (UserRole)currentUserRole;
+
 @end

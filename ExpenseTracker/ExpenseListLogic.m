@@ -30,6 +30,10 @@
     return self;
 }
 
++ (UserRole)currentUserRole {
+    return [NetworkManager currentUserRole];
+}
+
 + (void)logout {
     [NetworkManager logout];
     

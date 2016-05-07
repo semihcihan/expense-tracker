@@ -46,15 +46,34 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.navigationController.navigationBarHidden = NO;
     
-    [self.navigationController.interactivePopGestureRecognizer setEnabled:NO];
-    
     self.navigationItem.title = @"Expenses";
-    [NavigationBarStyler styleLeftNavigationItem:self.navigationItem image:[UIImage imageNamed:@"filtering"] target:self action:@selector(filterButtonTapped)];
-    [NavigationBarStyler styleRightNavigationItem:self.navigationItem
-                                firstButtonAction:@selector(newExpenseButtonTapped)
-                                 firstButtonImage:[UIImage imageNamed:@"new_expense"]
-                               secondButtonAction:@selector(moreButtonTapped)
-                                secondButtonImage:[UIImage imageNamed:@"more"] target:self];
+    
+    if ([ExpenseListLogic currentUserRole] == UserRoleAdmin)
+    {
+        [self.navigationController.interactivePopGestureRecognizer setEnabled:YES];
+        
+        [NavigationBarStyler styleRightNavigationItem:self.navigationItem
+                                    firstButtonAction:@selector(filterButtonTapped)
+                                     firstButtonImage:[UIImage imageNamed:@"filtering"]
+                                   secondButtonAction:@selector(newExpenseButtonTapped)
+                                    secondButtonImage:[UIImage imageNamed:@"new_expense"] target:self];
+    }
+    else
+    {
+        [self.navigationController.interactivePopGestureRecognizer setEnabled:NO];
+        
+        [NavigationBarStyler styleLeftNavigationItem:self.navigationItem
+                                               image:[UIImage imageNamed:@"filtering"]
+                                              target:self
+                                              action:@selector(filterButtonTapped)];
+        
+        [NavigationBarStyler styleRightNavigationItem:self.navigationItem
+                                    firstButtonAction:@selector(newExpenseButtonTapped)
+                                     firstButtonImage:[UIImage imageNamed:@"new_expense"]
+                                   secondButtonAction:@selector(moreButtonTapped)
+                                    secondButtonImage:[UIImage imageNamed:@"more"] target:self];
+
+    }
     
     self.tableView.tableHeaderView = nil;
     
@@ -200,6 +219,10 @@
 }
 
 #pragma mark - Actions
+
+- (void)backButtonTapped {
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 - (void)refresh:(UIRefreshControl *)refreshControl {
     
