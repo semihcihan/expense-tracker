@@ -65,6 +65,10 @@
     
     self.tableView.tableHeaderView = nil;
     
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:refreshControl];
+    
     [self.amountSlider addTarget:self action:@selector(filterValueChanged:) forControlEvents:UIControlEventValueChanged];
     [self.dateSlider addTarget:self action:@selector(filterValueChanged:) forControlEvents:UIControlEventValueChanged];
     [self.sortSegmentedControl addTarget:self action:@selector(sortMethodChanged) forControlEvents:UIControlEventValueChanged];
@@ -84,12 +88,13 @@
         [self filterValueChanged:NO];
     }
     
-    [self.view showLoadingView];
     [self getData];
 }
 
 - (void)getData {
-    
+
+    [self.view showLoadingView];
+
     [self.logic getExpensesWithSuccessBlock:^(NSArray *expenses)
      {
          [self.view dismissLoadingView];
@@ -202,6 +207,13 @@
 
 #pragma mark - Actions
 
+- (void)refresh:(UIRefreshControl *)refreshControl {
+    
+    [refreshControl endRefreshing];
+    
+    [self getData];
+}
+
 - (void)filterButtonTapped {
     
     if (self.filterViewVerticalSpaceToTopLayoutGuideConstraint.constant == 0) //close it
@@ -305,7 +317,6 @@
 - (void)errorViewTapped:(UIGestureRecognizer *)recognizer {
     
     [self.view dismissErrorView];
-    [self.view showLoadingView];
     [self getData];
 }
 

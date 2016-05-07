@@ -43,6 +43,10 @@
                                             image:[UIImage imageNamed:@"more"]
                                            target:self
                                            action:@selector(moreButtonTapped)];
+    
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:refreshControl];
 
     [self.tableView registerCellClassForDefaultReuseIdentifier:[UserListTableViewCell class]];
 }
@@ -60,6 +64,7 @@
     [self.logic getUsersAndUserDetailsWithSuccessBlock:^(NSArray *usersAndUserDetails)
      {
          [self.view dismissLoadingView];
+         [self.logic filterEmailsWithKeyword:self.searchBar.text];
          [self.tableView reloadData];
      }
                                failureBlock:^(NSString *error)
@@ -101,7 +106,15 @@
     
 #pragma mark - Actions
 
+- (void)refresh:(UIRefreshControl *)refreshControl {
+    
+    [refreshControl endRefreshing];
+    [self getData];
+}
+
 - (void)errorViewTapped:(UIGestureRecognizer *)recognizer {
+    
+    [self.view dismissErrorView];
     [self getData];
 }
 
@@ -132,7 +145,7 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     
-    [self.logic filterEmailsWithKeyword:searchText];
+    [self.logic filterEmailsWithKeyword:self.searchBar.text];
     [self.tableView reloadData];
 }
 
