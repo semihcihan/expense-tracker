@@ -8,6 +8,8 @@
 
 #import "NetworkManager.h"
 
+static NSString * const kDefaultErrorMessage = @"An error occurred.";
+
 @implementation NetworkManager
 
 + (instancetype)sharedInstance
@@ -30,7 +32,7 @@
 }
 
 + (void)logout {
-    [PFUser logOut];
+    [PFUser logOutInBackground];
 }
 
 + (void)signUpWithEmail:(NSString *)email
@@ -42,7 +44,8 @@
     user.password = password;
     user.username = email;
     
-    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+    {
         if (succeeded)
         {
             UserDetails *userDetails = [[UserDetails  alloc] init];
@@ -74,19 +77,20 @@
                          }
                          else
                          {
-                             failureBlock(@"An error occurred.");
+                             [[NetworkManager currentUser] deleteInBackground];
+                             failureBlock(NSLocalizedString(kDefaultErrorMessage, nil));
                          }
                      }];
                 }
                 else
                 {
-                    failureBlock(@"An error occurred.");
+                    failureBlock(NSLocalizedString(kDefaultErrorMessage, nil));
                 }
             }];
         }
         else
         {
-            failureBlock(@"An error occurred.");
+            failureBlock([error userInfo][@"error"]);
         }
         
     }];
@@ -108,24 +112,24 @@
             [query whereKey:@"user" equalTo:[NetworkManager currentUser]];
             [query getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error)
             {
-                if (!error) {
-                    UserDetails *userDetails = (UserDetails *)object;
-                    if (userDetails)
+                UserDetails *userDetails = (UserDetails *)object;
+                if (!error && userDetails)
+                {
+                    if (userDetails.banned)
                     {
-                        if (userDetails.banned)
-                        {
-                            failureBlock(NSLocalizedString(@"Sorry, you're banned.", nil));
-                        }
-                        else
-                        {
-                            [NetworkManager saveCurrentUserRole:[userDetails userRole]];
-                            successBlock([NetworkManager currentUser]);
-                        }
+                        [NetworkManager logout];
+                        failureBlock(NSLocalizedString(@"Sorry, you're banned.", nil));
                     }
                     else
                     {
-                        failureBlock(@"An error occurred.");
+                        [NetworkManager saveCurrentUserRole:[userDetails userRole]];
+                        successBlock([NetworkManager currentUser]);
                     }
+                }
+                else
+                {
+                    [NetworkManager logout];
+                    failureBlock(NSLocalizedString(kDefaultErrorMessage, nil));
                 }
                 
             }];
@@ -153,7 +157,7 @@
         }
         else
         {
-            failureBlock([error userInfo][@"error"]);
+            failureBlock(NSLocalizedString(kDefaultErrorMessage, nil));
         }
     }];
     
@@ -173,7 +177,8 @@
     
     PFQuery *queryRole = [PFRole query];
     [queryRole whereKey:@"name" equalTo:@"admin"];
-    [queryRole getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+    [queryRole getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error)
+    {
         if (!error)
         {
             PFRole *role = (PFRole *)object;
@@ -189,13 +194,13 @@
                  }
                  else
                  {
-                     failureBlock(@"An error occurred.");
+                     failureBlock(NSLocalizedString(kDefaultErrorMessage, nil));
                  }
              }];
         }
         else
         {
-            failureBlock(@"An error occurred.");
+            failureBlock(NSLocalizedString(kDefaultErrorMessage, nil));
         }
     }];
 
@@ -215,7 +220,7 @@
         }
         else
         {
-            failureBlock([error localizedDescription]);
+            failureBlock(NSLocalizedString(kDefaultErrorMessage, nil));
         }
     }];
 }
@@ -244,13 +249,13 @@
                 }
                 else
                 {
-                    failureBlock(@"An error occurred");
+                    failureBlock(NSLocalizedString(kDefaultErrorMessage, nil));
                 }
             }];
         }
         else
         {
-            failureBlock(@"An error occurred");
+            failureBlock(NSLocalizedString(kDefaultErrorMessage, nil));
         }
     }];
 }
@@ -271,7 +276,7 @@
         }
         else
         {
-            failureBlock(@"An error occurred");
+            failureBlock(NSLocalizedString(kDefaultErrorMessage, nil));
         }
     }];
     
