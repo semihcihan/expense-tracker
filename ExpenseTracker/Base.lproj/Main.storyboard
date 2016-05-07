@@ -500,7 +500,7 @@
                                             <constraint firstAttribute="height" constant="1" id="hNw-bA-XeD"/>
                                         </constraints>
                                     </view>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="100" textAlignment="right" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="S34-kI-B2E">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" placeholder="100" textAlignment="right" adjustsFontSizeToFit="NO" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="S34-kI-B2E">
                                         <rect key="frame" x="158" y="10" width="112" height="33"/>
                                         <color key="tintColor" red="0.23921568630000001" green="0.40784313729999999" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="textColor" red="0.76570861999999995" green="0.095219323389999999" blue="0.1809298547" alpha="1" colorSpace="calibratedRGB"/>

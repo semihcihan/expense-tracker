@@ -178,7 +178,7 @@
     [self dismissKeyboard];
 
     ActionSheetDatePicker *picker = [ActionSheetDatePicker showPickerWithTitle:nil
-                                                                datePickerMode:UIDatePickerModeDate
+                                                                datePickerMode:UIDatePickerModeDateAndTime
                                                                   selectedDate:self.logic.expense.date
                                                                    minimumDate:nil
                                                                    maximumDate:[NSDate date]
