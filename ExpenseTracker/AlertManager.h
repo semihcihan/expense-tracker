@@ -15,7 +15,7 @@
 @interface AlertManager : NSObject
 
 /**
- Shows an alert with the givene inputs. For iOS 7, internally, it uses alert view. For iOS 8 and higher it uses the new aler controller.
+ Shows an alert with the givene inputs.
  @param title Title of the alert.
  @param message Message of the alert.
  @param cancelButtonTitle Title of the default destructive alert button.
