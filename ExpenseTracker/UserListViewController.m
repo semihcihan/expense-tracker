@@ -53,6 +53,13 @@
     [self getData];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    self.navigationController.interactivePopGestureRecognizer.delegate = nil;
+    [self.navigationController.interactivePopGestureRecognizer setEnabled:NO];
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
