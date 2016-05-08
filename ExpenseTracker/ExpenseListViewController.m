@@ -154,7 +154,7 @@
         ExpenseListTableViewSectionHeaderView *headerView = [ExpenseListTableViewSectionHeaderView loadFromNIB];
         NSNumber *weeklyTotal = [self.logic totalAmountOfWeek:section];
         headerView.totalAmountLabel.text = [self.logic currencyStringRepresentationOfAmount:weeklyTotal];
-        headerView.averageAmountLabel.text = [self.logic currencyStringRepresentationOfAmount:@(weeklyTotal.floatValue / 7)];
+        headerView.averageAmountLabel.text = [self.logic currencyStringRepresentationOfAmount:@(weeklyTotal.doubleValue / 7)];
         return headerView;
     }
     else

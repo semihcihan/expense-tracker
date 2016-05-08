@@ -64,7 +64,7 @@
     CGFloat total = 0.f;
     for (Expense *expense in self.shownExpenses)
     {
-        total += expense.amount.floatValue;
+        total += expense.amount.doubleValue;
     }
     
     return @(total);
@@ -75,7 +75,7 @@
     CGFloat total = 0.f;
     for (Expense *expense in self.shownExpensesPerWeek[week])
     {
-        total += expense.amount.floatValue;
+        total += expense.amount.doubleValue;
     }
     
     return @(total);
