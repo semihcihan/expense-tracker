@@ -24,6 +24,8 @@
 		49015D981CD780AA00164FED /* NSDate+ExpenseTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 49015D971CD780AA00164FED /* NSDate+ExpenseTracker.m */; };
 		49015D9B1CD7C4EB00164FED /* NSNumber+ExpenseTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = 49015D9A1CD7C4EB00164FED /* NSNumber+ExpenseTracker.m */; };
 		49015D9D1CD7D06500164FED /* NSDateExpenseTrackerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 49015D9C1CD7D06500164FED /* NSDateExpenseTrackerTests.m */; };
+		4931EA971CDF5CF000762035 /* CreteExpenseFunctionalTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 4931EA961CDF5CF000762035 /* CreteExpenseFunctionalTest.m */; };
+		4931EA9A1CDF5F8600762035 /* RestNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 4931EA991CDF5F8600762035 /* RestNetworkManager.m */; };
 		497F07F01CD53C1F003DC694 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 497F07EF1CD53C1F003DC694 /* main.m */; };
 		497F07F31CD53C1F003DC694 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 497F07F21CD53C1F003DC694 /* AppDelegate.m */; };
 		497F07F61CD53C1F003DC694 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 497F07F51CD53C1F003DC694 /* ViewController.m */; };
@@ -96,6 +98,9 @@
 		49015D991CD7C4EB00164FED /* NSNumber+ExpenseTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSNumber+ExpenseTracker.h"; sourceTree = "<group>"; };
 		49015D9A1CD7C4EB00164FED /* NSNumber+ExpenseTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSNumber+ExpenseTracker.m"; sourceTree = "<group>"; };
 		49015D9C1CD7D06500164FED /* NSDateExpenseTrackerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSDateExpenseTrackerTests.m; sourceTree = "<group>"; };
+		4931EA961CDF5CF000762035 /* CreteExpenseFunctionalTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreteExpenseFunctionalTest.m; sourceTree = "<group>"; };
+		4931EA981CDF5F8600762035 /* RestNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestNetworkManager.h; sourceTree = "<group>"; };
+		4931EA991CDF5F8600762035 /* RestNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestNetworkManager.m; sourceTree = "<group>"; };
 		497F07EB1CD53C1F003DC694 /* ExpenseTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExpenseTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		497F07EF1CD53C1F003DC694 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		497F07F11CD53C1F003DC694 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -219,6 +224,15 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		4931EA9B1CDF7DA900762035 /* RestNetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				4931EA981CDF5F8600762035 /* RestNetworkManager.h */,
+				4931EA991CDF5F8600762035 /* RestNetworkManager.m */,
+			);
+			name = RestNetworkManager;
+			sourceTree = "<group>";
+		};
 		497F07E21CD53C1F003DC694 = {
 			isa = PBXGroup;
 			children = (
@@ -271,10 +285,12 @@
 		497F08071CD53C1F003DC694 /* ExpenseTrackerTests */ = {
 			isa = PBXGroup;
 			children = (
+				4931EA9B1CDF7DA900762035 /* RestNetworkManager */,
 				497F08081CD53C1F003DC694 /* ExpenseTrackerTests.m */,
 				49015D9C1CD7D06500164FED /* NSDateExpenseTrackerTests.m */,
 				4984F9731CDE735000D21F99 /* NSNumberExpenseTrackerTests.m */,
 				4984F9751CDE757B00D21F99 /* OpeningLogicTests.m */,
+				4931EA961CDF5CF000762035 /* CreteExpenseFunctionalTest.m */,
 				497F080A1CD53C1F003DC694 /* Info.plist */,
 			);
 			path = ExpenseTrackerTests;
@@ -580,8 +596,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				49015D9D1CD7D06500164FED /* NSDateExpenseTrackerTests.m in Sources */,
+				4931EA9A1CDF5F8600762035 /* RestNetworkManager.m in Sources */,
 				4984F9741CDE735000D21F99 /* NSNumberExpenseTrackerTests.m in Sources */,
 				497F08091CD53C1F003DC694 /* ExpenseTrackerTests.m in Sources */,
+				4931EA971CDF5CF000762035 /* CreteExpenseFunctionalTest.m in Sources */,
 				4984F9761CDE757B00D21F99 /* OpeningLogicTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -14,7 +14,7 @@ end
 
 target 'ExpenseTrackerTests' do
     
-    pod 'Parse'
-
+    pod 'AFNetworking', '~> 3.0'
+    
 end
 
