@@ -189,14 +189,14 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="48"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uxr-00-a5L">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="251" text="Total" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uxr-00-a5L">
                                             <rect key="frame" x="15" y="14" width="39" height="21"/>
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                             <color key="textColor" red="0.23921568630000001" green="0.40784313729999999" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IeE-jm-sxQ">
-                                            <rect key="frame" x="240" y="14" width="120" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="IeE-jm-sxQ">
+                                            <rect key="frame" x="74" y="14" width="286" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="120" id="9tm-sx-OLe"/>
                                                 <constraint firstAttribute="height" constant="21" id="b69-pF-7a8"/>
@@ -204,6 +204,11 @@
                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                             <color key="textColor" red="0.76570861999999995" green="0.095219323389999999" blue="0.1809298547" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="9tm-sx-OLe"/>
+                                                </mask>
+                                            </variation>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bBK-rg-H98">
                                             <rect key="frame" x="15" y="45" width="360" height="3"/>
@@ -216,6 +221,7 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="uxr-00-a5L" firstAttribute="centerX" secondItem="bBd-0X-BRb" secondAttribute="centerX" id="27m-hm-WgB"/>
+                                        <constraint firstItem="IeE-jm-sxQ" firstAttribute="leading" secondItem="uxr-00-a5L" secondAttribute="trailing" constant="20" id="C1e-uH-cwj"/>
                                         <constraint firstAttribute="trailing" secondItem="IeE-jm-sxQ" secondAttribute="trailing" constant="15" id="E4a-Rt-wml"/>
                                         <constraint firstItem="uxr-00-a5L" firstAttribute="centerY" secondItem="bBd-0X-BRb" secondAttribute="centerY" id="Gvg-dH-Ap7"/>
                                         <constraint firstAttribute="trailing" secondItem="bBK-rg-H98" secondAttribute="trailing" id="Svr-HY-xLk"/>
@@ -635,6 +641,6 @@
         <image name="diamond_blue" width="164" height="127"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ShY-Rr-nCd"/>
+        <segue reference="qfW-g8-nPz"/>
     </inferredMetricsTieBreakers>
 </document>
