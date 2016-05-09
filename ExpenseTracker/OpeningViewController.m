@@ -28,10 +28,7 @@
     
     self.logic = [[OpeningLogic alloc] init];
     
-    self.navigationController.navigationBarHidden = YES;
-    
-    self.emailTextField.text = @"se@i.co";
-    self.passwordTextField.text = @"22323333";
+    self.navigationController.navigationBarHidden = YES;    
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
